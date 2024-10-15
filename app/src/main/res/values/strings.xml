@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Compose World</string>
+    <string name="welcome_message">Welcome to ComposeWorld!</string>
+
+
+    <!-- onboarding screen -->
+    <string name="paragraph_one">
+        Dive into a unique virtual operating system experience right within your Android app!
+        Built with Jetpack Compose, ComposeWorld simulates a miniature smartphone OS, showcasing
+        an array of tiny apps and functionalities designed to highlight mobile development skills.
+    </string>
+    <string name="paragraph_two">
+        Explore a vibrant home screen that’s fully customizable, complete with smooth animations
+        and interactive widgets. Whether you\'re looking to experiment with new features or simply
+        enjoy the immersive environment, ComposeWorld offers an engaging and feature-rich platform
+        for all your mobile development needs.
+    </string>
+    <string name="paragraph_three">
+        Get ready to explore, create, and innovate in ComposeWorld!
+    </string>
+
+
+    <!-- home screen -->
+    <string name="description_home_screen">
+        Developed by Ralph Maron Eda, this miniature smartphone OS offers interactive apps and
+        smooth animations. Customize your home screen and enjoy the experience!
+    </string>
 </resources>
