@@ -1,4 +1,4 @@
-package com.ralphmarondev.composeworld.features.notes.presentation.components
+package com.ralphmarondev.composeworld.features.notes.presentation.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package com.ralphmarondev.composeworld.features.notes.presentation
+package com.ralphmarondev.composeworld.features.notes.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -27,12 +27,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.composeworld.R
-import com.ralphmarondev.composeworld.features.notes.presentation.components.NoteCard
+import com.ralphmarondev.composeworld.features.notes.presentation.home.components.NoteCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteScreen(
-    backToHome: () -> Unit
+    backToHome: () -> Unit,
+    addNewNote: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -71,7 +72,7 @@ fun NoteScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(onClick = addNewNote) {
                 Icon(
                     imageVector = Icons.Outlined.Add,
                     contentDescription = "New Note"

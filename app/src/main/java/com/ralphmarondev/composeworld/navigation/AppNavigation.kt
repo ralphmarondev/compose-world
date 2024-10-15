@@ -6,7 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.composeworld.features.home.HomeScreen
-import com.ralphmarondev.composeworld.features.notes.presentation.NoteScreen
+import com.ralphmarondev.composeworld.features.notes.presentation.home.NoteScreen
+import com.ralphmarondev.composeworld.features.notes.presentation.newnote.NewNoteScreen
 
 @Composable
 fun AppNavigation(
@@ -27,8 +28,12 @@ fun AppNavigation(
             NoteScreen(
                 backToHome = {
                     navController.navigateUp()
-                }
+                },
+                addNewNote = { navController.navigate(Routes.NewNote) }
             )
+        }
+        composable<Routes.NewNote> {
+            NewNoteScreen(backToAllNotes = { navController.navigateUp() })
         }
     }
 }
