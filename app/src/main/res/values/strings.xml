@@ -25,4 +25,12 @@
         Developed by Ralph Maron Eda, this miniature smartphone OS offers interactive apps and
         smooth animations. Customize your home screen and enjoy the experience!
     </string>
+
+
+    <!-- notes -->
+    <string name="sample_text">
+        Compose World will be on my resume. It highlights my knowledge about mobile app development.
+        From navigation, to ui design, to navigation, to animation, to playing videos and music,
+        displaying notification and more.
+    </string>
 </resources>
