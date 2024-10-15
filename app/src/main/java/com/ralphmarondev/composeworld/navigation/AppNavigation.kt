@@ -1,0 +1,34 @@
+package com.ralphmarondev.composeworld.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.composeworld.features.home.HomeScreen
+import com.ralphmarondev.composeworld.features.notes.presentation.NoteScreen
+
+@Composable
+fun AppNavigation(
+    navController: NavHostController = rememberNavController()
+) {
+    NavHost(
+        navController = navController,
+        startDestination = Routes.Home
+    ) {
+        composable<Routes.Home> {
+            HomeScreen(
+                navigateToNotes = {
+                    navController.navigate(Routes.Notes)
+                }
+            )
+        }
+        composable<Routes.Notes> {
+            NoteScreen(
+                backToHome = {
+                    navController.navigateUp()
+                }
+            )
+        }
+    }
+}

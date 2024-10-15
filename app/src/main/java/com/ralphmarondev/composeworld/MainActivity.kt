@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.rememberAsyncImagePainter
-import com.ralphmarondev.composeworld.features.home.HomeScreen
+import com.ralphmarondev.composeworld.navigation.AppNavigation
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
-                    HomeScreen()
+                    AppNavigation()
                 }
             }
         }

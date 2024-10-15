@@ -24,7 +24,9 @@ import com.ralphmarondev.composeworld.R
 import com.ralphmarondev.composeworld.features.home.components.TinyAppCard
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navigateToNotes: () -> Unit
+) {
     Scaffold(
         containerColor = Color.Transparent
     ) { innerPadding ->
@@ -68,7 +70,7 @@ fun HomeScreen() {
                 )
                 TinyAppCard(
                     image = R.drawable.notes,
-                    onClick = {}
+                    onClick = navigateToNotes
                 )
 
                 TinyAppCard(
