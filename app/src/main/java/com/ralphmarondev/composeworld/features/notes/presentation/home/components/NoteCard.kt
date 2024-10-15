@@ -17,16 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ralphmarondev.composeworld.R
+import com.ralphmarondev.composeworld.core.model.Note
 
 @Composable
 fun NoteCard(
+    note: Note,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -76,7 +76,7 @@ fun NoteCard(
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
                     Text(
-                        text = "Coding Compose World",
+                        text = note.title,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
@@ -100,7 +100,7 @@ fun NoteCard(
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = stringResource(R.string.sample_text),
+                text = note.description,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 16.sp,

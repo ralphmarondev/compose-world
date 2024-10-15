@@ -1,6 +1,7 @@
 package com.ralphmarondev.composeworld.features.notes.presentation.newnote
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,17 +30,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.composeworld.core.model.Note
 import com.ralphmarondev.composeworld.features.notes.presentation.newnote.components.DescriptionTextField
 import com.ralphmarondev.composeworld.features.notes.presentation.newnote.components.TitleTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewNoteScreen(
-    backToAllNotes: () -> Unit
+    backToAllNotes: () -> Unit,
+    viewModel: NewNoteViewModel = viewModel()
 ) {
+    val context = LocalContext.current
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
@@ -64,6 +70,29 @@ fun NewNoteScreen(
                     ElevatedButton(
                         onClick = {
                             Log.d("NOTES", "Title: $title, Description: $description")
+                            val note = Note(
+                                title = title,
+                                description = description
+                            )
+                            viewModel.createNote(
+                                note = note,
+                                response = { isSuccess, msg ->
+                                    if (isSuccess) {
+                                        Toast.makeText(
+                                            context,
+                                            "Saved successfully!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        backToAllNotes()
+                                    } else {
+                                        Toast.makeText(
+                                            context,
+                                            "Failed. $msg",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            )
                         }
                     ) {
                         Text(
