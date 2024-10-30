@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.browser.BrowserMainScreen
 import com.ralphmarondev.composeworld.features.home.HomeScreen
 import com.ralphmarondev.composeworld.features.notes.presentation.home.NoteScreen
 import com.ralphmarondev.composeworld.features.notes.presentation.newnote.NewNoteScreen
@@ -21,6 +22,9 @@ fun AppNavigation(
             HomeScreen(
                 navigateToNotes = {
                     navController.navigate(Routes.Notes)
+                },
+                navigateToBrowser = {
+                    navController.navigate(Routes.Browser)
                 }
             )
         }
@@ -34,6 +38,9 @@ fun AppNavigation(
         }
         composable<Routes.NewNote> {
             NewNoteScreen(backToAllNotes = { navController.navigateUp() })
+        }
+        composable<Routes.Browser> {
+            BrowserMainScreen()
         }
     }
 }

@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Compose World"
 include(":app")
- 
+include(":features:browser")

@@ -11,4 +11,7 @@ object Routes {
 
     @Serializable
     data object NewNote
+
+    @Serializable
+    data object Browser
 }

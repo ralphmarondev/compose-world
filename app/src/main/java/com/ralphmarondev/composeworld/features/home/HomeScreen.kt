@@ -25,7 +25,8 @@ import com.ralphmarondev.composeworld.features.home.components.TinyAppCard
 
 @Composable
 fun HomeScreen(
-    navigateToNotes: () -> Unit
+    navigateToBrowser: () -> Unit,
+    navigateToNotes: () -> Unit,
 ) {
     Scaffold(
         containerColor = Color.Transparent
@@ -66,7 +67,7 @@ fun HomeScreen(
             ) {
                 TinyAppCard(
                     image = R.drawable.browser,
-                    onClick = {}
+                    onClick = navigateToBrowser
                 )
                 TinyAppCard(
                     image = R.drawable.notes,
