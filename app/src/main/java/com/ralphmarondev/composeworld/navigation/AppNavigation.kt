@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.browser.BrowserMainScreen
+import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.features.home.HomeScreen
 import com.ralphmarondev.composeworld.features.notes.presentation.home.NoteScreen
 import com.ralphmarondev.composeworld.features.notes.presentation.newnote.NewNoteScreen
@@ -25,6 +26,9 @@ fun AppNavigation(
                 },
                 navigateToBrowser = {
                     navController.navigate(Routes.Browser)
+                },
+                navigateToCalculator = {
+                    navController.navigate(Routes.Calculator)
                 }
             )
         }
@@ -41,6 +45,9 @@ fun AppNavigation(
         }
         composable<Routes.Browser> {
             BrowserMainScreen()
+        }
+        composable<Routes.Calculator> {
+            CalculatorMainScreen()
         }
     }
 }
