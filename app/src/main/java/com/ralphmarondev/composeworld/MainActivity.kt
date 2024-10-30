@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.rememberAsyncImagePainter
-import com.ralphmarondev.composeworld.navigation.AppNavigation
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
+import com.ralphmarondev.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
