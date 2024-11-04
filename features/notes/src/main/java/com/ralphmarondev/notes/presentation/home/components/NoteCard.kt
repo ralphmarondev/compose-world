@@ -22,10 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ralphmarondev.notes.domain.model.Note
 
 @Composable
 fun NoteCard(
-    note: com.ralphmarondev.model.Note,
+    note: Note,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {

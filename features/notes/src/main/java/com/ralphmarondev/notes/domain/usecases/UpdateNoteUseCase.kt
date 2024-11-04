@@ -1,11 +1,11 @@
 package com.ralphmarondev.notes.domain.usecases
 
 import android.util.Log
-import com.ralphmarondev.model.Note
+import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.domain.repository.NoteRepository
 
 class UpdateNoteUseCase(private val noteRepository: NoteRepository) {
-    suspend fun updateNote(note: com.ralphmarondev.model.Note, response: (Boolean, String?) -> Unit) {
+    suspend fun updateNote(note: Note, response: (Boolean, String?) -> Unit) {
         try {
             noteRepository.updateNote(note)
             response(true, "Success.")

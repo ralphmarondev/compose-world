@@ -1,4 +1,4 @@
-package com.ralphmarondev.navigation
+package com.ralphmarondev.composeworld.navigation
 
 import kotlinx.serialization.Serializable
 

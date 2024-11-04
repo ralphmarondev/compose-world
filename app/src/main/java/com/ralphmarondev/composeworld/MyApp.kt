@@ -1,12 +1,13 @@
-package com.ralphmarondev.data
+package com.ralphmarondev.composeworld
 
 import android.app.Application
 import androidx.room.Room
-import com.ralphmarondev.data.local.AppDatabase
+import com.ralphmarondev.notes.data.local.AppDatabase
 
 class MyApp : Application() {
     companion object {
         lateinit var database: AppDatabase
+            private set
     }
 
     override fun onCreate() {

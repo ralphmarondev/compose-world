@@ -1,17 +1,18 @@
 package com.ralphmarondev.notes.data.repository
 
 import com.ralphmarondev.notes.data.local.NoteDao
+import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
 class NoteRepositoryImpl(
     private val noteDao: NoteDao
 ) : NoteRepository {
-    override suspend fun createNote(note: com.ralphmarondev.model.Note) {
+    override suspend fun createNote(note: Note) {
         noteDao.createNote(note)
     }
 
-    override suspend fun updateNote(note: com.ralphmarondev.model.Note) {
+    override suspend fun updateNote(note: Note) {
         noteDao.updateNote(note)
     }
 
@@ -19,7 +20,7 @@ class NoteRepositoryImpl(
         noteDao.deleteNote(id)
     }
 
-    override fun getAllNotes(): Flow<List<com.ralphmarondev.model.Note>> {
+    override fun getAllNotes(): Flow<List<Note>> {
         return noteDao.getAllNotes()
     }
 }

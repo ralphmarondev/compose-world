@@ -35,6 +35,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.notes.data.local.AppDatabase
+import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.presentation.newnote.components.DescriptionTextField
 import com.ralphmarondev.notes.presentation.newnote.components.TitleTextField
 
@@ -42,8 +44,11 @@ import com.ralphmarondev.notes.presentation.newnote.components.TitleTextField
 @Composable
 fun NewNoteScreen(
     backToAllNotes: () -> Unit,
-    viewModel: NewNoteViewModel = viewModel()
+    database: AppDatabase
 ) {
+    val viewModel: NewNoteViewModel = viewModel(
+        factory = NewNoteViewModelFactory(database)
+    )
     val context = LocalContext.current
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -69,7 +74,7 @@ fun NewNoteScreen(
                     ElevatedButton(
                         onClick = {
                             Log.d("NOTES", "Title: $title, Description: $description")
-                            val note = com.ralphmarondev.model.Note(
+                            val note = Note(
                                 title = title,
                                 description = description
                             )

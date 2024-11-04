@@ -21,11 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Compose World"
 include(":app")
+include(":features:home")
 include(":features:browser")
 include(":features:calculator")
-include(":navigation")
-include(":core:data")
-include(":core:model")
-include(":features:home")
 include(":features:notes")
-include(":core:common")

@@ -1,9 +1,8 @@
-package com.ralphmarondev.data.local
+package com.ralphmarondev.notes.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ralphmarondev.model.Note
-import com.ralphmarondev.notes.data.local.NoteDao
+import com.ralphmarondev.notes.domain.model.Note
 
 @Database(
     entities = [Note::class],

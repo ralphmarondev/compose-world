@@ -53,8 +53,10 @@ android {
 
 dependencies {
 
-    implementation(project(":navigation"))
-    implementation(project(":core:data"))
+    implementation(project(":features:browser"))
+    implementation(project(":features:home"))
+    implementation(project(":features:calculator"))
+    implementation(project(":features:notes"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -70,6 +72,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.coil.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    // room
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
