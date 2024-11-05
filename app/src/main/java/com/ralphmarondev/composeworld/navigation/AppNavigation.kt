@@ -11,6 +11,7 @@ import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
+import com.ralphmarondev.settings.presentation.SettingScreen
 
 @Composable
 fun AppNavigation() {
@@ -30,6 +31,9 @@ fun AppNavigation() {
                 },
                 navigateToCalculator = {
                     navController.navigate(Routes.Calculator)
+                },
+                navigateToSettings = {
+                    navController.navigate(Routes.Settings)
                 }
             )
         }
@@ -57,6 +61,13 @@ fun AppNavigation() {
         }
         composable<Routes.Calculator> {
             CalculatorMainScreen()
+        }
+        composable<Routes.Settings> {
+            SettingScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
         }
     }
 }

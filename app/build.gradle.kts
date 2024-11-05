@@ -57,6 +57,7 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":features:calculator"))
     implementation(project(":features:notes"))
+    implementation(project(":features:settings"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

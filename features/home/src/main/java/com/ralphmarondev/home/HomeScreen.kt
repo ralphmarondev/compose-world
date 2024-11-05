@@ -26,7 +26,8 @@ import com.ralphmarondev.home.components.TinyAppCard
 fun HomeScreen(
     navigateToBrowser: () -> Unit,
     navigateToNotes: () -> Unit,
-    navigateToCalculator: () -> Unit
+    navigateToCalculator: () -> Unit,
+    navigateToSettings: () -> Unit
 ) {
     Scaffold(
         containerColor = Color.Transparent
@@ -80,7 +81,7 @@ fun HomeScreen(
                 )
                 TinyAppCard(
                     image = R.drawable.setting,
-                    onClick = {}
+                    onClick = navigateToSettings
                 )
             }
         }

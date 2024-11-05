@@ -17,4 +17,7 @@ object Routes {
 
     @Serializable
     data object Calculator
+
+    @Serializable
+    data object Settings
 }
