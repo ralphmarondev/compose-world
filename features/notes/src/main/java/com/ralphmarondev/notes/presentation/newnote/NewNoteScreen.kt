@@ -137,7 +137,7 @@ fun NewNoteScreen(
                                 .size(16.dp)
                         )
                         Text(
-                            text = "Tue, Oct 15, 2024",
+                            text = viewModel.getCurrentDate(),
                             fontSize = 14.sp,
                             modifier = Modifier
                                 .padding(start = 6.dp, end = 8.dp)
@@ -151,7 +151,7 @@ fun NewNoteScreen(
                         )
 
                         Text(
-                            text = "6:57PM",
+                            text = viewModel.getCurrentTime(),
                             fontSize = 14.sp,
                             modifier = Modifier.padding(start = 4.dp)
                         )
