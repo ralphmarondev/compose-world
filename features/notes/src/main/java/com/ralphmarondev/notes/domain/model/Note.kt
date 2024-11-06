@@ -11,6 +11,8 @@ data class Note(
     val id: Int = 0,
     val title: String,
     val description: String,
+    val date: String,
+    val time: String,
     val dateCreated: String = getCurrentDateInString(),
     val isDeleted: Boolean = false
 )

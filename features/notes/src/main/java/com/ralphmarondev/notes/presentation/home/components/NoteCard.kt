@@ -23,6 +23,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ralphmarondev.notes.domain.model.Note
+import com.ralphmarondev.notes.utils.getDayOfMonth
+import com.ralphmarondev.notes.utils.getTimeInMilitary
+import com.ralphmarondev.notes.utils.getWeekday
 
 @Composable
 fun NoteCard(
@@ -53,7 +56,7 @@ fun NoteCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "TUE",
+                        text = getWeekday(note.date),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         fontSize = 14.sp,
@@ -64,7 +67,7 @@ fun NoteCard(
 
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "15",
+                        text = getDayOfMonth(note.date),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
@@ -87,7 +90,7 @@ fun NoteCard(
 
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "15:52",
+                        text = getTimeInMilitary(note.time),
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         fontSize = 14.sp,

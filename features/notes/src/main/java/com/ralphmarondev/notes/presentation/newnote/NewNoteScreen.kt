@@ -39,6 +39,8 @@ import com.ralphmarondev.notes.data.local.AppDatabase
 import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.presentation.newnote.components.DescriptionTextField
 import com.ralphmarondev.notes.presentation.newnote.components.TitleTextField
+import com.ralphmarondev.notes.utils.getCurrentDate
+import com.ralphmarondev.notes.utils.getCurrentTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,10 +75,17 @@ fun NewNoteScreen(
                 actions = {
                     ElevatedButton(
                         onClick = {
-                            Log.d("NOTES", "Title: $title, Description: $description")
+                            Log.d(
+                                "NOTES",
+                                "Title: $title, Description: $description, " +
+                                        "Date: ${getCurrentDate()}, " +
+                                        "Time: ${getCurrentTime()}"
+                            )
                             val note = Note(
                                 title = title,
-                                description = description
+                                description = description,
+                                date = getCurrentDate(),
+                                time = getCurrentTime()
                             )
                             viewModel.createNote(
                                 note = note,
@@ -137,7 +146,7 @@ fun NewNoteScreen(
                                 .size(16.dp)
                         )
                         Text(
-                            text = viewModel.getCurrentDate(),
+                            text = getCurrentDate(),
                             fontSize = 14.sp,
                             modifier = Modifier
                                 .padding(start = 6.dp, end = 8.dp)
@@ -151,7 +160,7 @@ fun NewNoteScreen(
                         )
 
                         Text(
-                            text = viewModel.getCurrentTime(),
+                            text = getCurrentTime(),
                             fontSize = 14.sp,
                             modifier = Modifier.padding(start = 4.dp)
                         )
