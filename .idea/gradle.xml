@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/features/browser" />
             <option value="$PROJECT_DIR$/features/calculator" />
             <option value="$PROJECT_DIR$/features/home" />
+            <option value="$PROJECT_DIR$/features/keepr" />
             <option value="$PROJECT_DIR$/features/notes" />
             <option value="$PROJECT_DIR$/features/settings" />
           </set>

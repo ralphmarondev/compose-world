@@ -1,6 +1,5 @@
 package com.ralphmarondev.composeworld.navigation
 
-import DetailScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,6 +10,8 @@ import com.ralphmarondev.browser.BrowserMainScreen
 import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
+import com.ralphmarondev.keepr.presentation.auth.AuthScreen
+import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
 import com.ralphmarondev.settings.presentation.SettingScreen
@@ -36,6 +37,9 @@ fun AppNavigation() {
                 },
                 navigateToSettings = {
                     navController.navigate(Routes.Settings)
+                },
+                navigateToKeeper = {
+                    navController.navigate(Routes.Keeper)
                 }
             )
         }
@@ -80,6 +84,13 @@ fun AppNavigation() {
         composable<Routes.Settings> {
             SettingScreen(
                 navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Keeper> {
+            AuthScreen(
+                backToHome = {
                     navController.navigateUp()
                 }
             )
