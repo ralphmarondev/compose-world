@@ -13,6 +13,9 @@ object Routes {
     data object NewNote
 
     @Serializable
+    data class NoteDetails(val id: Int)
+
+    @Serializable
     data object Browser
 
     @Serializable

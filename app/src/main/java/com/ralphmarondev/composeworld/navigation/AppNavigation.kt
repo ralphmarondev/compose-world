@@ -1,10 +1,12 @@
 package com.ralphmarondev.composeworld.navigation
 
+import DetailScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.ralphmarondev.browser.BrowserMainScreen
 import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
@@ -45,7 +47,10 @@ fun AppNavigation() {
                 addNewNote = {
                     navController.navigate(Routes.NewNote)
                 },
-                database = MyApp.database
+                database = MyApp.database,
+                navigateToDetails = { noteId ->
+                    navController.navigate(Routes.NoteDetails(noteId))
+                }
             )
         }
         composable<Routes.NewNote> {
@@ -54,6 +59,16 @@ fun AppNavigation() {
                     navController.navigateUp()
                 },
                 database = MyApp.database
+            )
+        }
+        composable<Routes.NoteDetails> {
+            val args = it.toRoute<Routes.NoteDetails>()
+            DetailScreen(
+                backToAllNotes = {
+                    navController.navigateUp()
+                },
+                database = MyApp.database,
+                noteId = args.id
             )
         }
         composable<Routes.Browser> {

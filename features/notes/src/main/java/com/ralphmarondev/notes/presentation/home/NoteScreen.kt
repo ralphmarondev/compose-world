@@ -43,6 +43,7 @@ import com.ralphmarondev.notes.presentation.home.components.NoteCard
 fun NoteScreen(
     backToHome: () -> Unit,
     addNewNote: () -> Unit,
+    navigateToDetails: (Int) -> Unit,
     database: AppDatabase
 ) {
     val viewModel: HomeViewModel = viewModel(
@@ -117,7 +118,9 @@ fun NoteScreen(
             }
             items(notes.size) { index ->
                 NoteCard(
-                    onClick = {},
+                    onClick = {
+                        navigateToDetails(notes[index].id)
+                    },
                     note = notes[index],
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 4.dp)

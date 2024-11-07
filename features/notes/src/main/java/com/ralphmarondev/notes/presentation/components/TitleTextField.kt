@@ -1,5 +1,10 @@
-package com.ralphmarondev.notes.presentation.newnote.components
+package com.ralphmarondev.notes.presentation.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -13,7 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DescriptionTextField(
+fun TitleTextField(
     value: String,
     onValueChanged: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -23,7 +28,7 @@ fun DescriptionTextField(
         onValueChange = { onValueChanged(it) },
         placeholder = {
             Text(
-                text = "How was your day? :)",
+                text = "Title",
                 fontFamily = FontFamily.Monospace,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -31,15 +36,26 @@ fun DescriptionTextField(
         },
         textStyle = TextStyle(
             fontFamily = FontFamily.Monospace,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.W400
+            fontSize = 20.sp,
+            fontWeight = FontWeight.W500
         ),
+        trailingIcon = {
+            AnimatedVisibility(value.isNotEmpty()) {
+                IconButton(onClick = { onValueChanged("") }) {
+                    Icon(
+                        imageVector = Icons.Outlined.Clear,
+                        contentDescription = "Clear"
+                    )
+                }
+            }
+        },
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         ),
+        maxLines = 1,
         modifier = modifier
     )
 }
