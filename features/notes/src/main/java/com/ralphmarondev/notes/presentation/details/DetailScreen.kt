@@ -1,5 +1,6 @@
 package com.ralphmarondev.notes.presentation.details
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,21 +23,23 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.notes.data.local.AppDatabase
+import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.presentation.components.DescriptionTextField
 import com.ralphmarondev.notes.presentation.components.TitleTextField
-import com.ralphmarondev.notes.presentation.details.DetailsViewModel
-import com.ralphmarondev.notes.presentation.details.DetailsViewModelFactory
 import com.ralphmarondev.notes.utils.getCurrentDate
 import com.ralphmarondev.notes.utils.getCurrentTime
 
@@ -47,12 +50,45 @@ fun DetailScreen(
     database: AppDatabase,
     noteId: Int
 ) {
+    val context = LocalContext.current
     val viewModel: DetailsViewModel = viewModel(
         factory = DetailsViewModelFactory(database)
     )
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var date by remember { mutableStateOf("") }
+    var time by remember { mutableStateOf("") }
+
+    val note by viewModel.note.collectAsState()
+
+    var originalTitle by remember { mutableStateOf("") }
+    var originalDescription by remember { mutableStateOf("") }
+
+    // fetch note data when the composable first launched or noteId changes :>
+    LaunchedEffect(noteId) {
+        viewModel.getNoteById(noteId)
+    }
+
+    LaunchedEffect(note) {
+        note.let {
+            title = it.title
+            description = it.description
+            date = it.date
+            time = it.time
+
+            originalTitle = it.title
+            originalDescription = it.description
+        }
+    }
+
+    // update date and time when title or description changes
+    LaunchedEffect(title, description) {
+        if (title != originalTitle || description != originalDescription) {
+            date = getCurrentDate()
+            time = getCurrentTime()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -73,7 +109,32 @@ fun DetailScreen(
                 },
                 actions = {
                     ElevatedButton(
-                        onClick = {}
+                        onClick = {
+                            viewModel.updateNote(
+                                note = Note(
+                                    id = noteId,
+                                    title = title,
+                                    description = description,
+                                    date = date,
+                                    time = time
+                                ),
+                                response = { success, message ->
+                                    if (success) {
+                                        Toast.makeText(
+                                            context,
+                                            "Updated successfully!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            context,
+                                            "Update failed. Error: $message",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            )
+                        }
                     ) {
                         Text(
                             text = "UPDATE",
@@ -113,7 +174,7 @@ fun DetailScreen(
                                 .size(16.dp)
                         )
                         Text(
-                            text = getCurrentDate(),
+                            text = date,
                             fontSize = 14.sp,
                             modifier = Modifier
                                 .padding(start = 6.dp, end = 8.dp)
@@ -127,7 +188,7 @@ fun DetailScreen(
                         )
 
                         Text(
-                            text = getCurrentTime(),
+                            text = time,
                             fontSize = 14.sp,
                             modifier = Modifier.padding(start = 4.dp)
                         )
@@ -153,13 +214,6 @@ fun DetailScreen(
                         onValueChanged = { description = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                    )
-
-                    Text(
-                        text = "ID: $noteId",
-                        fontFamily = FontFamily.Monospace,
-                        modifier = Modifier
-                            .padding(16.dp)
                     )
                 }
             }

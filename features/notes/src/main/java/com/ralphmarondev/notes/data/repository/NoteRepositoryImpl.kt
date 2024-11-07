@@ -20,6 +20,10 @@ class NoteRepositoryImpl(
         noteDao.deleteNote(id)
     }
 
+    override suspend fun getNoteById(id: Int): Note {
+        return noteDao.getNoteById(id)
+    }
+
     override fun getAllNotes(): Flow<List<Note>> {
         return noteDao.getAllNotes()
     }
