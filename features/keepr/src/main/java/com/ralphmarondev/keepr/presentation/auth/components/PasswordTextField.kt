@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun PasswordTextField(
@@ -44,15 +43,13 @@ fun PasswordTextField(
                 text = label,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.W500,
-                fontSize = 16.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         },
         textStyle = TextStyle(
             fontFamily = FontFamily.Monospace,
-            fontWeight = FontWeight.W500,
-            fontSize = 16.sp
+            fontWeight = FontWeight.W500
         ),
         maxLines = maxLines,
         leadingIcon = {
