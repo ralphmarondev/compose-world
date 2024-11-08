@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.auth
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,15 +24,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.keepr.data.local.KeeprDao
+import com.ralphmarondev.keepr.domain.model.KeeprUser
 import com.ralphmarondev.keepr.presentation.auth.components.LoginComponent
 import com.ralphmarondev.keepr.presentation.auth.components.RegisterComponent
 
 @Composable
 fun AuthScreen(
     backToHome: () -> Unit,
-    navigateToHome: (String) -> Unit
+    navigateToHome: (String) -> Unit,
+    keeprDao: KeeprDao
 ) {
+    val viewModel: AuthViewModel = viewModel(
+        factory = AuthViewModelFactory(keeprDao)
+    )
+    val context = LocalContext.current
     var selectedScreen by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -67,7 +77,30 @@ fun AuthScreen(
                         RegisterComponent(
                             backToLogin = { selectedScreen = 0 },
                             onRegister = { fullName, username, password ->
-
+                                val user = KeeprUser(
+                                    fullName = fullName,
+                                    username = username,
+                                    password = password
+                                )
+                                viewModel.createUser(
+                                    keeprUser = user,
+                                    response = { success, message ->
+                                        if (success) {
+                                            Toast.makeText(
+                                                context,
+                                                "Registered successfully!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            selectedScreen = 0
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "Registration Failed. Error: $message",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+                                )
                             }
                         )
                     }
