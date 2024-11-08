@@ -11,6 +11,7 @@ import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
 import com.ralphmarondev.keepr.presentation.auth.AuthScreen
+import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
 import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
@@ -104,6 +105,18 @@ fun AppNavigation() {
             com.ralphmarondev.keepr.presentation.home.HomeScreen(
                 currentUser = args.username,
                 logout = {
+                    navController.navigateUp()
+                },
+                navigateToSubCategory = { category ->
+                    navController.navigate(Routes.KeeperSubCategory(category))
+                }
+            )
+        }
+        composable<Routes.KeeperSubCategory> {
+            val args = it.toRoute<Routes.KeeperSubCategory>()
+            SubCategories(
+                category = args.category,
+                backToHome = {
                     navController.navigateUp()
                 }
             )

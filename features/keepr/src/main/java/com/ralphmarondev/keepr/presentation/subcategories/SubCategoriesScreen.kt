@@ -1,12 +1,11 @@
-package com.ralphmarondev.keepr.presentation.home
+package com.ralphmarondev.keepr.presentation.subcategories
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.LightMode
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,43 +24,29 @@ import com.ralphmarondev.keepr.presentation.components.CategoryCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    currentUser: String,
-    logout: () -> Unit,
-    navigateToSubCategory: (String) -> Unit
+fun SubCategories(
+    category: String,
+    backToHome: () -> Unit
 ) {
     val categories = listOf(
         Categories(
-            image = R.drawable.social,
-            text = "Social",
-            onClick = {
-                navigateToSubCategory("Social")
-            }
+            image = R.drawable.tiktok,
+            text = "Tiktok",
+            onClick = {}
         ),
         Categories(
-            image = R.drawable.gaming,
-            text = "Gaming",
-            onClick = {
-                navigateToSubCategory("Gaming")
-            }
+            image = R.drawable.facebook,
+            text = "Facebook",
+            onClick = {}
         ),
         Categories(
-            image = R.drawable.development,
-            text = "Development",
-            onClick = {
-                navigateToSubCategory("Development")
-            }
+            image = R.drawable.instagram,
+            text = "Instagram",
+            onClick = {}
         ),
         Categories(
-            image = R.drawable.entertainment,
-            text = "Entertainment",
-            onClick = {
-                navigateToSubCategory("Entertainment")
-            }
-        ),
-        Categories(
-            image = R.drawable.new_image,
-            text = "New",
+            image = R.drawable.linkedin,
+            text = "LinkedIn",
             onClick = {}
         )
     )
@@ -71,30 +56,21 @@ fun HomeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Home",
+                        text = category,
                         fontFamily = FontFamily.Monospace
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = backToHome) {
                         Icon(
-                            imageVector = Icons.Outlined.Menu,
-                            contentDescription = "Menu"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Outlined.LightMode,
-                            contentDescription = "Theme Switcher"
+                            imageVector = Icons.Outlined.ArrowBackIosNew,
+                            contentDescription = "Back"
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
                     navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )

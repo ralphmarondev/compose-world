@@ -29,4 +29,7 @@ object Routes {
 
     @Serializable
     data class KeeperHome(val username: String)
+
+    @Serializable
+    data class KeeperSubCategory(val category: String)
 }
