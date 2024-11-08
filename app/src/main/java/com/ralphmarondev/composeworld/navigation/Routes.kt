@@ -26,4 +26,7 @@ object Routes {
 
     @Serializable
     data object Keeper
+
+    @Serializable
+    data class KeeperHome(val username: String)
 }

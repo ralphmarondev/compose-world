@@ -92,6 +92,18 @@ fun AppNavigation() {
             AuthScreen(
                 backToHome = {
                     navController.navigateUp()
+                },
+                navigateToHome = { username ->
+                    navController.navigate(Routes.KeeperHome(username))
+                }
+            )
+        }
+        composable<Routes.KeeperHome> {
+            val args = it.toRoute<Routes.KeeperHome>()
+            com.ralphmarondev.keepr.presentation.home.HomeScreen(
+                currentUser = args.username,
+                logout = {
+                    navController.navigateUp()
                 }
             )
         }
