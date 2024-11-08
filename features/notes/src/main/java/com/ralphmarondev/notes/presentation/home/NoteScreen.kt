@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.notes.R
-import com.ralphmarondev.notes.data.local.AppDatabase
+import com.ralphmarondev.notes.data.local.NoteDao
 import com.ralphmarondev.notes.presentation.home.components.NoteCard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,10 +44,10 @@ fun NoteScreen(
     backToHome: () -> Unit,
     addNewNote: () -> Unit,
     navigateToDetails: (Int) -> Unit,
-    database: AppDatabase
+    noteDao: NoteDao
 ) {
     val viewModel: HomeViewModel = viewModel(
-        factory = HomeViewModelFactory(database)
+        factory = HomeViewModelFactory(noteDao)
     )
     val notes by viewModel.allNotes.collectAsState()
 

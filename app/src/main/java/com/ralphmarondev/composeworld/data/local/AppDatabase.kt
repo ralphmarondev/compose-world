@@ -1,7 +1,8 @@
-package com.ralphmarondev.notes.data.local
+package com.ralphmarondev.composeworld.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.ralphmarondev.notes.data.local.NoteDao
 import com.ralphmarondev.notes.domain.model.Note
 
 @Database(

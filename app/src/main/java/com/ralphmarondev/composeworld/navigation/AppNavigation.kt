@@ -51,7 +51,7 @@ fun AppNavigation() {
                 addNewNote = {
                     navController.navigate(Routes.NewNote)
                 },
-                database = MyApp.database,
+                noteDao = MyApp.database.noteDao(),
                 navigateToDetails = { noteId ->
                     navController.navigate(Routes.NoteDetails(noteId))
                 }
@@ -62,7 +62,7 @@ fun AppNavigation() {
                 backToAllNotes = {
                     navController.navigateUp()
                 },
-                database = MyApp.database
+                noteDao = MyApp.database.noteDao()
             )
         }
         composable<Routes.NoteDetails> {
@@ -71,7 +71,7 @@ fun AppNavigation() {
                 backToAllNotes = {
                     navController.navigateUp()
                 },
-                database = MyApp.database,
+                noteDao = MyApp.database.noteDao(),
                 noteId = args.id
             )
         }

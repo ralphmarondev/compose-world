@@ -35,7 +35,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.notes.data.local.AppDatabase
+import com.ralphmarondev.notes.data.local.NoteDao
 import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.presentation.components.DescriptionTextField
 import com.ralphmarondev.notes.presentation.components.TitleTextField
@@ -46,10 +46,10 @@ import com.ralphmarondev.notes.utils.getCurrentTime
 @Composable
 fun NewNoteScreen(
     backToAllNotes: () -> Unit,
-    database: AppDatabase
+    noteDao: NoteDao
 ) {
     val viewModel: NewNoteViewModel = viewModel(
-        factory = NewNoteViewModelFactory(database)
+        factory = NewNoteViewModelFactory(noteDao)
     )
     val context = LocalContext.current
     var title by remember { mutableStateOf("") }
