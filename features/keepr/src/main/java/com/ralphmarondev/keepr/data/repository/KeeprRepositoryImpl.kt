@@ -10,4 +10,11 @@ class KeeprRepositoryImpl(
     override suspend fun createUser(keeprUser: KeeprUser) {
         keeprDao.createUser(keeprUser)
     }
+
+    override suspend fun login(username: String, password: String): Boolean {
+        return keeprDao.login(
+            username = username,
+            password = password
+        )
+    }
 }

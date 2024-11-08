@@ -68,7 +68,21 @@ fun AuthScreen(
                         LoginComponent(
                             goToRegister = { selectedScreen = 1 },
                             onLogin = { username, password ->
-                                navigateToHome("ralphmaron")
+                                viewModel.login(
+                                    username = username,
+                                    password = password,
+                                    response = { success ->
+                                        if (success) {
+                                            navigateToHome("ralphmaron")
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "Login Failed! Invalid Credentials.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+                                )
                             }
                         )
                     }

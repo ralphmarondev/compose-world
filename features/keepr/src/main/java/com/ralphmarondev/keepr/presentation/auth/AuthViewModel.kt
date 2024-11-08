@@ -7,6 +7,7 @@ import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.data.repository.KeeprRepositoryImpl
 import com.ralphmarondev.keepr.domain.model.KeeprUser
 import com.ralphmarondev.keepr.domain.usecases.CreateUserUseCase
+import com.ralphmarondev.keepr.domain.usecases.LoginUseCase
 import kotlinx.coroutines.launch
 
 class AuthViewModelFactory(private val keeprDao: KeeprDao) : ViewModelProvider.Factory {
@@ -21,10 +22,21 @@ class AuthViewModelFactory(private val keeprDao: KeeprDao) : ViewModelProvider.F
 class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
     private val keeprRepository = KeeprRepositoryImpl(keeprDao)
     private val createUserUseCase = CreateUserUseCase(keeprRepository)
+    private val loginUseCase = LoginUseCase(keeprRepository)
 
     fun createUser(keeprUser: KeeprUser, response: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
             createUserUseCase.createUser(keeprUser, response)
+        }
+    }
+
+    fun login(username: String, password: String, response: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val result = loginUseCase.login(
+                username = username,
+                password = password
+            )
+            response(result)
         }
     }
 }
