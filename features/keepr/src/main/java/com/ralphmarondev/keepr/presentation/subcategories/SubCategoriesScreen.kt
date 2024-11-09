@@ -26,28 +26,37 @@ import com.ralphmarondev.keepr.presentation.components.CategoryCard
 @Composable
 fun SubCategories(
     category: String,
-    backToHome: () -> Unit
+    backToHome: () -> Unit,
+    navigateToDetails: (String) -> Unit
 ) {
     val categories = listOf(
         Categories(
             image = R.drawable.tiktok,
             text = "Tiktok",
-            onClick = {}
+            onClick = {
+                navigateToDetails("Tiktok")
+            }
         ),
         Categories(
             image = R.drawable.facebook,
             text = "Facebook",
-            onClick = {}
+            onClick = {
+                navigateToDetails("Facebook")
+            }
         ),
         Categories(
             image = R.drawable.instagram,
             text = "Instagram",
-            onClick = {}
+            onClick = {
+                navigateToDetails("Instagram")
+            }
         ),
         Categories(
             image = R.drawable.linkedin,
             text = "LinkedIn",
-            onClick = {}
+            onClick = {
+                navigateToDetails("LinkedIn")
+            }
         )
     )
 

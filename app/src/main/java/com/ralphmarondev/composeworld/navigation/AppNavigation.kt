@@ -118,6 +118,18 @@ fun AppNavigation() {
                 category = args.category,
                 backToHome = {
                     navController.navigateUp()
+                },
+                navigateToDetails = { subCategory ->
+                    navController.navigate(Routes.KeeperDetailScreen(subCategory))
+                }
+            )
+        }
+        composable<Routes.KeeperDetailScreen> {
+            val args = it.toRoute<Routes.KeeperDetailScreen>()
+            com.ralphmarondev.keepr.presentation.details.DetailScreen(
+                subCategory = args.subCategory,
+                backToSubCategories = {
+                    navController.navigateUp()
                 }
             )
         }

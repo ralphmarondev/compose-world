@@ -32,4 +32,7 @@ object Routes {
 
     @Serializable
     data class KeeperSubCategory(val category: String)
+
+    @Serializable
+    data class KeeperDetailScreen(val subCategory: String)
 }
