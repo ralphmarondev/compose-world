@@ -5,6 +5,7 @@ import androidx.room.Query
 import androidx.room.Upsert
 import com.ralphmarondev.keepr.domain.model.KeeprUser
 
+// TODO: Create initial categories and sub categories on first launch
 @Dao
 interface KeeprDao {
 
@@ -13,4 +14,5 @@ interface KeeprDao {
 
     @Query("SELECT COUNT(*) > 0 FROM KeeprUser WHERE username=:username AND password=:password and isDeleted=0")
     suspend fun login(username: String, password: String): Boolean
+
 }
