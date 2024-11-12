@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.data.repository.KeeprRepositoryImpl
 import com.ralphmarondev.keepr.domain.model.KeeprUser
+import com.ralphmarondev.keepr.domain.usecases.CreateDefaultUseCase
 import com.ralphmarondev.keepr.domain.usecases.CreateUserUseCase
 import com.ralphmarondev.keepr.domain.usecases.LoginUseCase
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
     private val keeprRepository = KeeprRepositoryImpl(keeprDao)
     private val createUserUseCase = CreateUserUseCase(keeprRepository)
     private val loginUseCase = LoginUseCase(keeprRepository)
+    private val createDefaultUseCase = CreateDefaultUseCase(keeprRepository)
 
     fun createUser(keeprUser: KeeprUser, response: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
@@ -36,7 +38,21 @@ class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
                 username = username,
                 password = password
             )
+            if (result) {
+                createDefaults()
+            }
             response(result)
         }
+    }
+
+    private fun createDefaults() {
+        // create default categories [social, gaming, development, entertainment]
+        // create default sub categories [
+        //  social: tiktok, facebook, instagram, linkedIn,
+        // gaming: clash of clans, mobile legends
+        // development: github
+        // entertainment: ...
+        // ]
+        createDefaultUseCase.createDefaults()
     }
 }

@@ -73,7 +73,7 @@ fun AuthScreen(
                                     password = password,
                                     response = { success ->
                                         if (success) {
-                                            navigateToHome("ralphmaron")
+                                            navigateToHome(username)
                                         } else {
                                             Toast.makeText(
                                                 context,

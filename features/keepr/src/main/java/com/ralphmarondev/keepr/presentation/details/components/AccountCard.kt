@@ -47,7 +47,7 @@ fun AccountCard(
         ) {
             Image(
                 painter = rememberAsyncImagePainter(R.drawable.tiktok),
-                contentDescription = keeprAccount.subCategory,
+                contentDescription = "Sub Category Image",
                 modifier = Modifier
                     .size(65.dp),
                 contentScale = ContentScale.Crop
@@ -56,7 +56,7 @@ fun AccountCard(
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = keeprAccount.subCategory,
+                    text = "${keeprAccount.subCategory}",
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.W500,
                     fontSize = 18.sp,
