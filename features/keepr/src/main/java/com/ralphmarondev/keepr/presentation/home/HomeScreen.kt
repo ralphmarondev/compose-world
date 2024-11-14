@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.LightMode
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,6 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
+import com.ralphmarondev.keepr.presentation.home.components.NewCategoryDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,6 +43,7 @@ fun HomeScreen(
         )
     )
     val categories by viewModel.categories.collectAsState()
+    val showNewDialog by viewModel.showNewDialog.collectAsState()
 
     Scaffold(
         topBar = {
@@ -63,10 +65,10 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { viewModel.toggleShowNewDialog() }) {
                         Icon(
-                            imageVector = Icons.Outlined.LightMode,
-                            contentDescription = "Theme Switcher"
+                            imageVector = Icons.Outlined.Add,
+                            contentDescription = "New Category"
                         )
                     }
                 },
@@ -97,6 +99,15 @@ fun HomeScreen(
                         .padding(8.dp)
                 )
             }
+        }
+
+        if (showNewDialog) {
+            NewCategoryDialog(
+                onDismiss = { viewModel.toggleShowNewDialog() },
+                onSaveCategory = { name->
+                    viewModel.createNewCategory(name)
+                }
+            )
         }
     }
 }

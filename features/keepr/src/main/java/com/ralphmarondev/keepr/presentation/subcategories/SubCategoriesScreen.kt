@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
+import com.ralphmarondev.keepr.presentation.subcategories.components.NewSubCategoryDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,6 +43,7 @@ fun SubCategories(
         )
     )
     val subCategories by viewModel.subCategories.collectAsState()
+    val showNewSubCategory by viewModel.showNewSubCategory.collectAsState()
 
     Scaffold(
         topBar = {
@@ -56,6 +59,14 @@ fun SubCategories(
                         Icon(
                             imageVector = Icons.Outlined.ArrowBackIosNew,
                             contentDescription = "Back"
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { viewModel.toggleShowNewSubCategory() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Add,
+                            contentDescription = "New SubCategory"
                         )
                     }
                 },
@@ -85,6 +96,15 @@ fun SubCategories(
                         .padding(8.dp)
                 )
             }
+        }
+
+        if (showNewSubCategory) {
+            NewSubCategoryDialog(
+                onDismiss = { viewModel.toggleShowNewSubCategory() },
+                onSaveSubCategory = { name ->
+                    viewModel.createNewSubCategory(name)
+                }
+            )
         }
     }
 }

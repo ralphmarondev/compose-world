@@ -39,7 +39,7 @@ import androidx.compose.ui.window.DialogProperties
 @Composable
 fun NewAccountDialog(
     onDismiss: () -> Unit,
-    onSaveCategory: (String) -> Unit
+    onSaveCategory: (String, String, String) -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     var usernameOrEmail by remember { mutableStateOf("") }
@@ -187,7 +187,7 @@ fun NewAccountDialog(
 
             Button(
                 onClick = {
-                    onSaveCategory(name)
+                    onSaveCategory(name, usernameOrEmail, password)
                 },
                 modifier = Modifier.padding(16.dp)
             ) {

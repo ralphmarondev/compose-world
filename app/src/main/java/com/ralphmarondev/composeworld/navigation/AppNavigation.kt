@@ -133,7 +133,8 @@ fun AppNavigation() {
                 subCategoryName = args.subCategory,
                 backToSubCategories = {
                     navController.navigateUp()
-                }
+                },
+                keeprDao = MyApp.database.keeprDao()
             )
         }
     }

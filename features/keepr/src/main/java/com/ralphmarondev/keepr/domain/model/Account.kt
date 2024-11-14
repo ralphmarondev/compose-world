@@ -8,8 +8,8 @@ import com.ralphmarondev.keepr.util.getCurrentDateInString
 data class Account(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val categoryName: String, // ex. social
-    val subCategoryName: String, // ex. tiktok
+    val subCategoryName: String,
+    val name: String,
     val username: String,
     val password: String, // encrypt this later
     val createDate: String = getCurrentDateInString(),

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
@@ -18,48 +19,33 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.domain.model.Account
 import com.ralphmarondev.keepr.presentation.details.components.AccountCard
-import com.ralphmarondev.keepr.presentation.details.components.AccountCardItems
+import com.ralphmarondev.keepr.presentation.details.components.NewAccountDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     subCategoryName: String,
+    keeprDao: KeeprDao,
     backToSubCategories: () -> Unit
 ) {
-    val listOfAccounts = listOf(
-        AccountCardItems(
-            keeprAccount = Account(
-                categoryName = "Social",
-                subCategoryName = subCategoryName,
-                username = "edaralphmaron@gmail.com",
-                password = "somepassword-hehez"
-            ),
-            onClick = {}
-        ),
-        AccountCardItems(
-            keeprAccount = Account(
-                categoryName = "Social",
-                subCategoryName = subCategoryName,
-                username = "edaralphmaron2@gmail.com",
-                password = "somepassword-hehez2"
-            ),
-            onClick = {}
-        ),
-        AccountCardItems(
-            keeprAccount = Account(
-                categoryName = subCategoryName,
-                subCategoryName = "Tiktok",
-                username = "edaralphmaron3@gmail.com",
-                password = "somepassword-hehez3"
-            ),
-            onClick = {}
+    val viewModel: DetailViewModel = viewModel(
+        factory = DetailViewModelFactory(
+            keeprDao = keeprDao,
+            subCategory = subCategoryName
         )
     )
+
+    val showNewAccount by viewModel.showNewAccount.collectAsState()
+    val accounts by viewModel.accounts.collectAsState()
 
     Scaffold(
         topBar = {
@@ -86,7 +72,7 @@ fun DetailScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(onClick = { viewModel.toggleShowNewAccount() }) {
                 Icon(
                     imageVector = Icons.Outlined.Add,
                     contentDescription = "New Account"
@@ -100,15 +86,33 @@ fun DetailScreen(
                 .padding(innerPadding)
         ) {
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            items(listOfAccounts.size) { index ->
+            items(accounts) { account ->
                 AccountCard(
-                    keeprAccount = listOfAccounts[index].keeprAccount,
-                    onClick = listOfAccounts[index].onClick,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                    keeprAccount = Account(
+                        name = account.name,
+                        username = account.username,
+                        password = account.password,
+                        subCategoryName = account.subCategoryName
+                    ),
+                    onClick = {
+
+                    }
                 )
             }
             item { Spacer(modifier = Modifier.height(100.dp)) }
+        }
+
+        if (showNewAccount) {
+            NewAccountDialog(
+                onDismiss = { viewModel.toggleShowNewAccount() },
+                onSaveCategory = { name, username, password ->
+                    viewModel.createNewAccount(
+                        name = name,
+                        username = username,
+                        password = password
+                    )
+                }
+            )
         }
     }
 }
