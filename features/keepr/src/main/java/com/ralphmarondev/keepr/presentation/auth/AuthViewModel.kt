@@ -45,7 +45,7 @@ class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
         }
     }
 
-    private fun createDefaults() {
+    private suspend fun createDefaults() {
         // create default categories [social, gaming, development, entertainment]
         // create default sub categories [
         //  social: tiktok, facebook, instagram, linkedIn,

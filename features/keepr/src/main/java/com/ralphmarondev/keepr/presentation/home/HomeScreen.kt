@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.Menu
@@ -16,10 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.R
+import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.Categories
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 
@@ -27,44 +32,21 @@ import com.ralphmarondev.keepr.presentation.components.CategoryCard
 @Composable
 fun HomeScreen(
     currentUser: String,
+    keeprDao: KeeprDao,
     logout: () -> Unit,
     navigateToSubCategory: (String) -> Unit
 ) {
-    val categories = listOf(
+    val viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModelFactory(keeprDao)
+    )
+    val rawCategories by viewModel.categories.collectAsState()
+    val categories = rawCategories.map { category ->
         Categories(
             image = R.drawable.social,
-            text = "Social",
-            onClick = {
-                navigateToSubCategory("Social")
-            }
-        ),
-        Categories(
-            image = R.drawable.gaming,
-            text = "Gaming",
-            onClick = {
-                navigateToSubCategory("Gaming")
-            }
-        ),
-        Categories(
-            image = R.drawable.development,
-            text = "Development",
-            onClick = {
-                navigateToSubCategory("Development")
-            }
-        ),
-        Categories(
-            image = R.drawable.entertainment,
-            text = "Entertainment",
-            onClick = {
-                navigateToSubCategory("Entertainment")
-            }
-        ),
-        Categories(
-            image = R.drawable.new_image,
-            text = "New",
+            text = category.name,
             onClick = {}
         )
-    )
+    }
 
     Scaffold(
         topBar = {
@@ -107,11 +89,11 @@ fun HomeScreen(
                 .padding(innerPadding)
                 .padding(8.dp)
         ) {
-            items(categories.size) { index ->
+            items(categories) { category ->
                 CategoryCard(
-                    image = categories[index].image,
-                    text = categories[index].text,
-                    onClick = categories[index].onClick,
+                    image = category.image,
+                    text = category.text,
+                    onClick = category.onClick,
                     modifier = Modifier
                         .padding(8.dp)
                 )

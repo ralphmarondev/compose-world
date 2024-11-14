@@ -8,8 +8,8 @@ import com.ralphmarondev.keepr.util.getCurrentDateInString
 data class KeeprAccount(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val category: Int, // ex. social
-    val subCategory: Int, // ex. tiktok
+    val category: String, // ex. social
+    val subCategory: String, // ex. tiktok
     val name: String = "Account",
     val usernameOrEmail: String,
     val password: String, // encrypt this later
@@ -31,5 +31,5 @@ data class SubCategory(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val category: Int // Category ID
+    val category: String // Category Name [name must be unique]
 )
