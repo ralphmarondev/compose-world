@@ -37,7 +37,9 @@ fun HomeScreen(
     navigateToSubCategory: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel(
-        factory = HomeViewModelFactory(keeprDao)
+        factory = HomeViewModelFactory(
+            keeprDao = keeprDao
+        )
     )
     val categories by viewModel.categories.collectAsState()
 

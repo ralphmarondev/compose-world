@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.keepr.data.local.KeeprDao
+import com.ralphmarondev.keepr.data.local.PreferencesHelper
 import com.ralphmarondev.keepr.data.repository.KeeprRepositoryImpl
 import com.ralphmarondev.keepr.domain.model.User
 import com.ralphmarondev.keepr.domain.usecases.CreateDefaultUseCase
@@ -11,16 +12,24 @@ import com.ralphmarondev.keepr.domain.usecases.CreateUserUseCase
 import com.ralphmarondev.keepr.domain.usecases.LoginUseCase
 import kotlinx.coroutines.launch
 
-class AuthViewModelFactory(private val keeprDao: KeeprDao) : ViewModelProvider.Factory {
+class AuthViewModelFactory(
+    private val keeprDao: KeeprDao,
+    private val preferences: PreferencesHelper
+) : ViewModelProvider.Factory {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
-            return AuthViewModel(keeprDao) as T
+            return AuthViewModel(keeprDao, preferences) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
 
-class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
+class AuthViewModel(
+    private val keeprDao: KeeprDao,
+    private val preferences: PreferencesHelper
+) : ViewModel() {
+
     private val keeprRepository = KeeprRepositoryImpl(keeprDao)
     private val createUserUseCase = CreateUserUseCase(keeprRepository)
     private val loginUseCase = LoginUseCase(keeprRepository)
@@ -38,9 +47,12 @@ class AuthViewModel(private val keeprDao: KeeprDao) : ViewModel() {
                 username = username,
                 password = password
             )
-            // if login success, create defaults.
+            // if login success and first launch, create defaults.
             if (result) {
-                createDefaultUseCase.createDefaults()
+                if (preferences.isFirstLaunch()) {
+                    createDefaultUseCase.createDefaults()
+                    preferences.setFirstLaunchDone()
+                }
             }
             response(result)
         }

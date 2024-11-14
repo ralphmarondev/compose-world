@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.data.local.KeeprDao
+import com.ralphmarondev.keepr.data.local.PreferencesHelper
 import com.ralphmarondev.keepr.domain.model.User
 import com.ralphmarondev.keepr.presentation.auth.components.LoginComponent
 import com.ralphmarondev.keepr.presentation.auth.components.RegisterComponent
@@ -36,10 +37,14 @@ import com.ralphmarondev.keepr.presentation.auth.components.RegisterComponent
 fun AuthScreen(
     backToHome: () -> Unit,
     navigateToHome: (String) -> Unit,
-    keeprDao: KeeprDao
+    keeprDao: KeeprDao,
+    preferences: PreferencesHelper
 ) {
     val viewModel: AuthViewModel = viewModel(
-        factory = AuthViewModelFactory(keeprDao)
+        factory = AuthViewModelFactory(
+            keeprDao = keeprDao,
+            preferences = preferences
+        )
     )
     val context = LocalContext.current
     var selectedScreen by remember { mutableIntStateOf(0) }

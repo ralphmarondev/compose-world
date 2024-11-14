@@ -12,7 +12,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModelFactory(private val keeprDao: KeeprDao) : ViewModelProvider.Factory {
+class HomeViewModelFactory(
+    private val keeprDao: KeeprDao
+) : ViewModelProvider.Factory {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(keeprDao) as T
@@ -21,7 +24,10 @@ class HomeViewModelFactory(private val keeprDao: KeeprDao) : ViewModelProvider.F
     }
 }
 
-class HomeViewModel(private val keeprDao: KeeprDao) : ViewModel() {
+class HomeViewModel(
+    private val keeprDao: KeeprDao
+) : ViewModel() {
+
     private val keeprRepository = KeeprRepositoryImpl(keeprDao)
     private val getCategoriesUseCase = GetCategoriesUseCase(keeprRepository)
 

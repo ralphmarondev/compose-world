@@ -35,7 +35,10 @@ fun SubCategories(
     navigateToDetails: (String) -> Unit
 ) {
     val viewModel: SubCategoriesViewModel = viewModel(
-        factory = SubCategoriesViewModelFactory(keeprDao, categoryName)
+        factory = SubCategoriesViewModelFactory(
+            keeprDao = keeprDao,
+            categoryName = categoryName
+        )
     )
     val subCategories by viewModel.subCategories.collectAsState()
 

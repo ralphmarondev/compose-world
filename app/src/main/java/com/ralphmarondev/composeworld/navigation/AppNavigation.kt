@@ -97,7 +97,8 @@ fun AppNavigation() {
                 navigateToHome = { username ->
                     navController.navigate(Routes.KeeperHome(username))
                 },
-                keeprDao = MyApp.database.keeprDao()
+                keeprDao = MyApp.database.keeprDao(),
+                preferences = MyApp.keeprPreferences
             )
         }
         composable<Routes.KeeperHome> {
