@@ -96,7 +96,9 @@ fun DetailScreen(
                     ),
                     onClick = {
 
-                    }
+                    },
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }
             item { Spacer(modifier = Modifier.height(100.dp)) }
