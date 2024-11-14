@@ -5,12 +5,13 @@ import androidx.room.PrimaryKey
 import com.ralphmarondev.keepr.util.getCurrentDateInString
 
 @Entity
-data class KeeprUser(
+data class Account(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val fullName: String,
+    val categoryName: String, // ex. social
+    val subCategoryName: String, // ex. tiktok
     val username: String,
-    val password: String,
-    val dateCreated: String = getCurrentDateInString(),
+    val password: String, // encrypt this later
+    val createDate: String = getCurrentDateInString(),
     val isDeleted: Boolean = false
 )

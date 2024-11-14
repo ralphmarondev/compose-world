@@ -22,16 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.keepr.R
-import com.ralphmarondev.keepr.domain.model.KeeprAccount
+import com.ralphmarondev.keepr.domain.model.Account
 
 data class AccountCardItems(
-    val keeprAccount: KeeprAccount,
+    val keeprAccount: Account,
     val onClick: () -> Unit
 )
 
 @Composable
 fun AccountCard(
-    keeprAccount: KeeprAccount,
+    keeprAccount: Account,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,7 +56,7 @@ fun AccountCard(
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = "${keeprAccount.subCategory}",
+                    text = keeprAccount.subCategoryName,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.W500,
                     fontSize = 18.sp,
@@ -65,7 +65,7 @@ fun AccountCard(
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    text = keeprAccount.usernameOrEmail,
+                    text = keeprAccount.username,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.W300,
                     fontSize = 14.sp,

@@ -21,11 +21,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.data.local.KeeprDao
-import com.ralphmarondev.keepr.presentation.components.Categories
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,22 +39,17 @@ fun HomeScreen(
     val viewModel: HomeViewModel = viewModel(
         factory = HomeViewModelFactory(keeprDao)
     )
-    val rawCategories by viewModel.categories.collectAsState()
-    val categories = rawCategories.map { category ->
-        Categories(
-            image = R.drawable.social,
-            text = category.name,
-            onClick = {}
-        )
-    }
+    val categories by viewModel.categories.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Home",
-                        fontFamily = FontFamily.Monospace
+                        text = "Hello, $currentUser",
+                        fontFamily = FontFamily.Monospace,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
                     )
                 },
                 navigationIcon = {
@@ -91,13 +86,25 @@ fun HomeScreen(
         ) {
             items(categories) { category ->
                 CategoryCard(
-                    image = category.image,
-                    text = category.text,
-                    onClick = category.onClick,
+                    image = getImage(category.name),
+                    text = category.name,
+                    onClick = {
+                        navigateToSubCategory(category.name)
+                    },
                     modifier = Modifier
                         .padding(8.dp)
                 )
             }
         }
+    }
+}
+
+private fun getImage(categoryName: String): Int {
+    return when (categoryName.lowercase()) {
+        "social" -> R.drawable.social
+        "gaming" -> R.drawable.gaming
+        "development" -> R.drawable.development
+        "entertainment" -> R.drawable.entertainment
+        else -> R.drawable.android
     }
 }

@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -19,44 +21,41 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.ralphmarondev.keepr.domain.model.KeeprAccount
+import com.ralphmarondev.keepr.domain.model.Account
 import com.ralphmarondev.keepr.presentation.details.components.AccountCard
 import com.ralphmarondev.keepr.presentation.details.components.AccountCardItems
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    subCategory: String,
+    subCategoryName: String,
     backToSubCategories: () -> Unit
 ) {
     val listOfAccounts = listOf(
         AccountCardItems(
-            keeprAccount = KeeprAccount(
-                category = "Social",
-                subCategory = subCategory,
-                usernameOrEmail = "edaralphmaron@gmail.com",
-                password = "somepassword-hehez",
-                owner = "ralphmaron"
+            keeprAccount = Account(
+                categoryName = "Social",
+                subCategoryName = subCategoryName,
+                username = "edaralphmaron@gmail.com",
+                password = "somepassword-hehez"
             ),
             onClick = {}
         ),
         AccountCardItems(
-            keeprAccount = KeeprAccount(
-                category = "Social",
-                subCategory = subCategory,
-                usernameOrEmail = "edaralphmaron2@gmail.com",
-                password = "somepassword-hehez2",
-                owner = "ralphmaron"
+            keeprAccount = Account(
+                categoryName = "Social",
+                subCategoryName = subCategoryName,
+                username = "edaralphmaron2@gmail.com",
+                password = "somepassword-hehez2"
             ),
             onClick = {}
         ),
         AccountCardItems(
-            keeprAccount = KeeprAccount(
-                category = subCategory,
-                subCategory = "Tiktok",
-                usernameOrEmail = "edaralphmaron3@gmail.com",
-                password = "somepassword-hehez3",
-                owner = "ralphmaron"
+            keeprAccount = Account(
+                categoryName = subCategoryName,
+                subCategoryName = "Tiktok",
+                username = "edaralphmaron3@gmail.com",
+                password = "somepassword-hehez3"
             ),
             onClick = {}
         )
@@ -67,7 +66,7 @@ fun DetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = subCategory,
+                        text = subCategoryName,
                         fontFamily = FontFamily.Monospace
                     )
                 },
@@ -85,6 +84,14 @@ fun DetailScreen(
                     navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {}) {
+                Icon(
+                    imageVector = Icons.Outlined.Add,
+                    contentDescription = "New Account"
+                )
+            }
         }
     ) { innerPadding ->
         LazyColumn(

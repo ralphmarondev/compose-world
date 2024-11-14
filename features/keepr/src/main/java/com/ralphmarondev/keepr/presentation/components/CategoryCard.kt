@@ -20,12 +20,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
-data class Categories(
-    val image: Int,
-    val text: String,
-    val onClick: () -> Unit
-)
-
 @Composable
 fun CategoryCard(
     image: Int,

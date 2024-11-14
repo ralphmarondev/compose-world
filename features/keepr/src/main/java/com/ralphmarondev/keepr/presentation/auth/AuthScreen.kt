@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.data.local.KeeprDao
-import com.ralphmarondev.keepr.domain.model.KeeprUser
+import com.ralphmarondev.keepr.domain.model.User
 import com.ralphmarondev.keepr.presentation.auth.components.LoginComponent
 import com.ralphmarondev.keepr.presentation.auth.components.RegisterComponent
 
@@ -91,13 +91,13 @@ fun AuthScreen(
                         RegisterComponent(
                             backToLogin = { selectedScreen = 0 },
                             onRegister = { fullName, username, password ->
-                                val user = KeeprUser(
+                                val user = User(
                                     fullName = fullName,
                                     username = username,
                                     password = password
                                 )
                                 viewModel.createUser(
-                                    keeprUser = user,
+                                    user = user,
                                     response = { success, message ->
                                         if (success) {
                                             Toast.makeText(

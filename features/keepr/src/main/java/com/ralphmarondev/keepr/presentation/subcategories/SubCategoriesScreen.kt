@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,57 +16,35 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.R
-import com.ralphmarondev.keepr.presentation.components.Categories
+import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubCategories(
-    category: String,
+    categoryName: String,
+    keeprDao: KeeprDao,
     backToHome: () -> Unit,
     navigateToDetails: (String) -> Unit
 ) {
-    val categories = listOf(
-        Categories(
-            image = R.drawable.tiktok,
-            text = "Tiktok",
-            onClick = {
-                navigateToDetails("Tiktok")
-            }
-        ),
-        Categories(
-            image = R.drawable.facebook,
-            text = "Facebook",
-            onClick = {
-                navigateToDetails("Facebook")
-            }
-        ),
-        Categories(
-            image = R.drawable.instagram,
-            text = "Instagram",
-            onClick = {
-                navigateToDetails("Instagram")
-            }
-        ),
-        Categories(
-            image = R.drawable.linkedin,
-            text = "LinkedIn",
-            onClick = {
-                navigateToDetails("LinkedIn")
-            }
-        )
+    val viewModel: SubCategoriesViewModel = viewModel(
+        factory = SubCategoriesViewModelFactory(keeprDao)
     )
+    val subCategories by viewModel.subCategories.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = category,
+                        text = categoryName,
                         fontFamily = FontFamily.Monospace
                     )
                 },
@@ -92,15 +71,28 @@ fun SubCategories(
                 .padding(innerPadding)
                 .padding(8.dp)
         ) {
-            items(categories.size) { index ->
+            items(subCategories) { subCategory ->
                 CategoryCard(
-                    image = categories[index].image,
-                    text = categories[index].text,
-                    onClick = categories[index].onClick,
+                    image = getImage(subCategory.name),
+                    text = subCategory.name,
+                    onClick = {
+                        navigateToDetails(subCategory.name)
+                    },
                     modifier = Modifier
                         .padding(8.dp)
                 )
             }
         }
+    }
+}
+
+private fun getImage(subCategoryName: String): Int {
+    return when (subCategoryName.lowercase()) {
+        "tiktok" -> R.drawable.tiktok
+        "facebook" -> R.drawable.facebook
+        "instagram" -> R.drawable.instagram
+        "linkedin" -> R.drawable.linkedin
+        "youtube" -> R.drawable.youtube
+        else -> R.drawable.android
     }
 }
