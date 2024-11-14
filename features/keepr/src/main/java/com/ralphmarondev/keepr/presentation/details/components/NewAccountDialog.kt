@@ -161,23 +161,25 @@ fun NewAccountDialog(
                 ),
                 maxLines = 1,
                 trailingIcon = {
-                    AnimatedVisibility(password.isNotEmpty()) {
-                        IconButton(onClick = { password = "" }) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        AnimatedVisibility(password.isNotEmpty()) {
+                            IconButton(onClick = { password = "" }) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Clear,
+                                    contentDescription = "Clear"
+                                )
+                            }
+                        }
+                        IconButton(
+                            onClick = { showPassword = !showPassword }
+                        ) {
+                            val icon =
+                                if (showPassword) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
                             Icon(
-                                imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear"
+                                imageVector = icon,
+                                contentDescription = "Password Visibility"
                             )
                         }
-                    }
-                    IconButton(
-                        onClick = { showPassword = !showPassword }
-                    ) {
-                        val icon =
-                            if (showPassword) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
-                        Icon(
-                            imageVector = icon,
-                            contentDescription = "Password Visibility"
-                        )
                     }
                 },
                 visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
