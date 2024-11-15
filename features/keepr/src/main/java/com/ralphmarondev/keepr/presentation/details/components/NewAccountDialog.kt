@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.details.components
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +43,7 @@ fun NewAccountDialog(
     onDismiss: () -> Unit,
     onSaveCategory: (String, String, String) -> Unit
 ) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var usernameOrEmail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -163,22 +166,16 @@ fun NewAccountDialog(
                 trailingIcon = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         AnimatedVisibility(password.isNotEmpty()) {
-                            IconButton(onClick = { password = "" }) {
+                            IconButton(
+                                onClick = { showPassword = !showPassword }
+                            ) {
+                                val icon =
+                                    if (showPassword) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
                                 Icon(
-                                    imageVector = Icons.Outlined.Clear,
-                                    contentDescription = "Clear"
+                                    imageVector = icon,
+                                    contentDescription = "Password Visibility"
                                 )
                             }
-                        }
-                        IconButton(
-                            onClick = { showPassword = !showPassword }
-                        ) {
-                            val icon =
-                                if (showPassword) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
-                            Icon(
-                                imageVector = icon,
-                                contentDescription = "Password Visibility"
-                            )
                         }
                     }
                 },
@@ -189,7 +186,19 @@ fun NewAccountDialog(
 
             Button(
                 onClick = {
-                    onSaveCategory(name, usernameOrEmail, password)
+                    if (
+                        name.trim().isNotEmpty() &&
+                        usernameOrEmail.trim().isNotEmpty() &&
+                        password.trim().isNotEmpty()
+                    ) {
+                        onSaveCategory(name.trim(), usernameOrEmail.trim(), password.trim())
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Please fill in all fields.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 },
                 modifier = Modifier.padding(16.dp)
             ) {

@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.home.components
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -37,6 +39,7 @@ fun NewCategoryDialog(
     onDismiss: () -> Unit,
     onSaveCategory: (String) -> Unit
 ) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf("") }
 
     Dialog(
@@ -109,7 +112,15 @@ fun NewCategoryDialog(
 
             Button(
                 onClick = {
-                    onSaveCategory(name)
+                    if (name.trim().isNotEmpty()) {
+                        onSaveCategory(name.trim())
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Please fill in all fields!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 },
                 modifier = Modifier.padding(16.dp)
             ) {
