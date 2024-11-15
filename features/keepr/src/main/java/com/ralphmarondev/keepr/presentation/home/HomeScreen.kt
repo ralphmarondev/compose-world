@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -44,6 +46,8 @@ fun HomeScreen(
     )
     val categories by viewModel.categories.collectAsState()
     val showNewDialog by viewModel.showNewDialog.collectAsState()
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -105,7 +109,16 @@ fun HomeScreen(
             NewCategoryDialog(
                 onDismiss = { viewModel.toggleShowNewDialog() },
                 onSaveCategory = { name ->
-                    viewModel.createNewCategory(name)
+                    viewModel.createNewCategory(
+                        name = name,
+                        response = { isSuccess, msg ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewDialog()
+                            } else {
+                                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    )
                 }
             )
         }

@@ -60,9 +60,12 @@ class HomeViewModel(
         _showNewDialog.value = !_showNewDialog.value
     }
 
-    fun createNewCategory(name: String) {
+    fun createNewCategory(name: String, response: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
-            createNewCategoryUseCase.createNewCategory(name)
+            createNewCategoryUseCase.createNewCategory(
+                name = name,
+                response = response
+            )
         }
     }
 }

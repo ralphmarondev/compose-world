@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.subcategories
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -44,6 +46,8 @@ fun SubCategories(
     )
     val subCategories by viewModel.subCategories.collectAsState()
     val showNewSubCategory by viewModel.showNewSubCategory.collectAsState()
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -102,7 +106,16 @@ fun SubCategories(
             NewSubCategoryDialog(
                 onDismiss = { viewModel.toggleShowNewSubCategory() },
                 onSaveSubCategory = { name ->
-                    viewModel.createNewSubCategory(name)
+                    viewModel.createNewSubCategory(
+                        name = name,
+                        response = { isSuccess, msg ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewSubCategory()
+                            } else {
+                                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    )
                 }
             )
         }

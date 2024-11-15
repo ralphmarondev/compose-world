@@ -62,7 +62,12 @@ class DetailViewModel(
         _showNewAccount.value = !_showNewAccount.value
     }
 
-    fun createNewAccount(name: String, username: String, password: String) {
+    fun createNewAccount(
+        name: String,
+        username: String,
+        password: String,
+        response: (Boolean, String?) -> Unit
+    ) {
         viewModelScope.launch {
             val account = Account(
                 name = name,
@@ -70,7 +75,10 @@ class DetailViewModel(
                 password = password,
                 subCategoryName = subCategory
             )
-            createNewAccountUseCase.createAccount(account)
+            createNewAccountUseCase.createAccount(
+                account = account,
+                response = response
+            )
         }
     }
 }

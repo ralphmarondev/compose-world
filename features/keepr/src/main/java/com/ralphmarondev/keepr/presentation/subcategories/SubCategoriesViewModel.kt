@@ -56,11 +56,12 @@ class SubCategoriesViewModel(
         _showNewSubCategory.value = !_showNewSubCategory.value
     }
 
-    fun createNewSubCategory(name: String) {
+    fun createNewSubCategory(name: String, response: (Boolean, String?) -> Unit) {
         viewModelScope.launch {
             createNewSubCategoryUseCase.createNewSubCategory(
                 name = name,
-                categoryName = categoryName
+                categoryName = categoryName,
+                response = response
             )
         }
     }

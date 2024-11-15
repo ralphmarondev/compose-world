@@ -1,5 +1,6 @@
 package com.ralphmarondev.keepr.presentation.details
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -46,6 +48,8 @@ fun DetailScreen(
 
     val showNewAccount by viewModel.showNewAccount.collectAsState()
     val accounts by viewModel.accounts.collectAsState()
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -111,7 +115,14 @@ fun DetailScreen(
                     viewModel.createNewAccount(
                         name = name,
                         username = username,
-                        password = password
+                        password = password,
+                        response = { isSuccess, msg ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewAccount()
+                            } else {
+                                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     )
                 }
             )
