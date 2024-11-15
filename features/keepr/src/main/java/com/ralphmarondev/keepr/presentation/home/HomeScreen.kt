@@ -24,10 +24,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 import com.ralphmarondev.keepr.presentation.home.components.NewCategoryDialog
+import com.ralphmarondev.keepr.util.getCardImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -90,7 +90,7 @@ fun HomeScreen(
         ) {
             items(categories) { category ->
                 CategoryCard(
-                    image = getImage(category.name),
+                    image = getCardImage(category.name),
                     text = category.name,
                     onClick = {
                         navigateToSubCategory(category.name)
@@ -104,20 +104,10 @@ fun HomeScreen(
         if (showNewDialog) {
             NewCategoryDialog(
                 onDismiss = { viewModel.toggleShowNewDialog() },
-                onSaveCategory = { name->
+                onSaveCategory = { name ->
                     viewModel.createNewCategory(name)
                 }
             )
         }
-    }
-}
-
-private fun getImage(categoryName: String): Int {
-    return when (categoryName.lowercase()) {
-        "social" -> R.drawable.social
-        "gaming" -> R.drawable.gaming
-        "development" -> R.drawable.development
-        "entertainment" -> R.drawable.entertainment
-        else -> R.drawable.android
     }
 }

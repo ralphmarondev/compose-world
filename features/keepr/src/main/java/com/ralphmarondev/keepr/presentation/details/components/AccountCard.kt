@@ -21,13 +21,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.domain.model.Account
-
-data class AccountCardItems(
-    val keeprAccount: Account,
-    val onClick: () -> Unit
-)
+import com.ralphmarondev.keepr.util.getCardImage
 
 @Composable
 fun AccountCard(
@@ -46,7 +41,7 @@ fun AccountCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(R.drawable.tiktok),
+                painter = rememberAsyncImagePainter(getCardImage(keeprAccount.subCategoryName)),
                 contentDescription = "Sub Category Image",
                 modifier = Modifier
                     .size(65.dp),

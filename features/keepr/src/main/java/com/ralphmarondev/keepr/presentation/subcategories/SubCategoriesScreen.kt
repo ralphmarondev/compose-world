@@ -23,10 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.keepr.R
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 import com.ralphmarondev.keepr.presentation.subcategories.components.NewSubCategoryDialog
+import com.ralphmarondev.keepr.util.getCardImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,7 +87,7 @@ fun SubCategories(
         ) {
             items(subCategories) { subCategory ->
                 CategoryCard(
-                    image = getImage(subCategory.name),
+                    image = getCardImage(subCategory.name),
                     text = subCategory.name,
                     onClick = {
                         navigateToDetails(subCategory.name)
@@ -106,16 +106,5 @@ fun SubCategories(
                 }
             )
         }
-    }
-}
-
-private fun getImage(subCategoryName: String): Int {
-    return when (subCategoryName.lowercase()) {
-        "tiktok" -> R.drawable.tiktok
-        "facebook" -> R.drawable.facebook
-        "instagram" -> R.drawable.instagram
-        "linkedin" -> R.drawable.linkedin
-        "youtube" -> R.drawable.youtube
-        else -> R.drawable.android
     }
 }
