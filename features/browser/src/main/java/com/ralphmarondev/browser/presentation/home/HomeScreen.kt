@@ -40,6 +40,11 @@ import com.ralphmarondev.browser.presentation.home.components.HomeTopBar
 fun HomeScreen() {
     val baseUrl = "https://duckduckgo.com/"
     var url by remember { mutableStateOf("") }
+    val webView = remember { mutableStateOf<WebView?>(null) }
+
+    // states to track navigation
+    var canGoBack by remember { mutableStateOf(false) }
+    var canGoForward by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -49,7 +54,12 @@ fun HomeScreen() {
             )
         },
         bottomBar = {
-            HomeBottomBar()
+            HomeBottomBar(
+                canGoBack = canGoBack,
+                canGoForward = canGoForward,
+                onBackClick = { webView.value?.goBack() },
+                onForwardClick = { webView.value?.goForward() }
+            )
         }
     ) { innerPadding ->
         Box(
@@ -60,18 +70,36 @@ fun HomeScreen() {
             AnimatedVisibility(url.isNotEmpty()) {
                 AndroidView(
                     factory = { context ->
-                        return@AndroidView WebView(context).apply {
+                        WebView(context).apply {
                             settings.javaScriptEnabled = true
-                            webViewClient = WebViewClient()
-
                             settings.loadWithOverviewMode = true
                             settings.useWideViewPort = true
-                            settings.setSupportZoom(false)
+                            settings.setSupportZoom(true)
+                            settings.builtInZoomControls = true
+                            settings.displayZoomControls = false
+
+                            settings.userAgentString =
+                                settings.userAgentString.replace("wv", "") + "Mobile Safari/537.36"
+
+                            webViewClient = object : WebViewClient() {
+                                override fun onPageFinished(view: WebView?, url: String?) {
+                                    super.onPageFinished(view, url)
+
+                                    // update navigation states
+                                    if (view != null) {
+                                        canGoBack = view.canGoBack()
+                                        canGoForward = view.canGoForward()
+                                    }
+                                }
+                            }
+
                         }
                     },
-                    update = {
-                        it.loadUrl("$baseUrl$url")
-                    }
+                    update = { view ->
+                        view.loadUrl("$baseUrl$url")
+                        webView.value = view
+                    },
+                    modifier = Modifier.fillMaxSize()
                 )
             }
             AnimatedVisibility(url.isEmpty()) {
@@ -92,7 +120,7 @@ fun HomeScreen() {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text =
-                        "Hello there, this browser is developed, designed, and being maintained by Ralph Maron Eda.",
+                        "Hello there, this browser is developed, designed, and being maintained by Ralph Maron A. Eda.",
                         fontFamily = FontFamily.Monospace,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W500,

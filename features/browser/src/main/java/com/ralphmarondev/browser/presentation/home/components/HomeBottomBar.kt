@@ -17,7 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeBottomBar() {
+fun HomeBottomBar(
+    canGoBack: Boolean,
+    canGoForward: Boolean,
+    onBackClick: () -> Unit,
+    onForwardClick: () -> Unit
+) {
     BottomAppBar(
         actions = {
             Row(
@@ -27,7 +32,8 @@ fun HomeBottomBar() {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 IconButton(
-                    onClick = {}
+                    onClick = onBackClick,
+                    enabled = canGoBack
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBackIosNew,
@@ -35,7 +41,8 @@ fun HomeBottomBar() {
                     )
                 }
                 IconButton(
-                    onClick = {}
+                    onClick = onForwardClick,
+                    enabled = canGoForward
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
