@@ -46,11 +46,23 @@ fun HomeScreen() {
     var canGoBack by remember { mutableStateOf(false) }
     var canGoForward by remember { mutableStateOf(false) }
 
+    // handling search :)
+    val onSearch = {
+        if (url.isNotEmpty()) {
+            if (url.startsWith("http://") || url.startsWith("https://")) {
+                webView.value?.loadUrl(url)
+            } else {
+                webView.value?.loadUrl("$baseUrl$url")
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             HomeTopBar(
                 value = url,
-                onValueChanged = { url = it }
+                onValueChanged = { url = it },
+                onSearch = onSearch
             )
         },
         bottomBar = {
@@ -96,7 +108,6 @@ fun HomeScreen() {
                         }
                     },
                     update = { view ->
-                        view.loadUrl("$baseUrl$url")
                         webView.value = view
                     },
                     modifier = Modifier.fillMaxSize()
