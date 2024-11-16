@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.ralphmarondev.browser.BrowserMainScreen
 import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
@@ -91,7 +90,7 @@ fun AppNavigation() {
             )
         }
         composable<Routes.Browser> {
-            BrowserMainScreen()
+            com.ralphmarondev.browser.presentation.home.HomeScreen()
         }
         composable<Routes.Calculator> {
             CalculatorMainScreen()
