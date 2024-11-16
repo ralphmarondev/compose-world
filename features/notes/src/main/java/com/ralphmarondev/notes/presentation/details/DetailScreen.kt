@@ -17,6 +17,8 @@ import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -38,6 +40,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -61,6 +64,7 @@ fun DetailScreen(
     )
     val note by viewModel.note.collectAsState()
     var showDeleteDialog by remember { mutableStateOf(false) }
+    var showMenu by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -105,19 +109,48 @@ fun DetailScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Sat, Nov 16, 2024",
+                            text = note.date,
                             fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.W500,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            color = MaterialTheme.colorScheme.tertiary
+                            color = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.weight(1f)
                         )
 
-                        IconButton(onClick = {}) {
+                        IconButton(onClick = { showMenu = !showMenu }) {
                             Icon(
                                 imageVector = Icons.Outlined.MoreVert,
                                 contentDescription = "More"
                             )
+
+                            DropdownMenu(
+                                expanded = showMenu,
+                                onDismissRequest = { showMenu = !showMenu },
+                                offset = DpOffset(x = (-16).dp, y = 0.dp)
+                            ) {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = "Edit",
+                                            fontFamily = FontFamily.Monospace
+                                        )
+                                    },
+                                    onClick = navigateToUpdateNote
+                                )
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = "Delete",
+                                            fontFamily = FontFamily.Monospace
+                                        )
+                                    },
+                                    onClick = {
+                                        showMenu = !showMenu
+                                        showDeleteDialog = !showDeleteDialog
+                                    }
+                                )
+                            }
                         }
                     }
 
