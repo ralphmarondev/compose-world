@@ -15,6 +15,7 @@ import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
 import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
+import com.ralphmarondev.notes.presentation.updatenote.UpdateNoteScreen
 import com.ralphmarondev.settings.presentation.SettingScreen
 
 @Composable
@@ -70,6 +71,19 @@ fun AppNavigation() {
             val args = it.toRoute<Routes.NoteDetails>()
             DetailScreen(
                 backToAllNotes = {
+                    navController.navigateUp()
+                },
+                noteDao = MyApp.database.noteDao(),
+                noteId = args.id,
+                navigateToUpdateNote = {
+                    navController.navigate(Routes.UpdateNote(args.id))
+                }
+            )
+        }
+        composable<Routes.UpdateNote> {
+            val args = it.toRoute<Routes.UpdateNote>()
+            UpdateNoteScreen(
+                backToNoteDetails = {
                     navController.navigateUp()
                 },
                 noteDao = MyApp.database.noteDao(),

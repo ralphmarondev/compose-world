@@ -103,7 +103,7 @@ fun NoteScreen(
                 .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item { Spacer(modifier = Modifier.height(16.dp)) }
+            item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
                 AnimatedVisibility(notes.isEmpty()) {
                     Text(
@@ -124,7 +124,7 @@ fun NoteScreen(
                     },
                     note = note,
                     modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
                 )
             }
             item { Spacer(modifier = Modifier.height(160.dp)) }
