@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -190,15 +189,6 @@ fun UpdateNoteScreen(
                             fontSize = 14.sp,
                             modifier = Modifier.padding(start = 4.dp)
                         )
-
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear",
-                                modifier = Modifier
-                                    .size(18.dp)
-                            )
-                        }
                     }
                     TitleTextField(
                         value = title,
