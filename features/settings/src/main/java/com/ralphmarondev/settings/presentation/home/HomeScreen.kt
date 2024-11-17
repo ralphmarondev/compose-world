@@ -1,40 +1,32 @@
 package com.ralphmarondev.settings.presentation.home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.NavigateNext
-import androidx.compose.material.icons.outlined.AccountBox
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Backup
+import androidx.compose.material.icons.outlined.CircleNotifications
+import androidx.compose.material.icons.outlined.DeleteForever
+import androidx.compose.material.icons.outlined.DeveloperBoard
+import androidx.compose.material.icons.outlined.Feedback
+import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.MiscellaneousServices
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Output
+import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
-import com.ralphmarondev.settings.R
+import com.ralphmarondev.settings.presentation.home.components.AccountCard
 import com.ralphmarondev.settings.presentation.home.components.HomeTopBar
+import com.ralphmarondev.settings.presentation.home.components.SettingsItemCard
+import com.ralphmarondev.settings.presentation.home.components.SettingsItemCategoryText
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigateBack: () -> Unit
@@ -50,107 +42,91 @@ fun HomeScreen(
                 .padding(innerPadding)
                 .padding(horizontal = 8.dp)
         ) {
+            item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp, horizontal = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(R.drawable.cute_me),
-                        contentDescription = "Profile",
-                        modifier = Modifier
-                            .size(80.dp)
-                            .clip(CircleShape),
-                        contentScale = ContentScale.Crop
-                    )
-                    Column(
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                    ) {
-                        Text(
-                            text = "Ralph Maron Eda",
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W500,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            text = "edaralphmaron@gmail.com",
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.W300,
-                            color = MaterialTheme.colorScheme.tertiary
-                        )
-                        Text(
-                            text = "Computer Engineer",
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.W500,
-                            color = MaterialTheme.colorScheme.secondary
-                        )
-                    }
-                }
+                AccountCard()
             }
 
             item {
-                Text(
-                    text = "Preferences",
-                    fontFamily = FontFamily.Monospace,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp),
-                    color = MaterialTheme.colorScheme.secondary
+                SettingsItemCategoryText(text = "General")
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Language",
+                    leadingIcon = Icons.Outlined.Language
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Version and Update",
+                    leadingIcon = Icons.Outlined.Update
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Backup and Restore",
+                    leadingIcon = Icons.Outlined.Backup
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Clear Data",
+                    leadingIcon = Icons.Outlined.DeleteForever
                 )
             }
+
             item {
-                ElevatedCard(
+                SettingsItemCategoryText(text = "Appearance")
+                SettingsItemCard(
                     onClick = {},
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.AccountBox,
-                            contentDescription = "Account"
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Column(
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp)
-                        ) {
-                            Text(
-                                text = "User Profile",
-                                fontFamily = FontFamily.Monospace,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.W500,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Text(
-                                text = "Email and Address",
-                                fontFamily = FontFamily.Monospace,
-                                fontSize = 14.sp,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                fontWeight = FontWeight.W300,
-                                color = MaterialTheme.colorScheme.tertiary
-                            )
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Outlined.NavigateNext,
-                            contentDescription = "Navigate Next"
-                        )
-                    }
-                }
+                    text = "App Theme",
+                    leadingIcon = Icons.Outlined.AccountCircle
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Font Style and Size",
+                    leadingIcon = Icons.Outlined.Output
+                )
             }
+
+            item {
+                SettingsItemCategoryText(text = "Notification")
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Notifications",
+                    leadingIcon = Icons.Outlined.Notifications
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "App Notifications",
+                    leadingIcon = Icons.Outlined.CircleNotifications
+                )
+            }
+
+            item {
+                SettingsItemCategoryText(text = "Help and Support")
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Feedback",
+                    leadingIcon = Icons.Outlined.Feedback
+                )
+            }
+
+            item {
+                SettingsItemCategoryText(text = "Misc")
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Terms of Service",
+                    leadingIcon = Icons.Outlined.MiscellaneousServices
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Open Source Licenses",
+                    leadingIcon = Icons.Outlined.Source
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "About Developer",
+                    leadingIcon = Icons.Outlined.DeveloperBoard
+                )
+            }
+            item { Spacer(modifier = Modifier.height(160.dp)) }
         }
     }
 }
