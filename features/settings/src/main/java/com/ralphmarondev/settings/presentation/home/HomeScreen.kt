@@ -1,4 +1,4 @@
-package com.ralphmarondev.settings.presentation
+package com.ralphmarondev.settings.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,17 +14,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.NavigateNext
 import androidx.compose.material.icons.outlined.AccountBox
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,46 +32,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.settings.R
+import com.ralphmarondev.settings.presentation.home.components.HomeTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(
+fun HomeScreen(
     navigateBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Settings",
-                        fontFamily = FontFamily.Monospace
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            imageVector = Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {}) {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Outlined.Search,
-                                contentDescription = "Search"
-                            )
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
-                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
-            )
+            HomeTopBar(navigateBack)
         }
     ) { innerPadding ->
         LazyColumn(

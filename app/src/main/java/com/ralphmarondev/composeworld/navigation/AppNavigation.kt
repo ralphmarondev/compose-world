@@ -15,7 +15,7 @@ import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
 import com.ralphmarondev.notes.presentation.updatenote.UpdateNoteScreen
-import com.ralphmarondev.settings.presentation.SettingScreen
+import com.ralphmarondev.settings.navigation.SettingsNavigation
 
 @Composable
 fun AppNavigation() {
@@ -96,7 +96,7 @@ fun AppNavigation() {
             CalculatorMainScreen()
         }
         composable<Routes.Settings> {
-            SettingScreen(
+            SettingsNavigation(
                 navigateBack = {
                     navController.navigateUp()
                 }
