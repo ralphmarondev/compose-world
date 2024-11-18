@@ -29,7 +29,8 @@ import com.ralphmarondev.settings.presentation.home.components.SettingsItemCateg
 
 @Composable
 fun HomeScreen(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    navigateToAppTheme: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -74,7 +75,7 @@ fun HomeScreen(
             item {
                 SettingsItemCategoryText(text = "Appearance")
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToAppTheme,
                     text = "App Theme",
                     leadingIcon = Icons.Outlined.AccountCircle
                 )

@@ -4,10 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.settings.presentation.appearance.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.home.HomeScreen
 
 @Composable
 fun SettingsNavigation(
+    darkTheme: Boolean,
+    toggleDarkTheme: () -> Unit,
     navigateBack: () -> Unit
 ) {
     val navController = rememberNavController()
@@ -18,7 +21,17 @@ fun SettingsNavigation(
     ) {
         composable<Routes.Home> {
             HomeScreen(
-                navigateBack = navigateBack
+                navigateBack = navigateBack,
+                navigateToAppTheme = {
+                    navController.navigate(Routes.Appearance.AppTheme)
+                }
+            )
+        }
+        composable<Routes.Appearance.AppTheme> {
+            AppThemeScreen(
+                navigateBack = navigateBack,
+                darkTheme = darkTheme,
+                toggleDarkTheme = toggleDarkTheme
             )
         }
     }

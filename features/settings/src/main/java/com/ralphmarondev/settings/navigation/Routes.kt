@@ -8,4 +8,17 @@ object Routes {
 
     @Serializable
     data object ComingSoon
+
+    object General{
+        @Serializable
+        data object Language
+    }
+
+    object Appearance{
+        @Serializable
+        data object AppTheme
+
+        @Serializable
+        data object FontStyleAndSize
+    }
 }

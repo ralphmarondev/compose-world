@@ -18,7 +18,10 @@ import com.ralphmarondev.notes.presentation.updatenote.UpdateNoteScreen
 import com.ralphmarondev.settings.navigation.SettingsNavigation
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(
+    darkTheme: Boolean,
+    toggleDarkTheme: () -> Unit
+) {
     val navController: NavHostController = rememberNavController()
 
     NavHost(
@@ -99,7 +102,9 @@ fun AppNavigation() {
             SettingsNavigation(
                 navigateBack = {
                     navController.navigateUp()
-                }
+                },
+                darkTheme = darkTheme,
+                toggleDarkTheme = toggleDarkTheme
             )
         }
         composable<Routes.Keeper> {
