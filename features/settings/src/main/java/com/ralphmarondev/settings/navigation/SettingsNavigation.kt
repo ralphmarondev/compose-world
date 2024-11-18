@@ -6,6 +6,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.settings.presentation.appearance.fonts.AppFontStyleScreen
 import com.ralphmarondev.settings.presentation.appearance.theme.AppThemeScreen
+import com.ralphmarondev.settings.presentation.general.backup.BackupAndRestoreScreen
+import com.ralphmarondev.settings.presentation.general.data.ClearDataScreen
+import com.ralphmarondev.settings.presentation.general.language.AppLanguageScreen
+import com.ralphmarondev.settings.presentation.general.version.AppVersionScreen
 import com.ralphmarondev.settings.presentation.home.HomeScreen
 
 @Composable
@@ -23,6 +27,20 @@ fun SettingsNavigation(
         composable<Routes.Home> {
             HomeScreen(
                 navigateBack = navigateBack,
+                // general
+                navigateToLanguage = {
+                    navController.navigate(Routes.General.Language)
+                },
+                navigateToVersion = {
+                    navController.navigate(Routes.General.Version)
+                },
+                navigateToBackup = {
+                    navController.navigate(Routes.General.Backup)
+                },
+                navigateToClearData = {
+                    navController.navigate(Routes.General.ClearData)
+                },
+                // appearance
                 navigateToAppTheme = {
                     navController.navigate(Routes.Appearance.AppTheme)
                 },
@@ -31,6 +49,28 @@ fun SettingsNavigation(
                 }
             )
         }
+
+        composable<Routes.General.Language> {
+            AppLanguageScreen(
+                navigateBack = { navController.navigateUp() }
+            )
+        }
+        composable<Routes.General.Version> {
+            AppVersionScreen(
+                navigateBack = { navController.navigateUp() }
+            )
+        }
+        composable<Routes.General.Backup> {
+            BackupAndRestoreScreen(
+                navigateBack = { navController.navigateUp() }
+            )
+        }
+        composable<Routes.General.ClearData> {
+            ClearDataScreen(
+                navigateBack = { navController.navigateUp() }
+            )
+        }
+
         composable<Routes.Appearance.AppTheme> {
             AppThemeScreen(
                 navigateBack = { navController.navigateUp() },

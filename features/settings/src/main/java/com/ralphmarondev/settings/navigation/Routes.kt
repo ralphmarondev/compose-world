@@ -6,15 +6,21 @@ object Routes {
     @Serializable
     data object Home
 
-    @Serializable
-    data object ComingSoon
-
-    object General{
+    object General {
         @Serializable
         data object Language
+
+        @Serializable
+        data object Version
+
+        @Serializable
+        data object Backup
+
+        @Serializable
+        data object ClearData
     }
 
-    object Appearance{
+    object Appearance {
         @Serializable
         data object AppTheme
 

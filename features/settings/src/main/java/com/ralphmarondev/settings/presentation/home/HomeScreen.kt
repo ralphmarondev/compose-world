@@ -30,6 +30,12 @@ import com.ralphmarondev.settings.presentation.home.components.SettingsItemCateg
 @Composable
 fun HomeScreen(
     navigateBack: () -> Unit,
+    // general
+    navigateToLanguage: () -> Unit,
+    navigateToVersion: () -> Unit,
+    navigateToBackup: () -> Unit,
+    navigateToClearData: () -> Unit,
+    // appearance
     navigateToAppTheme: () -> Unit,
     navigateToAppFontStyle: () -> Unit
 ) {
@@ -52,22 +58,22 @@ fun HomeScreen(
             item {
                 SettingsItemCategoryText(text = "General")
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToLanguage,
                     text = "Language",
                     leadingIcon = Icons.Outlined.Language
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToVersion,
                     text = "Version and Update",
                     leadingIcon = Icons.Outlined.Update
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToBackup,
                     text = "Backup and Restore",
                     leadingIcon = Icons.Outlined.Backup
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToClearData,
                     text = "Clear Data",
                     leadingIcon = Icons.Outlined.DeleteForever
                 )
