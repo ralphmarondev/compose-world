@@ -37,7 +37,9 @@ fun HomeScreen(
     navigateToClearData: () -> Unit,
     // appearance
     navigateToAppTheme: () -> Unit,
-    navigateToAppFontStyle: () -> Unit
+    navigateToAppFontStyle: () -> Unit,
+    // misc
+    navigateToDeveloper: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -129,7 +131,7 @@ fun HomeScreen(
                     leadingIcon = Icons.Outlined.Source
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToDeveloper,
                     text = "About Developer",
                     leadingIcon = Icons.Outlined.DeveloperBoard
                 )

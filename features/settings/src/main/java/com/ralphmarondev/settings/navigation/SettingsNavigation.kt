@@ -11,6 +11,7 @@ import com.ralphmarondev.settings.presentation.general.data.ClearDataScreen
 import com.ralphmarondev.settings.presentation.general.language.AppLanguageScreen
 import com.ralphmarondev.settings.presentation.general.version.AppVersionScreen
 import com.ralphmarondev.settings.presentation.home.HomeScreen
+import com.ralphmarondev.settings.presentation.misc.developer.AboutDeveloperScreen
 
 @Composable
 fun SettingsNavigation(
@@ -46,6 +47,10 @@ fun SettingsNavigation(
                 },
                 navigateToAppFontStyle = {
                     navController.navigate(Routes.Appearance.FontStyleAndSize)
+                },
+                // misc
+                navigateToDeveloper = {
+                    navController.navigate(Routes.Misc.Developer)
                 }
             )
         }
@@ -81,6 +86,14 @@ fun SettingsNavigation(
         composable<Routes.Appearance.FontStyleAndSize> {
             AppFontStyleScreen(
                 navigateBack = { navController.navigateUp() }
+            )
+        }
+
+        composable<Routes.Misc.Developer> {
+            AboutDeveloperScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
             )
         }
     }

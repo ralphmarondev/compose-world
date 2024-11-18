@@ -27,4 +27,9 @@ object Routes {
         @Serializable
         data object FontStyleAndSize
     }
+
+    object Misc{
+        @Serializable
+        data object Developer
+    }
 }
