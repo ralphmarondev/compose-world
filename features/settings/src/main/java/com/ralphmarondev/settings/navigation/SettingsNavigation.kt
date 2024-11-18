@@ -30,27 +30,41 @@ fun SettingsNavigation(
                 navigateBack = navigateBack,
                 // general
                 navigateToLanguage = {
-                    navController.navigate(Routes.General.Language)
+                    navController.navigate(Routes.General.Language) {
+                        launchSingleTop = true
+                    }
                 },
                 navigateToVersion = {
-                    navController.navigate(Routes.General.Version)
+                    navController.navigate(Routes.General.Version) {
+                        launchSingleTop = true
+                    }
                 },
                 navigateToBackup = {
-                    navController.navigate(Routes.General.Backup)
+                    navController.navigate(Routes.General.Backup) {
+                        launchSingleTop = true
+                    }
                 },
                 navigateToClearData = {
-                    navController.navigate(Routes.General.ClearData)
+                    navController.navigate(Routes.General.ClearData) {
+                        launchSingleTop = true
+                    }
                 },
                 // appearance
                 navigateToAppTheme = {
-                    navController.navigate(Routes.Appearance.AppTheme)
+                    navController.navigate(Routes.Appearance.AppTheme) {
+                        launchSingleTop = true
+                    }
                 },
                 navigateToAppFontStyle = {
-                    navController.navigate(Routes.Appearance.FontStyleAndSize)
+                    navController.navigate(Routes.Appearance.FontStyleAndSize) {
+                        launchSingleTop = true
+                    }
                 },
                 // misc
                 navigateToDeveloper = {
-                    navController.navigate(Routes.Misc.Developer)
+                    navController.navigate(Routes.Misc.Developer) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }
