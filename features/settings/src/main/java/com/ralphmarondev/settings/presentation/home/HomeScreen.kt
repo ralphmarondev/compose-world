@@ -30,7 +30,8 @@ import com.ralphmarondev.settings.presentation.home.components.SettingsItemCateg
 @Composable
 fun HomeScreen(
     navigateBack: () -> Unit,
-    navigateToAppTheme: () -> Unit
+    navigateToAppTheme: () -> Unit,
+    navigateToAppFontStyle: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -80,7 +81,7 @@ fun HomeScreen(
                     leadingIcon = Icons.Outlined.AccountCircle
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToAppFontStyle,
                     text = "Font Style and Size",
                     leadingIcon = Icons.Outlined.Output
                 )
