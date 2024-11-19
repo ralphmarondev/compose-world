@@ -10,15 +10,6 @@ object Routes {
     data object Notes
 
     @Serializable
-    data object NewNote
-
-    @Serializable
-    data class NoteDetails(val id: Int)
-
-    @Serializable
-    data class UpdateNote(val id: Int)
-
-    @Serializable
     data object Browser
 
     @Serializable

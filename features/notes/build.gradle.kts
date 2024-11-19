@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
 }
 
@@ -59,6 +60,9 @@ dependencies {
     implementation(libs.androidx.material.icons.extended.android)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.coil.compose)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.runtime)

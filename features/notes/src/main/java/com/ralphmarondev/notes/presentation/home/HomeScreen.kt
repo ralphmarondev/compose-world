@@ -41,7 +41,7 @@ import com.ralphmarondev.notes.presentation.home.components.NoteCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteScreen(
+fun HomeScreen(
     backToHome: () -> Unit,
     addNewNote: () -> Unit,
     navigateToDetails: (Int) -> Unit,

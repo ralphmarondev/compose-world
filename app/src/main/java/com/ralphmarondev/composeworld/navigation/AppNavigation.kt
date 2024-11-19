@@ -5,15 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
 import com.ralphmarondev.keepr.navigation.KeeprNavigation
-import com.ralphmarondev.notes.presentation.details.DetailScreen
-import com.ralphmarondev.notes.presentation.home.NoteScreen
-import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
-import com.ralphmarondev.notes.presentation.updatenote.UpdateNoteScreen
+import com.ralphmarondev.notes.navigation.NotesNavigation
 import com.ralphmarondev.settings.navigation.SettingsNavigation
 
 @Composable
@@ -47,48 +43,11 @@ fun AppNavigation(
             )
         }
         composable<Routes.Notes> {
-            NoteScreen(
-                backToHome = {
-                    navController.navigateUp()
-                },
-                addNewNote = {
-                    navController.navigate(Routes.NewNote)
-                },
-                noteDao = MyApp.database.noteDao(),
-                navigateToDetails = { noteId ->
-                    navController.navigate(Routes.NoteDetails(noteId))
-                }
-            )
-        }
-        composable<Routes.NewNote> {
-            NewNoteScreen(
-                backToAllNotes = {
+            NotesNavigation(
+                navigateBack = {
                     navController.navigateUp()
                 },
                 noteDao = MyApp.database.noteDao()
-            )
-        }
-        composable<Routes.NoteDetails> {
-            val args = it.toRoute<Routes.NoteDetails>()
-            DetailScreen(
-                backToAllNotes = {
-                    navController.navigateUp()
-                },
-                noteDao = MyApp.database.noteDao(),
-                noteId = args.id,
-                navigateToUpdateNote = {
-                    navController.navigate(Routes.UpdateNote(args.id))
-                }
-            )
-        }
-        composable<Routes.UpdateNote> {
-            val args = it.toRoute<Routes.UpdateNote>()
-            UpdateNoteScreen(
-                backToNoteDetails = {
-                    navController.navigateUp()
-                },
-                noteDao = MyApp.database.noteDao(),
-                noteId = args.id
             )
         }
         composable<Routes.Browser> {
