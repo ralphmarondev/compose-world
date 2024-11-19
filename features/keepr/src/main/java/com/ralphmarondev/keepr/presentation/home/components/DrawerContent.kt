@@ -12,7 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.material.icons.outlined.Category
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ImportExport
 import androidx.compose.material.icons.outlined.ManageAccounts
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -30,7 +32,6 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
@@ -44,12 +45,20 @@ import com.ralphmarondev.keepr.R
 fun DrawerContent(
     closeDrawer: () -> Unit
 ) {
-    val drawerItems1 = listOf(
+    val drawerItems0 = listOf(
         NavigationModel(
             icon = Icons.Outlined.Person,
             label = "My Profile",
             onClick = {}
         ),
+        NavigationModel(
+            icon = Icons.Outlined.Settings,
+            label = "Settings",
+            onClick = {}
+        )
+    )
+
+    val drawerItems1 = listOf(
         NavigationModel(
             icon = Icons.Outlined.Category,
             label = "Categories",
@@ -62,7 +71,7 @@ fun DrawerContent(
         ),
         NavigationModel(
             icon = Icons.Outlined.ManageAccounts,
-            label = "Manage Accounts",
+            label = "Accounts",
             onClick = {}
         )
     )
@@ -123,85 +132,116 @@ fun DrawerContent(
                     color = MaterialTheme.colorScheme.secondary
                 )
             }
-
-            Spacer(modifier = Modifier.height(4.dp))
-            drawerItems1.forEachIndexed { _, item ->
-                NavigationDrawerItem(
-                    label = {
-                        Text(
-                            text = item.label,
-                            fontFamily = FontFamily.Monospace
-                        )
-                    },
-                    selected = false,
-                    onClick = item.onClick,
-                    icon = {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.label
-                        )
-                    },
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    colors = NavigationDrawerItemDefaults.colors(
-                        unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                        unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
-                )
-            }
-
-            HorizontalDivider(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp))
-            drawerItems2.forEachIndexed { _, item ->
-                NavigationDrawerItem(
-                    label = {
-                        Text(
-                            text = item.label,
-                            fontFamily = FontFamily.Monospace
-                        )
-                    },
-                    selected = false,
-                    onClick = item.onClick,
-                    icon = {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.label
-                        )
-                    },
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    colors = NavigationDrawerItemDefaults.colors(
-                        unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                        unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
-                )
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-            HorizontalDivider(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp))
-            NavigationDrawerItem(
-                label = {
-                    Text(
-                        text = "Close Drawer",
-                        fontFamily = FontFamily.Monospace
-                    )
-                },
-                onClick = closeDrawer,
-                selected = false,
-                icon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Close,
-                        contentDescription = "Close"
-                    )
-                },
+            Column(
                 modifier = Modifier
-                    .padding(8.dp),
-                colors = NavigationDrawerItemDefaults.colors(
-                    unselectedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                    unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                    unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
+                    .verticalScroll(rememberScrollState())
+            ) {
+                Spacer(modifier = Modifier.height(4.dp))
+                drawerItems0.forEachIndexed { _, item ->
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = item.label,
+                                fontFamily = FontFamily.Monospace
+                            )
+                        },
+                        selected = false,
+                        onClick = item.onClick,
+                        icon = {
+                            Icon(
+                                imageVector = item.icon,
+                                contentDescription = item.label
+                            )
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                    )
+                }
+
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp))
+                drawerItems1.forEachIndexed { _, item ->
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = item.label,
+                                fontFamily = FontFamily.Monospace
+                            )
+                        },
+                        selected = false,
+                        onClick = item.onClick,
+                        icon = {
+                            Icon(
+                                imageVector = item.icon,
+                                contentDescription = item.label
+                            )
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                    )
+                }
+
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp))
+                drawerItems2.forEachIndexed { _, item ->
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = item.label,
+                                fontFamily = FontFamily.Monospace
+                            )
+                        },
+                        selected = false,
+                        onClick = item.onClick,
+                        icon = {
+                            Icon(
+                                imageVector = item.icon,
+                                contentDescription = item.label
+                            )
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                    )
+                }
+
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp))
+                Spacer(modifier = Modifier.weight(1f))
+
+                NavigationDrawerItem(
+                    label = {
+                        Text(
+                            text = "Close Drawer",
+                            fontFamily = FontFamily.Monospace
+                        )
+                    },
+                    onClick = closeDrawer,
+                    selected = false,
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = "Close"
+                        )
+                    },
+                    modifier = Modifier
+                        .padding(8.dp),
+                    colors = NavigationDrawerItemDefaults.colors(
+                        unselectedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        unselectedTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                        unselectedIconColor = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
                 )
-            )
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }
