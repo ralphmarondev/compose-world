@@ -22,6 +22,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
@@ -30,6 +33,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.domain.model.Account
 import com.ralphmarondev.keepr.presentation.details.components.AccountCard
+import com.ralphmarondev.keepr.presentation.details.components.AccountDetailsDialog
 import com.ralphmarondev.keepr.presentation.details.components.NewAccountDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,6 +54,17 @@ fun DetailScreen(
     val accounts by viewModel.accounts.collectAsState()
 
     val context = LocalContext.current
+    var showAccountDetailsDialog by remember { mutableStateOf(false) }
+    var selectedAccount by remember {
+        mutableStateOf(
+            Account(
+                subCategoryName = "",
+                name = "",
+                username = "",
+                password = ""
+            )
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -99,7 +114,13 @@ fun DetailScreen(
                         subCategoryName = account.subCategoryName
                     ),
                     onClick = {
-
+                        selectedAccount = Account(
+                            name = account.name,
+                            username = account.username,
+                            password = account.password,
+                            subCategoryName = account.subCategoryName
+                        )
+                        showAccountDetailsDialog = !showAccountDetailsDialog
                     },
                     modifier = Modifier
                         .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -125,6 +146,13 @@ fun DetailScreen(
                         }
                     )
                 }
+            )
+        }
+
+        if (showAccountDetailsDialog) {
+            AccountDetailsDialog(
+                account = selectedAccount,
+                onDismiss = { showAccountDetailsDialog = !showAccountDetailsDialog }
             )
         }
     }
