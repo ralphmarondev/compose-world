@@ -29,13 +29,4 @@ object Routes {
 
     @Serializable
     data object Keeper
-
-    @Serializable
-    data class KeeperHome(val username: String)
-
-    @Serializable
-    data class KeeperSubCategory(val category: String)
-
-    @Serializable
-    data class KeeperDetailScreen(val subCategory: String)
 }

@@ -9,8 +9,7 @@ import androidx.navigation.toRoute
 import com.ralphmarondev.calculator.CalculatorMainScreen
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
-import com.ralphmarondev.keepr.presentation.auth.AuthScreen
-import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
+import com.ralphmarondev.keepr.navigation.KeeprNavigation
 import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.NoteScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
@@ -108,51 +107,12 @@ fun AppNavigation(
             )
         }
         composable<Routes.Keeper> {
-            AuthScreen(
-                backToHome = {
+            KeeprNavigation(
+                navigateBack = {
                     navController.navigateUp()
-                },
-                navigateToHome = { username ->
-                    navController.navigate(Routes.KeeperHome(username))
                 },
                 keeprDao = MyApp.database.keeprDao(),
                 preferences = MyApp.keeprPreferences
-            )
-        }
-        composable<Routes.KeeperHome> {
-            val args = it.toRoute<Routes.KeeperHome>()
-            com.ralphmarondev.keepr.presentation.home.HomeScreen(
-                currentUser = args.username,
-                logout = {
-                    navController.navigateUp()
-                },
-                navigateToSubCategory = { category ->
-                    navController.navigate(Routes.KeeperSubCategory(category))
-                },
-                keeprDao = MyApp.database.keeprDao()
-            )
-        }
-        composable<Routes.KeeperSubCategory> {
-            val args = it.toRoute<Routes.KeeperSubCategory>()
-            SubCategories(
-                categoryName = args.category,
-                backToHome = {
-                    navController.navigateUp()
-                },
-                navigateToDetails = { subCategory ->
-                    navController.navigate(Routes.KeeperDetailScreen(subCategory))
-                },
-                keeprDao = MyApp.database.keeprDao()
-            )
-        }
-        composable<Routes.KeeperDetailScreen> {
-            val args = it.toRoute<Routes.KeeperDetailScreen>()
-            com.ralphmarondev.keepr.presentation.details.DetailScreen(
-                subCategoryName = args.subCategory,
-                backToSubCategories = {
-                    navController.navigateUp()
-                },
-                keeprDao = MyApp.database.keeprDao()
             )
         }
     }
