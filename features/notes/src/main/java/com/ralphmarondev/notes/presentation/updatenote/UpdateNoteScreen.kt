@@ -61,6 +61,7 @@ fun UpdateNoteScreen(
     var description by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
+    var isUpdated by remember { mutableStateOf(false) }
 
     val note by viewModel.note.collectAsState()
 
@@ -84,6 +85,7 @@ fun UpdateNoteScreen(
         if (title != originalTitle || description != originalDescription) {
             date = getCurrentDate()
             time = getCurrentTime()
+            isUpdated = !isUpdated
         }
     }
 
@@ -107,30 +109,39 @@ fun UpdateNoteScreen(
                 actions = {
                     ElevatedButton(
                         onClick = {
-                            viewModel.updateNote(
-                                note = Note(
-                                    id = noteId,
-                                    title = title,
-                                    description = description,
-                                    date = date,
-                                    time = time
-                                ),
-                                response = { success, message ->
-                                    if (success) {
-                                        Toast.makeText(
-                                            context,
-                                            "Updated successfully!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    } else {
-                                        Toast.makeText(
-                                            context,
-                                            "Update failed. Error: $message",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+                            if (isUpdated) {
+                                viewModel.updateNote(
+                                    note = Note(
+                                        id = noteId,
+                                        title = title,
+                                        description = description,
+                                        date = date,
+                                        time = time
+                                    ),
+                                    response = { success, message ->
+                                        if (success) {
+                                            backToNoteDetails()
+                                            Toast.makeText(
+                                                context,
+                                                "Updated successfully!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "Update failed. Error: $message",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "No changes made!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     ) {
                         Text(
