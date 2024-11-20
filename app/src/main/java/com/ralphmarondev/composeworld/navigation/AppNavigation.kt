@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.onboarding.navigation.OnBoardingNavigation
 import com.ralphmarondev.browser.navigation.BrowserNavigation
 import com.ralphmarondev.calculator.navigation.CalculatorNavigation
 import com.ralphmarondev.composeworld.MyApp
@@ -24,6 +25,13 @@ fun AppNavigation(
         navController = navController,
         startDestination = Routes.Home
     ) {
+        composable<Routes.Onboarding> {
+            OnBoardingNavigation(
+                navigateToHome = {
+                    navController.navigate(Routes.Home)
+                }
+            )
+        }
         composable<Routes.Home> {
             HomeScreen(
                 navigateToNotes = {

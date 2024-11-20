@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/features/home" />
             <option value="$PROJECT_DIR$/features/keepr" />
             <option value="$PROJECT_DIR$/features/notes" />
+            <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/settings" />
           </set>
         </option>
