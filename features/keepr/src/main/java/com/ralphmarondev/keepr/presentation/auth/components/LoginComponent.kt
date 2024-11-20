@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -25,7 +24,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun LoginComponent(
-    goToRegister: () -> Unit,
     onLogin: (String, String) -> Unit
 ) {
     val context = LocalContext.current
@@ -99,34 +97,6 @@ fun LoginComponent(
         ) {
             Text(
                 text = "LOGIN",
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily.Monospace,
-                fontWeight = FontWeight.W500,
-                fontSize = 16.sp
-            )
-        }
-
-        Text(
-            text = "Or",
-            fontFamily = FontFamily.Monospace,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.W400,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(2.dp),
-            textAlign = TextAlign.Center
-        )
-        ElevatedButton(
-            onClick = goToRegister,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Text(
-                text = "REGISTER",
                 textAlign = TextAlign.Center,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.W500,
