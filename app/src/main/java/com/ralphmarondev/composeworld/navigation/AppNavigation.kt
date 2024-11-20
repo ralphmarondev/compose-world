@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.browser.navigation.BrowserNavigation
 import com.ralphmarondev.calculator.navigation.CalculatorNavigation
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
@@ -51,7 +52,11 @@ fun AppNavigation(
             )
         }
         composable<Routes.Browser> {
-            com.ralphmarondev.browser.presentation.home.HomeScreen()
+            BrowserNavigation(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
         }
         composable<Routes.Calculator> {
             CalculatorNavigation(

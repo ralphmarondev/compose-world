@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.android)
 }
 
@@ -58,6 +59,9 @@ dependencies {
     implementation(libs.androidx.material.icons.extended.android)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.coil.compose)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation("com.google.accompanist:accompanist-webview:0.36.0")
 
