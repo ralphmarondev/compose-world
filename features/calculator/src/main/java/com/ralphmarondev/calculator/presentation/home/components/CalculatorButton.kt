@@ -1,4 +1,4 @@
-package com.ralphmarondev.calculator.components
+package com.ralphmarondev.calculator.presentation.home.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size

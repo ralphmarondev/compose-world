@@ -1,4 +1,4 @@
-package com.ralphmarondev.calculator
+package com.ralphmarondev.calculator.presentation.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,11 +19,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.calculator.components.CalculatorButton
+import com.ralphmarondev.calculator.presentation.home.components.CalculatorButton
 
 @Composable
-fun CalculatorMainScreen() {
-    val viewModel: CalculatorViewModel = viewModel()
+fun HomeScreen() {
+    val viewModel: HomeViewModel = viewModel()
     val equationText = viewModel.equationText.observeAsState()
     val resultText = viewModel.resultText.observeAsState()
 
