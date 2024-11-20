@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,14 +27,13 @@ fun TinyAppCard2(
     label: String = "Label"
 ) {
     Column(
-        modifier = modifier
-            .wrapContentSize(),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
             onClick = onClick,
             modifier = Modifier
-                .wrapContentSize()
+                .padding(8.dp)
         ) {
             Column(
                 modifier = Modifier.padding(8.dp)
@@ -54,6 +52,7 @@ fun TinyAppCard2(
             text = label,
             fontFamily = FontFamily.Monospace,
             maxLines = 2,
+            minLines = 2,
             overflow = TextOverflow.Ellipsis,
             color = Color.White,
             textAlign = TextAlign.Center

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -66,18 +67,45 @@ fun HomeScreen(
             }
 
             Spacer(modifier = Modifier.weight(1f))
-            Row(
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.SpaceAround
             ) {
-                TinyAppCard2(
-                    image = R.drawable.keepr,
-                    onClick = navigateToKeeper,
-                    label = "Keepr"
-                )
+                item {
+                    TinyAppCard2(
+                        image = R.drawable.keepr,
+                        onClick = navigateToKeeper,
+                        label = "Keepr",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                item {
+                    TinyAppCard2(
+                        image = R.drawable.instagram,
+                        onClick = {},
+                        label = "Compose\ntagram",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                item {
+                    TinyAppCard2(
+                        image = R.drawable.weather_news,
+                        onClick = {},
+                        label = "Weather",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                item {
+                    TinyAppCard2(
+                        image = R.drawable.clock,
+                        onClick = {},
+                        label = "Clock",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
             Row(
                 modifier = Modifier
@@ -90,7 +118,7 @@ fun HomeScreen(
                     Box(
                         modifier = Modifier
                             .padding(2.dp)
-                            .size(16.dp)
+                            .size(12.dp)
                             .clip(CircleShape)
                             .background(Color.LightGray)
                     )
