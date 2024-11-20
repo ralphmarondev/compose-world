@@ -1,4 +1,4 @@
-package com.example.onboarding
+package com.ralphmarondev.onboarding
 
 import org.junit.Test
 

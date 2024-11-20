@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.onboarding"
+    namespace = "com.ralphmarondev.onboarding"
     compileSdk = 34
 
     defaultConfig {

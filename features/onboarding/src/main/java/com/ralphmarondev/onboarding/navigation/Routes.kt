@@ -1,4 +1,4 @@
-package com.example.onboarding.navigation
+package com.ralphmarondev.onboarding.navigation
 
 import kotlinx.serialization.Serializable
 

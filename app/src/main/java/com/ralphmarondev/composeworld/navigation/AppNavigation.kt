@@ -5,13 +5,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.onboarding.navigation.OnBoardingNavigation
 import com.ralphmarondev.browser.navigation.BrowserNavigation
 import com.ralphmarondev.calculator.navigation.CalculatorNavigation
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.home.HomeScreen
 import com.ralphmarondev.keepr.navigation.KeeprNavigation
 import com.ralphmarondev.notes.navigation.NotesNavigation
+import com.ralphmarondev.onboarding.navigation.OnBoardingNavigation
 import com.ralphmarondev.settings.navigation.SettingsNavigation
 
 @Composable
@@ -23,11 +23,12 @@ fun AppNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Home
+        startDestination = Routes.Onboarding
     ) {
         composable<Routes.Onboarding> {
             OnBoardingNavigation(
                 navigateToHome = {
+                    navController.popBackStack() // we will not go back here again after success registration
                     navController.navigate(Routes.Home)
                 }
             )

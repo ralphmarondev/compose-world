@@ -1,12 +1,12 @@
-package com.example.onboarding.navigation
+package com.ralphmarondev.onboarding.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.onboarding.presentation.home.HomeScreen
-import com.example.onboarding.presentation.register.RegistrationScreen
+import com.ralphmarondev.onboarding.presentation.home.HomeScreen
+import com.ralphmarondev.onboarding.presentation.register.RegistrationScreen
 
 @Composable
 fun OnBoardingNavigation(
@@ -26,7 +26,10 @@ fun OnBoardingNavigation(
         }
         composable<Routes.Register> {
             RegistrationScreen(
-                finished = navigateToHome
+                finished = navigateToHome,
+                navigateBack = {
+                    navController.navigateUp()
+                }
             )
         }
     }
