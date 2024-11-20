@@ -64,7 +64,7 @@ fun RegistrationScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             imageVector = Icons.Outlined.ArrowBackIosNew,
                             contentDescription = "Navigate Back"
