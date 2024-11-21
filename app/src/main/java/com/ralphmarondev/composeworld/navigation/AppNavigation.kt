@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.browser.navigation.BrowserNavigation
 import com.ralphmarondev.calculator.navigation.CalculatorNavigation
 import com.ralphmarondev.composeworld.MyApp
+import com.ralphmarondev.data.preferences.AppPreferences
 import com.ralphmarondev.home.HomeScreen
 import com.ralphmarondev.keepr.navigation.KeeprNavigation
 import com.ralphmarondev.notes.navigation.NotesNavigation
@@ -17,13 +18,14 @@ import com.ralphmarondev.settings.navigation.SettingsNavigation
 @Composable
 fun AppNavigation(
     darkTheme: Boolean,
+    preferences: AppPreferences,
     toggleDarkTheme: () -> Unit
 ) {
     val navController: NavHostController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Onboarding
+        startDestination = if (preferences.isFirstLaunch()) Routes.Onboarding else Routes.Home
     ) {
         composable<Routes.Onboarding> {
             OnBoardingNavigation(
@@ -31,7 +33,8 @@ fun AppNavigation(
                     navController.popBackStack() // we will not go back here again after success registration
                     navController.navigate(Routes.Home)
                 },
-                dao = MyApp.database.userDao()
+                dao = MyApp.database.userDao(),
+                preferences = preferences
             )
         }
         composable<Routes.Home> {

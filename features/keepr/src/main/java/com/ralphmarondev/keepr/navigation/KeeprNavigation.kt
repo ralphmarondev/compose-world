@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.ralphmarondev.keepr.data.local.KeeprDao
-import com.ralphmarondev.keepr.data.local.PreferencesHelper
+import com.ralphmarondev.keepr.data.local.KeeprPreferences
 import com.ralphmarondev.keepr.presentation.auth.AuthScreen
 import com.ralphmarondev.keepr.presentation.details.DetailScreen
 import com.ralphmarondev.keepr.presentation.home.HomeScreen
@@ -16,7 +16,7 @@ import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
 fun KeeprNavigation(
     navigateBack: () -> Unit,
     keeprDao: KeeprDao,
-    preferences: PreferencesHelper
+    preferences: KeeprPreferences
 ) {
     val navController = rememberNavController()
 
@@ -43,7 +43,8 @@ fun KeeprNavigation(
                 navigateToSubCategory = { category ->
                     navController.navigate(Routes.SubCategories(category))
                 },
-                keeprDao = keeprDao
+                keeprDao = keeprDao,
+                preferences = preferences
             )
         }
         composable<Routes.SubCategories> {

@@ -43,18 +43,19 @@ import com.ralphmarondev.keepr.R
 
 @Composable
 fun DrawerContent(
-    closeDrawer: () -> Unit
+    closeDrawer: () -> Unit,
+    logout: () -> Unit
 ) {
     val drawerItems0 = listOf(
         NavigationModel(
             icon = Icons.Outlined.Person,
             label = "My Profile",
-            onClick = {}
+            onClick = closeDrawer
         ),
         NavigationModel(
             icon = Icons.Outlined.Settings,
             label = "Settings",
-            onClick = {}
+            onClick = { }
         )
     )
 
@@ -220,11 +221,11 @@ fun DrawerContent(
                 NavigationDrawerItem(
                     label = {
                         Text(
-                            text = "Close Drawer",
+                            text = "Logout",
                             fontFamily = FontFamily.Monospace
                         )
                     },
-                    onClick = closeDrawer,
+                    onClick = logout,
                     selected = false,
                     icon = {
                         Icon(

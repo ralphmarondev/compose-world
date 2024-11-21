@@ -40,11 +40,12 @@ import androidx.compose.ui.window.DialogProperties
 
 @Composable
 fun NewAccountDialog(
+    subCategory: String,
     onDismiss: () -> Unit,
     onSaveCategory: (String, String, String) -> Unit
 ) {
     val context = LocalContext.current
-    var name by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(subCategory) }
     var usernameOrEmail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }

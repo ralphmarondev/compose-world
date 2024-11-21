@@ -131,6 +131,7 @@ fun DetailScreen(
 
         if (showNewAccount) {
             NewAccountDialog(
+                subCategory = subCategoryName,
                 onDismiss = { viewModel.toggleShowNewAccount() },
                 onSaveCategory = { name, username, password ->
                     viewModel.createNewAccount(

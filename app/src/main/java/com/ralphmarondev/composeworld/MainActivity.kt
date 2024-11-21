@@ -24,7 +24,8 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            var darkTheme by remember { mutableStateOf(false) }
+            val preferences = MyApp.appPreferences
+            var darkTheme by remember { mutableStateOf(preferences.isDarkTheme()) }
 
             ComposeWorldTheme(darkTheme = darkTheme) {
                 Box(
@@ -40,7 +41,11 @@ class MainActivity : ComponentActivity() {
                     )
                     AppNavigation(
                         darkTheme = darkTheme,
-                        toggleDarkTheme = { darkTheme = !darkTheme }
+                        toggleDarkTheme = {
+                            darkTheme = !darkTheme
+                            preferences.toggleDarkTheme()
+                        },
+                        preferences = preferences
                     )
                 }
             }

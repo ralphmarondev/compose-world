@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.data.preferences.AppPreferences
 import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.onboarding.R
 import com.ralphmarondev.onboarding.presentation.home.components.NormalTextField
@@ -47,6 +48,7 @@ import com.ralphmarondev.onboarding.presentation.home.components.PasswordTextFie
 @Composable
 fun RegistrationScreen(
     dao: UserDao,
+    preferences: AppPreferences,
     finished: () -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -186,6 +188,7 @@ fun RegistrationScreen(
                                         password = password.trim(),
                                         response = { isSuccess, msg ->
                                             if (isSuccess) {
+                                                preferences.setFirstLaunchDone()
                                                 finished()
                                             } else {
                                                 Toast.makeText(

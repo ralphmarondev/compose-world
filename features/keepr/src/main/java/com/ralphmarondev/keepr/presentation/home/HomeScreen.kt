@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.keepr.data.local.KeeprDao
+import com.ralphmarondev.keepr.data.local.KeeprPreferences
 import com.ralphmarondev.keepr.presentation.components.CategoryCard
 import com.ralphmarondev.keepr.presentation.home.components.DrawerContent
 import com.ralphmarondev.keepr.presentation.home.components.NewCategoryDialog
@@ -42,12 +43,14 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     currentUser: String,
     keeprDao: KeeprDao,
+    preferences: KeeprPreferences,
     logout: () -> Unit,
     navigateToSubCategory: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel(
         factory = HomeViewModelFactory(
-            keeprDao = keeprDao
+            keeprDao = keeprDao,
+            preferences = preferences
         )
     )
     val categories by viewModel.categories.collectAsState()
@@ -59,7 +62,10 @@ fun HomeScreen(
 
     ModalNavigationDrawer(
         drawerContent = {
-            DrawerContent(closeDrawer = { scope.launch { drawerState.apply { close() } } })
+            DrawerContent(
+                closeDrawer = { scope.launch { drawerState.apply { close() } } },
+                logout = logout
+            )
         },
         drawerState = drawerState
     ) {
