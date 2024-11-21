@@ -84,7 +84,9 @@ fun AppNavigation(
                     navController.navigateUp()
                 },
                 darkTheme = darkTheme,
-                toggleDarkTheme = toggleDarkTheme
+                toggleDarkTheme = toggleDarkTheme,
+                dao = MyApp.database.userDao(),
+                currentUser = preferences.getCurrentUser() // NOTE: Get this from login later
             )
         }
         composable<Routes.Keeper> {

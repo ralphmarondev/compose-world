@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.settings.presentation.appearance.fonts.AppFontStyleScreen
 import com.ralphmarondev.settings.presentation.appearance.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.general.backup.BackupAndRestoreScreen
@@ -16,6 +17,8 @@ import com.ralphmarondev.settings.presentation.misc.developer.AboutDeveloperScre
 @Composable
 fun SettingsNavigation(
     darkTheme: Boolean,
+    dao: UserDao,
+    currentUser: String,
     toggleDarkTheme: () -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -65,7 +68,9 @@ fun SettingsNavigation(
                     navController.navigate(Routes.Misc.Developer) {
                         launchSingleTop = true
                     }
-                }
+                },
+                dao = dao,
+                currentUser = currentUser
             )
         }
 

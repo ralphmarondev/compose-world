@@ -10,4 +10,5 @@ data class User(
     val fullName: String,
     val username: String,
     val password: String, // encrypt this later
+    val description: String = "Smiley"
 )

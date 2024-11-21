@@ -20,8 +20,12 @@ import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.settings.presentation.home.components.AccountCard
 import com.ralphmarondev.settings.presentation.home.components.HomeTopBar
 import com.ralphmarondev.settings.presentation.home.components.SettingsItemCard
@@ -29,6 +33,8 @@ import com.ralphmarondev.settings.presentation.home.components.SettingsItemCateg
 
 @Composable
 fun HomeScreen(
+    dao: UserDao,
+    currentUser: String,
     navigateBack: () -> Unit,
     // general
     navigateToLanguage: () -> Unit,
@@ -41,6 +47,15 @@ fun HomeScreen(
     // misc
     navigateToDeveloper: () -> Unit
 ) {
+    val viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModelFactory(
+            dao = dao,
+            username = currentUser
+        )
+    )
+
+    val user by viewModel.currentUser.collectAsState()
+
     Scaffold(
         topBar = {
             HomeTopBar(navigateBack)
@@ -54,7 +69,12 @@ fun HomeScreen(
         ) {
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
-                AccountCard()
+                AccountCard(
+                    user = user,
+                    onClick = {
+                        // TODO: navigate to account settings screen
+                    }
+                )
             }
 
             item {

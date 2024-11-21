@@ -188,6 +188,7 @@ fun RegistrationScreen(
                                         password = password.trim(),
                                         response = { isSuccess, msg ->
                                             if (isSuccess) {
+                                                preferences.setCurrentUser(username.trim())
                                                 preferences.setFirstLaunchDone()
                                                 finished()
                                             } else {

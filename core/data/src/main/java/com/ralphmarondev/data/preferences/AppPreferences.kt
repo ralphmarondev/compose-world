@@ -13,6 +13,7 @@ class AppPreferences(context: Context) {
         private const val PREFERENCES_NAME = "AppPrefs"
         private const val KEY_FIRST_LAUNCH = "isFirstLaunch"
         private const val APP_THEME = "app_theme"
+        private const val CURRENT_USER = "current_user"
     }
 
     fun isFirstLaunch(): Boolean {
@@ -31,5 +32,13 @@ class AppPreferences(context: Context) {
         Log.d("AppPreferences", "Current Theme: ${sharedPreferences.getBoolean(APP_THEME, false)}")
         sharedPreferences.edit()
             .putBoolean(APP_THEME, !sharedPreferences.getBoolean(APP_THEME, false)).apply()
+    }
+
+    fun setCurrentUser(value: String) {
+        sharedPreferences.edit().putString(CURRENT_USER, value).apply()
+    }
+
+    fun getCurrentUser(): String {
+        return sharedPreferences.getString(CURRENT_USER, "no_user")!!
     }
 }

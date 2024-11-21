@@ -20,12 +20,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.ralphmarondev.data.user.User
 import com.ralphmarondev.settings.R
 
 @Composable
-fun AccountCard(modifier: Modifier = Modifier) {
+fun AccountCard(
+    user: User,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     ElevatedCard(
-        onClick = {},
+        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -37,7 +42,7 @@ fun AccountCard(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(R.drawable.cute_me),
+                painter = rememberAsyncImagePainter(R.drawable.android),
                 contentDescription = "Profile",
                 modifier = Modifier
                     .size(80.dp)
@@ -49,21 +54,21 @@ fun AccountCard(modifier: Modifier = Modifier) {
                     .padding(horizontal = 8.dp)
             ) {
                 Text(
-                    text = "Ralph Maron Eda",
+                    text = user.fullName,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    text = "edaralphmaron@gmail.com",
+                    text = user.username,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W300,
                     color = MaterialTheme.colorScheme.tertiary
                 )
                 Text(
-                    text = "Computer Engineer",
+                    text = user.description,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
