@@ -6,18 +6,10 @@ import androidx.room.Upsert
 import com.ralphmarondev.keepr.domain.model.Account
 import com.ralphmarondev.keepr.domain.model.Category
 import com.ralphmarondev.keepr.domain.model.Subcategory
-import com.ralphmarondev.keepr.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface KeeprDao {
-
-    @Upsert
-    suspend fun register(user: User)
-
-    @Query("SELECT COUNT(*) > 0 FROM User WHERE username=:username AND password=:password and isDeleted=0")
-    suspend fun login(username: String, password: String): Boolean
-
 
     @Query("SELECT * FROM Category")
     fun getCategories(): Flow<List<Category>>

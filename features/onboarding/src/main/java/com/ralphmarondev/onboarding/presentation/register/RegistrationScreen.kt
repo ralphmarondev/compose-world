@@ -37,6 +37,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.onboarding.R
 import com.ralphmarondev.onboarding.presentation.home.components.NormalTextField
 import com.ralphmarondev.onboarding.presentation.home.components.PasswordTextField
@@ -44,9 +46,14 @@ import com.ralphmarondev.onboarding.presentation.home.components.PasswordTextFie
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationScreen(
+    dao: UserDao,
     finished: () -> Unit,
     navigateBack: () -> Unit
 ) {
+    val viewModel: RegistrationViewModel = viewModel(
+        factory = RegistrationViewModelFactory(dao)
+    )
+
     val context = LocalContext.current
     var fullName by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
@@ -173,7 +180,22 @@ fun RegistrationScreen(
                                     .isNotEmpty() && password.trim().isNotEmpty()
                             ) {
                                 if (password.trim() == confirmPassword.trim()) {
-                                    finished()
+                                    viewModel.register(
+                                        fullName = fullName.trim(),
+                                        username = username.trim(),
+                                        password = password.trim(),
+                                        response = { isSuccess, msg ->
+                                            if (isSuccess) {
+                                                finished()
+                                            } else {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Registration failed. Error: $msg",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        }
+                                    )
                                 } else {
                                     Toast.makeText(
                                         context,

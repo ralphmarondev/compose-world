@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core:data"))
     implementation(project(":features:browser"))
     implementation(project(":features:home"))
     implementation(project(":features:calculator"))

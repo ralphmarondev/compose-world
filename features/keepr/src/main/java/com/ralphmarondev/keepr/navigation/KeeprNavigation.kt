@@ -26,12 +26,11 @@ fun KeeprNavigation(
     ) {
         composable<Routes.Auth> {
             AuthScreen(
-                backToHome = navigateBack,
+                navigateBack = navigateBack,
                 navigateToHome = { username ->
                     navController.navigate(Routes.Home(username))
                 },
-                keeprDao = keeprDao,
-                preferences = preferences
+                currentUser = "ralphmaron"
             )
         }
         composable<Routes.Home> {

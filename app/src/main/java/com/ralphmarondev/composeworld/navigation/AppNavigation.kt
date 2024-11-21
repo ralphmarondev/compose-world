@@ -30,7 +30,8 @@ fun AppNavigation(
                 navigateToHome = {
                     navController.popBackStack() // we will not go back here again after success registration
                     navController.navigate(Routes.Home)
-                }
+                },
+                dao = MyApp.database.userDao()
             )
         }
         composable<Routes.Home> {

@@ -5,11 +5,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.onboarding.presentation.home.HomeScreen
 import com.ralphmarondev.onboarding.presentation.register.RegistrationScreen
 
 @Composable
 fun OnBoardingNavigation(
+    dao: UserDao,
     navigateToHome: () -> Unit,
     navController: NavHostController = rememberNavController()
 ) {
@@ -29,7 +31,8 @@ fun OnBoardingNavigation(
                 finished = navigateToHome,
                 navigateBack = {
                     navController.navigateUp()
-                }
+                },
+                dao = dao
             )
         }
     }
