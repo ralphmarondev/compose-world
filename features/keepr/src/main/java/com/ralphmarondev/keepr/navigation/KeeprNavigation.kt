@@ -23,21 +23,20 @@ fun KeeprNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Auth
+        startDestination = if (preferences.isKeeprAuthEnabled()) Routes.Auth else Routes.Home
     ) {
         composable<Routes.Auth> {
             AuthScreen(
                 navigateBack = navigateBack,
                 navigateToHome = {
-                    navController.navigate(Routes.Home(currentUser))
+                    navController.navigate(Routes.Home)
                 },
                 currentUser = currentUser
             )
         }
         composable<Routes.Home> {
-            val args = it.toRoute<Routes.Home>()
             HomeScreen(
-                currentUser = args.username,
+                currentUser = currentUser,
                 logout = {
                     navController.navigateUp()
                 },

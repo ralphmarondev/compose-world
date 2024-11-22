@@ -7,7 +7,7 @@ object Routes {
     data object Auth
 
     @Serializable
-    data class Home(val username: String)
+    data object Home
 
     @Serializable
     data class SubCategories(val category: String)
