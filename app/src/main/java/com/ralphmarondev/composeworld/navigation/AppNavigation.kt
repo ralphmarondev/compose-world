@@ -95,7 +95,8 @@ fun AppNavigation(
                     navController.navigateUp()
                 },
                 keeprDao = MyApp.database.keeprDao(),
-                preferences = MyApp.keeprPreferences
+                preferences = MyApp.keeprPreferences,
+                currentUser = preferences.getCurrentUser()
             )
         }
     }

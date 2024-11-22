@@ -16,7 +16,8 @@ import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
 fun KeeprNavigation(
     navigateBack: () -> Unit,
     keeprDao: KeeprDao,
-    preferences: KeeprPreferences
+    preferences: KeeprPreferences,
+    currentUser: String
 ) {
     val navController = rememberNavController()
 
@@ -27,10 +28,10 @@ fun KeeprNavigation(
         composable<Routes.Auth> {
             AuthScreen(
                 navigateBack = navigateBack,
-                navigateToHome = { username ->
-                    navController.navigate(Routes.Home(username))
+                navigateToHome = {
+                    navController.navigate(Routes.Home(currentUser))
                 },
-                currentUser = "ralphmaron"
+                currentUser = currentUser
             )
         }
         composable<Routes.Home> {
