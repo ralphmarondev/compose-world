@@ -14,4 +14,7 @@ object Routes {
 
     @Serializable
     data class Details(val subCategory: String)
+
+    @Serializable
+    data object Settings
 }

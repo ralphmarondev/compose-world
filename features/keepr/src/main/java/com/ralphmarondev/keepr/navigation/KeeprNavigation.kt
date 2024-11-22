@@ -10,6 +10,7 @@ import com.ralphmarondev.keepr.data.local.KeeprPreferences
 import com.ralphmarondev.keepr.presentation.auth.AuthScreen
 import com.ralphmarondev.keepr.presentation.details.DetailScreen
 import com.ralphmarondev.keepr.presentation.home.HomeScreen
+import com.ralphmarondev.keepr.presentation.settings.SettingsScreen
 import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
 
 @Composable
@@ -44,7 +45,12 @@ fun KeeprNavigation(
                     navController.navigate(Routes.SubCategories(category))
                 },
                 keeprDao = keeprDao,
-                preferences = preferences
+                preferences = preferences,
+                navigateToSettings = {
+                    navController.navigate(Routes.Settings) {
+                        launchSingleTop = true
+                    }
+                }
             )
         }
         composable<Routes.SubCategories> {
@@ -68,6 +74,14 @@ fun KeeprNavigation(
                     navController.navigateUp()
                 },
                 keeprDao = keeprDao
+            )
+        }
+        composable<Routes.Settings> {
+            SettingsScreen(
+                preferences = preferences,
+                navigateBack = {
+                    navController.navigateUp()
+                }
             )
         }
     }

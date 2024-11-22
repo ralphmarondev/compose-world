@@ -45,7 +45,8 @@ fun HomeScreen(
     keeprDao: KeeprDao,
     preferences: KeeprPreferences,
     logout: () -> Unit,
-    navigateToSubCategory: (String) -> Unit
+    navigateToSubCategory: (String) -> Unit,
+    navigateToSettings: () -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel(
         factory = HomeViewModelFactory(
@@ -64,7 +65,8 @@ fun HomeScreen(
         drawerContent = {
             DrawerContent(
                 closeDrawer = { scope.launch { drawerState.apply { close() } } },
-                logout = logout
+                logout = logout,
+                navigateToSettings = navigateToSettings
             )
         },
         drawerState = drawerState

@@ -44,7 +44,8 @@ import com.ralphmarondev.keepr.R
 @Composable
 fun DrawerContent(
     closeDrawer: () -> Unit,
-    logout: () -> Unit
+    logout: () -> Unit,
+    navigateToSettings: () -> Unit
 ) {
     val drawerItems0 = listOf(
         NavigationModel(
@@ -55,7 +56,7 @@ fun DrawerContent(
         NavigationModel(
             icon = Icons.Outlined.Settings,
             label = "Settings",
-            onClick = { }
+            onClick = navigateToSettings
         )
     )
 
