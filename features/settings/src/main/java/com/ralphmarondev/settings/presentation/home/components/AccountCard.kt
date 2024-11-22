@@ -67,13 +67,13 @@ fun AccountCard(
                     fontWeight = FontWeight.W300,
                     color = MaterialTheme.colorScheme.tertiary
                 )
-                Text(
-                    text = user.description,
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.W500,
-                    color = MaterialTheme.colorScheme.secondary
-                )
+//                Text(
+//                    text = user.description,
+//                    fontFamily = FontFamily.Monospace,
+//                    fontSize = 16.sp,
+//                    fontWeight = FontWeight.W500,
+//                    color = MaterialTheme.colorScheme.secondary
+//                )
             }
         }
     }

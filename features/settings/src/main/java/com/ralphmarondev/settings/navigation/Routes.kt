@@ -6,6 +6,9 @@ object Routes {
     @Serializable
     data object Home
 
+    @Serializable
+    data object AccountSettings
+
     object General {
         @Serializable
         data object Language

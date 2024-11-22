@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.data.user.UserDao
+import com.ralphmarondev.settings.presentation.account.AccountSettingScreen
 import com.ralphmarondev.settings.presentation.appearance.fonts.AppFontStyleScreen
 import com.ralphmarondev.settings.presentation.appearance.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.general.backup.BackupAndRestoreScreen
@@ -31,6 +32,11 @@ fun SettingsNavigation(
         composable<Routes.Home> {
             HomeScreen(
                 navigateBack = navigateBack,
+                navigateToAccountSettings = {
+                    navController.navigate(Routes.AccountSettings) {
+                        launchSingleTop = true
+                    }
+                },
                 // general
                 navigateToLanguage = {
                     navController.navigate(Routes.General.Language) {
@@ -71,6 +77,16 @@ fun SettingsNavigation(
                 },
                 dao = dao,
                 currentUser = currentUser
+            )
+        }
+
+        composable<Routes.AccountSettings> {
+            AccountSettingScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                currentUser = currentUser,
+                dao = dao
             )
         }
 

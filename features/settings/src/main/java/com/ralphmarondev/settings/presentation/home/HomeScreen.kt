@@ -36,6 +36,7 @@ fun HomeScreen(
     dao: UserDao,
     currentUser: String,
     navigateBack: () -> Unit,
+    navigateToAccountSettings: () -> Unit,
     // general
     navigateToLanguage: () -> Unit,
     navigateToVersion: () -> Unit,
@@ -71,9 +72,7 @@ fun HomeScreen(
             item {
                 AccountCard(
                     user = user,
-                    onClick = {
-                        // TODO: navigate to account settings screen
-                    }
+                    onClick = navigateToAccountSettings
                 )
             }
 
