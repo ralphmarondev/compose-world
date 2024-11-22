@@ -96,6 +96,7 @@ fun NewCategoryDialog(
                     fontWeight = FontWeight.W500
                 ),
                 maxLines = 1,
+                singleLine = true,
                 trailingIcon = {
                     AnimatedVisibility(name.isNotEmpty()) {
                         IconButton(onClick = { name = "" }) {

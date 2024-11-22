@@ -104,6 +104,7 @@ fun NewAccountDialog(
                     fontWeight = FontWeight.W500
                 ),
                 maxLines = 1,
+                singleLine = true,
                 trailingIcon = {
                     AnimatedVisibility(name.isNotEmpty()) {
                         IconButton(onClick = { name = "" }) {
@@ -134,6 +135,7 @@ fun NewAccountDialog(
                     fontWeight = FontWeight.W500
                 ),
                 maxLines = 1,
+                singleLine = true,
                 trailingIcon = {
                     AnimatedVisibility(usernameOrEmail.isNotEmpty()) {
                         IconButton(onClick = { usernameOrEmail = "" }) {
@@ -164,6 +166,7 @@ fun NewAccountDialog(
                     fontWeight = FontWeight.W500
                 ),
                 maxLines = 1,
+                singleLine = true,
                 trailingIcon = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         AnimatedVisibility(password.isNotEmpty()) {
