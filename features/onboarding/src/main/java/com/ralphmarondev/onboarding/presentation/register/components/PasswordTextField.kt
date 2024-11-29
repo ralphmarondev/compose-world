@@ -1,6 +1,8 @@
 package com.ralphmarondev.onboarding.presentation.register.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material.icons.outlined.Visibility
@@ -19,6 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,6 +32,8 @@ fun PasswordTextField(
     value: String,
     onValueChanged: (String) -> Unit,
     label: String,
+    keyboardAction: () -> Unit,
+    isFinalField: Boolean = false,
     maxLines: Int = 1,
     leadingIcon: ImageVector = Icons.Outlined.Password
 ) {
@@ -51,6 +56,7 @@ fun PasswordTextField(
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.W500
         ),
+        singleLine = true,
         maxLines = maxLines,
         leadingIcon = {
             Icon(
@@ -70,6 +76,14 @@ fun PasswordTextField(
                 }
             }
         },
-        visualTransformation = if (show) VisualTransformation.None else PasswordVisualTransformation()
+        visualTransformation = if (show) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = if (isFinalField) ImeAction.Done else ImeAction.Next
+        ),
+        keyboardActions = if (isFinalField) KeyboardActions(
+            onDone = { keyboardAction() }
+        ) else KeyboardActions(
+            onNext = { keyboardAction() }
+        )
     )
 }

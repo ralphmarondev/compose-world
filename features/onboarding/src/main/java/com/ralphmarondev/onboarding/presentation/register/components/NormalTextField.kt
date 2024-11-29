@@ -1,6 +1,8 @@
 package com.ralphmarondev.onboarding.presentation.register.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.Clear
@@ -14,6 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
@@ -22,6 +25,7 @@ fun NormalTextField(
     value: String,
     onValueChanged: (String) -> Unit,
     label: String,
+    keyboardAction: () -> Unit,
     maxLines: Int = 1,
     leadingIcon: ImageVector = Icons.Outlined.AccountBox
 ) {
@@ -42,6 +46,7 @@ fun NormalTextField(
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.W500
         ),
+        singleLine = true,
         maxLines = maxLines,
         leadingIcon = {
             Icon(
@@ -58,6 +63,12 @@ fun NormalTextField(
                     )
                 }
             }
-        }
+        },
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { keyboardAction() }
+        )
     )
 }

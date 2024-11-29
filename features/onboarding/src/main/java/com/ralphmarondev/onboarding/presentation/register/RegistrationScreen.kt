@@ -29,7 +29,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -62,6 +64,8 @@ fun RegistrationScreen(
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var accept by remember { mutableStateOf(true) }
+
+    val focusManager = LocalFocusManager.current
 
     Scaffold(
         topBar = {
@@ -125,7 +129,10 @@ fun RegistrationScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp, vertical = 4.dp),
                     label = "Full Name",
-                    leadingIcon = Icons.Outlined.PersonOutline
+                    leadingIcon = Icons.Outlined.PersonOutline,
+                    keyboardAction = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
                 )
 
                 NormalTextField(
@@ -134,7 +141,10 @@ fun RegistrationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp, vertical = 4.dp),
-                    label = "Username"
+                    label = "Username",
+                    keyboardAction = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
                 )
 
                 PasswordTextField(
@@ -143,7 +153,10 @@ fun RegistrationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp, vertical = 4.dp),
-                    label = "Password"
+                    label = "Password",
+                    keyboardAction = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
                 )
 
                 PasswordTextField(
@@ -152,7 +165,11 @@ fun RegistrationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp, vertical = 4.dp),
-                    label = "Confirm Password"
+                    label = "Confirm Password",
+                    isFinalField = true,
+                    keyboardAction = {
+                        focusManager.clearFocus()
+                    }
                 )
 
                 Row(
