@@ -41,8 +41,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.data.preferences.AppPreferences
 import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.onboarding.R
-import com.ralphmarondev.onboarding.presentation.home.components.NormalTextField
-import com.ralphmarondev.onboarding.presentation.home.components.PasswordTextField
+import com.ralphmarondev.onboarding.presentation.register.components.NormalTextField
+import com.ralphmarondev.onboarding.presentation.register.components.PasswordTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,39 +1,30 @@
-package com.ralphmarondev.onboarding.presentation.home.components
+package com.ralphmarondev.onboarding.presentation.register.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Password
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material.icons.outlined.AccountBox
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
-fun PasswordTextField(
+fun NormalTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChanged: (String) -> Unit,
     label: String,
     maxLines: Int = 1,
-    leadingIcon: ImageVector = Icons.Outlined.Password
+    leadingIcon: ImageVector = Icons.Outlined.AccountBox
 ) {
-    var show by remember { mutableStateOf(false) }
-
     OutlinedTextField(
         value = value,
         onValueChange = { onValueChanged(it) },
@@ -60,16 +51,13 @@ fun PasswordTextField(
         },
         trailingIcon = {
             AnimatedVisibility(value.isNotEmpty()) {
-                IconButton(onClick = { show = !show }) {
-                    val icon = if (show) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
-
+                IconButton(onClick = { onValueChanged("") }) {
                     Icon(
-                        imageVector = icon,
+                        imageVector = Icons.Outlined.Clear,
                         contentDescription = ""
                     )
                 }
             }
-        },
-        visualTransformation = if (show) VisualTransformation.None else PasswordVisualTransformation()
+        }
     )
 }
