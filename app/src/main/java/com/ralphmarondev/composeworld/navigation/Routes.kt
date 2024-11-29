@@ -23,4 +23,7 @@ object Routes {
 
     @Serializable
     data object Keeper
+
+    @Serializable
+    data object Clock
 }

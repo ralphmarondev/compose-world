@@ -35,7 +35,8 @@ fun HomeScreen(
     navigateToNotes: () -> Unit,
     navigateToCalculator: () -> Unit,
     navigateToSettings: () -> Unit,
-    navigateToKeeper: () -> Unit
+    navigateToKeeper: () -> Unit,
+    navigateToClock: () -> Unit
 ) {
     Scaffold(
         containerColor = Color.Transparent
@@ -101,7 +102,7 @@ fun HomeScreen(
                 item {
                     TinyAppCard2(
                         image = R.drawable.clock,
-                        onClick = {},
+                        onClick = navigateToClock,
                         label = "Clock",
                         modifier = Modifier.weight(1f)
                     )

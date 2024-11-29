@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.browser.navigation.BrowserNavigation
 import com.ralphmarondev.calculator.navigation.CalculatorNavigation
+import com.ralphmarondev.clock.navigation.ClockNavigation
 import com.ralphmarondev.composeworld.MyApp
 import com.ralphmarondev.data.preferences.AppPreferences
 import com.ralphmarondev.home.HomeScreen
@@ -53,6 +54,9 @@ fun AppNavigation(
                 },
                 navigateToKeeper = {
                     navController.navigate(Routes.Keeper)
+                },
+                navigateToClock = {
+                    navController.navigate(Routes.Clock)
                 }
             )
         }
@@ -97,6 +101,13 @@ fun AppNavigation(
                 keeprDao = MyApp.database.keeprDao(),
                 preferences = MyApp.keeprPreferences,
                 currentUser = preferences.getCurrentUser()
+            )
+        }
+        composable<Routes.Clock> {
+            ClockNavigation(
+                navigateBack = {
+                    navController.navigateUp()
+                }
             )
         }
     }
