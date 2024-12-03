@@ -55,7 +55,6 @@ fun TitleTextField(
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         ),
-        maxLines = 1,
         modifier = modifier
     )
 }
