@@ -23,15 +23,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -48,6 +50,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.ralphmarondev.weather.data.remote.NetworkResponse
 import com.ralphmarondev.weather.data.remote.WeatherModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,9 +58,12 @@ fun HomeScreen(
     navigateBack: () -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel()
-    var city by remember { mutableStateOf("") }
+    val location by viewModel.location.collectAsState()
     val weatherResult = viewModel.weatherResult.observeAsState()
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    val scope = rememberCoroutineScope()
+    val snackbar = remember { SnackbarHostState() }
 
     Scaffold(
         topBar = {
@@ -84,6 +90,9 @@ fun HomeScreen(
                     navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
+        },
+        snackbarHost = {
+            SnackbarHost(snackbar)
         }
     ) { innerPadding ->
         LazyColumn(
@@ -99,8 +108,8 @@ fun HomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     OutlinedTextField(
-                        value = city,
-                        onValueChange = { city = it },
+                        value = location,
+                        onValueChange = { viewModel.onLocationChange(it) },
                         label = {
                             Text(
                                 text = "Search for any location",
@@ -117,7 +126,15 @@ fun HomeScreen(
                         trailingIcon = {
                             IconButton(
                                 onClick = {
-                                    viewModel.getData(city)
+                                    viewModel.onSearch(
+                                        response = { isValidLocation, message ->
+                                            if (!isValidLocation) {
+                                                scope.launch {
+                                                    snackbar.showSnackbar(message)
+                                                }
+                                            }
+                                        }
+                                    )
                                     keyboardController?.hide()
                                 }
                             ) {
@@ -136,7 +153,15 @@ fun HomeScreen(
                         ),
                         keyboardActions = KeyboardActions(
                             onSearch = {
-                                viewModel.getData(city)
+                                viewModel.onSearch(
+                                    response = { isValidLocation, message ->
+                                        if (!isValidLocation) {
+                                            scope.launch {
+                                                snackbar.showSnackbar(message)
+                                            }
+                                        }
+                                    }
+                                )
                                 keyboardController?.hide()
                             }
                         )
