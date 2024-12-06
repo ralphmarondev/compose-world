@@ -63,6 +63,10 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.runtime.livedata)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
