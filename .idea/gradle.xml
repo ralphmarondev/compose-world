@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/features/notes" />
             <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/settings" />
+            <option value="$PROJECT_DIR$/features/weather" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

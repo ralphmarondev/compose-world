@@ -36,7 +36,8 @@ fun HomeScreen(
     navigateToCalculator: () -> Unit,
     navigateToSettings: () -> Unit,
     navigateToKeeper: () -> Unit,
-    navigateToClock: () -> Unit
+    navigateToClock: () -> Unit,
+    navigateToWeather: () -> Unit
 ) {
     Scaffold(
         containerColor = Color.Transparent
@@ -94,7 +95,7 @@ fun HomeScreen(
                 item {
                     TinyAppCard2(
                         image = R.drawable.weather_news,
-                        onClick = {},
+                        onClick = navigateToWeather,
                         label = "Weather",
                         modifier = Modifier.weight(1f)
                     )

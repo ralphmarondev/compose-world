@@ -15,6 +15,7 @@ import com.ralphmarondev.keepr.navigation.KeeprNavigation
 import com.ralphmarondev.notes.navigation.NotesNavigation
 import com.ralphmarondev.onboarding.navigation.OnBoardingNavigation
 import com.ralphmarondev.settings.navigation.SettingsNavigation
+import com.ralphmarondev.weather.navigation.WeatherNavigation
 
 @Composable
 fun AppNavigation(
@@ -57,6 +58,9 @@ fun AppNavigation(
                 },
                 navigateToClock = {
                     navController.navigate(Routes.Clock)
+                },
+                navigateToWeather = {
+                    navController.navigate(Routes.Weather)
                 }
             )
         }
@@ -105,6 +109,13 @@ fun AppNavigation(
         }
         composable<Routes.Clock> {
             ClockNavigation(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Weather> {
+            WeatherNavigation(
                 navigateBack = {
                     navController.navigateUp()
                 }

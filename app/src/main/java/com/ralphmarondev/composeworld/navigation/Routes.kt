@@ -26,4 +26,7 @@ object Routes {
 
     @Serializable
     data object Clock
+
+    @Serializable
+    data object Weather
 }
