@@ -353,6 +353,7 @@ private fun AccountDetailsBottomSheet(
                 IconButton(
                     onClick = {
                         Toast.makeText(context, "Deleted!", Toast.LENGTH_SHORT).show()
+                        onDismiss()
                     }
                 ) {
                     Icon(
@@ -365,6 +366,7 @@ private fun AccountDetailsBottomSheet(
                 IconButton(
                     onClick = {
                         Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+                        onDismiss()
                     }
                 ) {
                     Icon(
