@@ -8,7 +8,9 @@ import com.ralphmarondev.keepr.data.local.KeeprDao
 import com.ralphmarondev.keepr.data.repository.KeeprRepositoryImpl
 import com.ralphmarondev.keepr.domain.model.Account
 import com.ralphmarondev.keepr.domain.usecases.CreateNewAccountUseCase
+import com.ralphmarondev.keepr.domain.usecases.DeleteAccountUseCase
 import com.ralphmarondev.keepr.domain.usecases.GetAccountsUseCase
+import com.ralphmarondev.keepr.domain.usecases.UpdateAccountUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -34,6 +36,8 @@ class DetailViewModel(
     private val repository = KeeprRepositoryImpl(keeprDao)
     private val getAccountsUseCase = GetAccountsUseCase(repository)
     private val createNewAccountUseCase = CreateNewAccountUseCase(repository)
+    private val updateAccountUseCase = UpdateAccountUseCase(repository)
+    private val deleteAccountUseCase = DeleteAccountUseCase(repository)
 
     private val _accounts = MutableStateFlow<List<Account>>(emptyList())
     val accounts: StateFlow<List<Account>> get() = _accounts
@@ -79,6 +83,42 @@ class DetailViewModel(
                 account = account,
                 response = response
             )
+        }
+    }
+
+    fun updateAccount(
+        id: Int,
+        accountLabel: String,
+        username: String,
+        password: String,
+        response: (Boolean, String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val isSuccess = updateAccountUseCase.updateAccount(
+                id = id,
+                newName = accountLabel,
+                newUsername = username,
+                newPassword = password
+            )
+            if (isSuccess) {
+                response(true, "Updated!")
+            } else {
+                response(false, "Failed!")
+            }
+        }
+    }
+
+    fun deleteAccount(
+        id: Int,
+        response: (Boolean, String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val isSuccess = deleteAccountUseCase.deleteAccount(id)
+            if (isSuccess) {
+                response(true, "Deleted!")
+            } else {
+                response(false, "Failed!")
+            }
         }
     }
 }

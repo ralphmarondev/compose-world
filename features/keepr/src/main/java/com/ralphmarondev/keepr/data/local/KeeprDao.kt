@@ -29,6 +29,11 @@ interface KeeprDao {
     @Upsert
     suspend fun insertAccount(account: Account)
 
+    @Query("UPDATE Account SET name=:newName, username=:newUsername, password=:newPassword WHERE id=:id")
+    suspend fun updateAccount(id: Int, newName: String, newUsername: String, newPassword: String)
+
+    @Query("DELETE FROM Account WHERE id=:id")
+    suspend fun deleteAccount(id: Int)
 
     // for create defaults
     @Upsert

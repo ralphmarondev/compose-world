@@ -176,7 +176,32 @@ fun DetailScreen(
         if (showAccountDetailsDialog) {
             AccountDetailsBottomSheet(
                 account = selectedAccount,
-                onDismiss = { showAccountDetailsDialog = !showAccountDetailsDialog }
+                onDismiss = { showAccountDetailsDialog = !showAccountDetailsDialog },
+                onUpdate = { accountLabel, username, password ->
+                    viewModel.updateAccount(
+                        id = selectedAccount.id,
+                        accountLabel = accountLabel,
+                        username = username,
+                        password = password,
+                        response = { isSuccess, message ->
+                            if (isSuccess) {
+                                showAccountDetailsDialog = !showAccountDetailsDialog
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                },
+                onDelete = {
+                    viewModel.deleteAccount(
+                        id = selectedAccount.id,
+                        response = { isSuccess, message ->
+                            if (isSuccess) {
+                                showAccountDetailsDialog = !showAccountDetailsDialog
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
             )
         }
     }
@@ -186,7 +211,9 @@ fun DetailScreen(
 @Composable
 private fun AccountDetailsBottomSheet(
     onDismiss: () -> Unit,
-    account: Account
+    account: Account,
+    onUpdate: (String, String, String) -> Unit,
+    onDelete: () -> Unit
 ) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
@@ -352,8 +379,7 @@ private fun AccountDetailsBottomSheet(
                 }
                 IconButton(
                     onClick = {
-                        Toast.makeText(context, "Deleted!", Toast.LENGTH_SHORT).show()
-                        onDismiss()
+                        onDelete()
                     }
                 ) {
                     Icon(
@@ -365,8 +391,7 @@ private fun AccountDetailsBottomSheet(
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(
                     onClick = {
-                        Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
-                        onDismiss()
+                        onUpdate(accountLabel, username, password)
                     }
                 ) {
                     Icon(

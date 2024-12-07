@@ -19,6 +19,10 @@ interface KeeprRepository {
 
     suspend fun insertAccount(account: Account)
 
+    suspend fun updateAccount(id: Int, name: String, username: String, password: String)
+
+    suspend fun deleteAccount(id: Int)
+
     // for create defaults
     suspend fun insertCategories(categories: List<Category>)
 

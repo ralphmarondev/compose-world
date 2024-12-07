@@ -35,6 +35,19 @@ class KeeprRepositoryImpl(
         keeprDao.insertAccount(account)
     }
 
+    override suspend fun updateAccount(id: Int, name: String, username: String, password: String) {
+        keeprDao.updateAccount(
+            id = id,
+            newName = name,
+            newUsername = username,
+            newPassword = password
+        )
+    }
+
+    override suspend fun deleteAccount(id: Int) {
+        keeprDao.deleteAccount(id)
+    }
+
     override suspend fun insertCategories(categories: List<Category>) {
         keeprDao.insertCategories(categories)
     }
