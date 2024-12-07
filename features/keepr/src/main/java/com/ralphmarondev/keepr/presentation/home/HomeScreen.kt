@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AddCircleOutline
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -76,7 +77,7 @@ fun HomeScreen(
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Hello, $currentUser",
+                            text = "Keepr",
                             fontFamily = FontFamily.Monospace,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1
@@ -97,6 +98,12 @@ fun HomeScreen(
                         }
                     },
                     actions = {
+                        IconButton(onClick = { }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Edit,
+                                contentDescription = "Edit Category"
+                            )
+                        }
                         IconButton(onClick = { viewModel.toggleShowNewDialog() }) {
                             Icon(
                                 imageVector = Icons.Outlined.AddCircleOutline,
