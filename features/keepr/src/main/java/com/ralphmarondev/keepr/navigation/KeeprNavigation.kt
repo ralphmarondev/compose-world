@@ -12,6 +12,7 @@ import com.ralphmarondev.keepr.presentation.details.DetailScreen
 import com.ralphmarondev.keepr.presentation.home.HomeScreen
 import com.ralphmarondev.keepr.presentation.settings.SettingsScreen
 import com.ralphmarondev.keepr.presentation.subcategories.SubCategories
+import com.ralphmarondev.keepr.presentation.update.UpdateScreen
 
 @Composable
 fun KeeprNavigation(
@@ -50,6 +51,11 @@ fun KeeprNavigation(
                     navController.navigate(Routes.Settings) {
                         launchSingleTop = true
                     }
+                },
+                navigateToUpdate = { title ->
+                    navController.navigate(Routes.Update(title)) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }
@@ -79,6 +85,15 @@ fun KeeprNavigation(
         composable<Routes.Settings> {
             SettingsScreen(
                 preferences = preferences,
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Update> {
+            val args = it.toRoute<Routes.Update>()
+            UpdateScreen(
+                title = args.title,
                 navigateBack = {
                     navController.navigateUp()
                 }

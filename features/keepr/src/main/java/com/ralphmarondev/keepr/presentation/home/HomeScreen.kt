@@ -47,7 +47,8 @@ fun HomeScreen(
     preferences: KeeprPreferences,
     logout: () -> Unit,
     navigateToSubCategory: (String) -> Unit,
-    navigateToSettings: () -> Unit
+    navigateToSettings: () -> Unit,
+    navigateToUpdate: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel(
         factory = HomeViewModelFactory(
@@ -98,7 +99,11 @@ fun HomeScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { }) {
+                        IconButton(
+                            onClick = {
+                                navigateToUpdate("Categories")
+                            }
+                        ) {
                             Icon(
                                 imageVector = Icons.Outlined.Edit,
                                 contentDescription = "Edit Category"

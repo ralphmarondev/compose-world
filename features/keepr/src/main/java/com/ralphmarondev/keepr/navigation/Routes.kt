@@ -17,4 +17,7 @@ object Routes {
 
     @Serializable
     data object Settings
+
+    @Serializable
+    data class Update(val title: String)
 }
