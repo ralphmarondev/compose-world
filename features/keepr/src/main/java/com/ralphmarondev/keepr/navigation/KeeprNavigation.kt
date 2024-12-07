@@ -25,7 +25,7 @@ fun KeeprNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = if (preferences.isKeeprAuthEnabled()) Routes.Auth else Routes.Home
+        startDestination = Routes.Home
     ) {
         composable<Routes.Auth> {
             AuthScreen(
@@ -38,23 +38,16 @@ fun KeeprNavigation(
         }
         composable<Routes.Home> {
             HomeScreen(
-                logout = {
-                    navController.navigateUp()
-                },
-                navigateToSubCategory = { category ->
-                    navController.navigate(Routes.SubCategories(category))
-                },
                 keeprDao = keeprDao,
                 preferences = preferences,
-                navigateToSettings = {
-                    navController.navigate(Routes.Settings) {
-                        launchSingleTop = true
-                    }
-                },
+                navigateBack = navigateBack,
                 navigateToUpdate = { title ->
                     navController.navigate(Routes.Update(title)) {
                         launchSingleTop = true
                     }
+                },
+                navigateToSubCategory = { category ->
+                    navController.navigate(Routes.SubCategories(category))
                 }
             )
         }
