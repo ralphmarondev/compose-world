@@ -9,7 +9,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AddCircleOutline
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,7 +42,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    currentUser: String,
     keeprDao: KeeprDao,
     preferences: KeeprPreferences,
     logout: () -> Unit,
@@ -84,21 +83,15 @@ fun HomeScreen(
                             maxLines = 1
                         )
                     },
-                    navigationIcon = {
+                    actions = {
                         IconButton(
-                            onClick = {
-                                scope.launch {
-                                    drawerState.apply { open() }
-                                }
-                            }
+                            onClick = navigateToSettings
                         ) {
                             Icon(
-                                imageVector = Icons.Outlined.Menu,
-                                contentDescription = "Menu"
+                                imageVector = Icons.Outlined.Settings,
+                                contentDescription = "Settings"
                             )
                         }
-                    },
-                    actions = {
                         IconButton(
                             onClick = {
                                 navigateToUpdate("Categories")
@@ -120,7 +113,6 @@ fun HomeScreen(
                         containerColor = MaterialTheme.colorScheme.primary,
                         titleContentColor = MaterialTheme.colorScheme.onPrimary,
                         actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
-                        navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 )
             }

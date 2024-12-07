@@ -38,7 +38,6 @@ fun KeeprNavigation(
         }
         composable<Routes.Home> {
             HomeScreen(
-                currentUser = currentUser,
                 logout = {
                     navController.navigateUp()
                 },
