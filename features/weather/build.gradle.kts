@@ -65,7 +65,7 @@ dependencies {
 
     implementation(libs.converter.gson)
     implementation(libs.retrofit)
-    implementation(libs.runtime.livedata)
+    implementation(libs.androidx.runtime.livedata)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
