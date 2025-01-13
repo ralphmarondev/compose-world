@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun FeedbackScreen(
     navigateBack: () -> Unit
 ) {
+    val context = LocalContext.current
     val viewModel = viewModel<FeedbackViewModel>()
     val name by viewModel.name.collectAsState()
     val email by viewModel.email.collectAsState()
@@ -173,7 +175,7 @@ fun FeedbackScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
-                        onClick = viewModel::sendFeedback
+                        onClick = { viewModel.sendFeedback(context) }
                     ) {
                         Text(
                             text = "Send Feedback",

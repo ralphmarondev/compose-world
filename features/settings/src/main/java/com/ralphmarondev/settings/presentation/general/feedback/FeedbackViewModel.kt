@@ -1,5 +1,8 @@
 package com.ralphmarondev.settings.presentation.general.feedback
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,13 +18,36 @@ class FeedbackViewModel : ViewModel() {
     private val _feedback = MutableStateFlow("")
     val feedback: StateFlow<String> get() = _feedback
 
-    fun sendFeedback() {
-        // TODO: Implement this!
-        // TODO: Open email passing all of the arguments ready to be send.
+    fun sendFeedback(
+        context: Context
+    ) {
         Log.d(
             "FEEDBACK",
             "Name: ${_name.value}, Email: ${_email.value}, Feedback: ${_feedback.value}"
         )
+
+        val recipient = "edaralphmaron@gmail.com"
+        val subject = "Feedback for Compose World from ${_name.value}"
+        val body = """
+            Name: ${_name.value}
+            Email: ${_email.value}
+            
+            Feedback:
+            ${_feedback.value}
+        """.trimIndent()
+
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+
+        try {
+            context.startActivity(Intent.createChooser(emailIntent, "Send Feedback via"))
+        } catch (e: Exception) {
+            Log.e("FEEDBACK", "Failed to open email client: ${e.message}")
+        }
 
         _name.value = ""
         _email.value = ""
