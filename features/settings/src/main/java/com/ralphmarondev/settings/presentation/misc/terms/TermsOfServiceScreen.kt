@@ -61,7 +61,7 @@ fun TermsOfServiceScreen(
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            item { Spacer(modifier = Modifier.height(8.dp)) }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
             item {
                 Column(
                     modifier = Modifier
