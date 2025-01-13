@@ -11,24 +11,15 @@ object Routes {
 
     object General {
         @Serializable
-        data object Language
-
-        @Serializable
         data object Version
 
         @Serializable
         data object Backup
-
-        @Serializable
-        data object ClearData
     }
 
     object Appearance {
         @Serializable
         data object AppTheme
-
-        @Serializable
-        data object FontStyleAndSize
     }
 
     object Misc{

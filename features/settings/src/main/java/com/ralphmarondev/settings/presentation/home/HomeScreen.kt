@@ -8,14 +8,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Backup
-import androidx.compose.material.icons.outlined.CircleNotifications
-import androidx.compose.material.icons.outlined.DeleteForever
 import androidx.compose.material.icons.outlined.DeveloperBoard
 import androidx.compose.material.icons.outlined.Feedback
-import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.MiscellaneousServices
-import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Output
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.Scaffold
@@ -38,13 +33,9 @@ fun HomeScreen(
     navigateBack: () -> Unit,
     navigateToAccountSettings: () -> Unit,
     // general
-    navigateToLanguage: () -> Unit,
     navigateToVersion: () -> Unit,
     navigateToBackup: () -> Unit,
-    navigateToClearData: () -> Unit,
-    // appearance
     navigateToAppTheme: () -> Unit,
-    navigateToAppFontStyle: () -> Unit,
     // misc
     navigateToDeveloper: () -> Unit
 ) {
@@ -79,11 +70,6 @@ fun HomeScreen(
             item {
                 SettingsItemCategoryText(text = "General")
                 SettingsItemCard(
-                    onClick = navigateToLanguage,
-                    text = "Language",
-                    leadingIcon = Icons.Outlined.Language
-                )
-                SettingsItemCard(
                     onClick = navigateToVersion,
                     text = "Version and Update",
                     leadingIcon = Icons.Outlined.Update
@@ -94,42 +80,10 @@ fun HomeScreen(
                     leadingIcon = Icons.Outlined.Backup
                 )
                 SettingsItemCard(
-                    onClick = navigateToClearData,
-                    text = "Clear Data",
-                    leadingIcon = Icons.Outlined.DeleteForever
-                )
-            }
-
-            item {
-                SettingsItemCategoryText(text = "Appearance")
-                SettingsItemCard(
                     onClick = navigateToAppTheme,
                     text = "App Theme",
                     leadingIcon = Icons.Outlined.AccountCircle
                 )
-                SettingsItemCard(
-                    onClick = navigateToAppFontStyle,
-                    text = "Font Style and Size",
-                    leadingIcon = Icons.Outlined.Output
-                )
-            }
-
-            item {
-                SettingsItemCategoryText(text = "Notification")
-                SettingsItemCard(
-                    onClick = {},
-                    text = "Notifications",
-                    leadingIcon = Icons.Outlined.Notifications
-                )
-                SettingsItemCard(
-                    onClick = {},
-                    text = "App Notifications",
-                    leadingIcon = Icons.Outlined.CircleNotifications
-                )
-            }
-
-            item {
-                SettingsItemCategoryText(text = "Help and Support")
                 SettingsItemCard(
                     onClick = {},
                     text = "Feedback",
@@ -138,7 +92,7 @@ fun HomeScreen(
             }
 
             item {
-                SettingsItemCategoryText(text = "Misc")
+                SettingsItemCategoryText(text = "Miscellaneous")
                 SettingsItemCard(
                     onClick = {},
                     text = "Terms of Service",
