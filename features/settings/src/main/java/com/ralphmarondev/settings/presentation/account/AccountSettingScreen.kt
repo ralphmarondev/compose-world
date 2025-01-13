@@ -1,5 +1,6 @@
 package com.ralphmarondev.settings.presentation.account
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -25,10 +26,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +40,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.settings.R
+import com.ralphmarondev.settings.presentation.account.components.NewNameDialog
+import com.ralphmarondev.settings.presentation.account.components.NewPasswordDialog
+import com.ralphmarondev.settings.presentation.account.components.NewUsernameDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,12 +55,19 @@ fun AccountSettingScreen(
     * - allow user to change the current picture [get the picture on their internal storage]
     * - update the user details [fullName, username, password, description]
     * */
+    val context = LocalContext.current
     val viewModel: AccountSettingsViewModel = viewModel(
         factory = AccountSettingsViewModeFactory(
             dao = dao,
             currentUser = currentUser
         )
     )
+    val fullName by viewModel.fullName.collectAsState()
+    val username by viewModel.username.collectAsState()
+    val password by viewModel.password.collectAsState()
+    val showNewNameDialog by viewModel.showNewFullNameDialog.collectAsState()
+    val showNewUsernameDialog by viewModel.showNewUsernameDialog.collectAsState()
+    val showNewPasswordDialog by viewModel.showNewPasswordDialog.collectAsState()
 
     Scaffold(
         topBar = {
@@ -121,7 +135,7 @@ fun AccountSettingScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { viewModel.toggleShowNewFullNameDialog() }
                                 .padding(horizontal = 16.dp, vertical = 4.dp)
                         ) {
                             Text(
@@ -131,7 +145,7 @@ fun AccountSettingScreen(
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
-                                text = "Ralph Maron Eda",
+                                text = fullName,
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
@@ -141,7 +155,7 @@ fun AccountSettingScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { viewModel.toggleShowNewUsernameDialog() }
                                 .padding(horizontal = 16.dp, vertical = 4.dp)
                         ) {
                             Text(
@@ -151,7 +165,7 @@ fun AccountSettingScreen(
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
-                                text = "ralphmaron",
+                                text = username,
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
@@ -161,7 +175,7 @@ fun AccountSettingScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable { viewModel.toggleShowNewPasswordDialog() }
                                 .padding(horizontal = 16.dp, vertical = 4.dp)
                         ) {
                             Text(
@@ -171,7 +185,7 @@ fun AccountSettingScreen(
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
-                                text = "******",
+                                text = password.map { "*" }.joinToString(""),
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
@@ -180,6 +194,60 @@ fun AccountSettingScreen(
                     }
                 }
             }
+        }
+
+        if (showNewNameDialog) {
+            NewNameDialog(
+                oldName = fullName,
+                onDismiss = { viewModel.toggleShowNewFullNameDialog() },
+                onSave = { newName ->
+                    viewModel.saveNewFullName(
+                        newName = newName,
+                        result = { isSuccess, message ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewFullNameDialog()
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            )
+        }
+
+        if (showNewUsernameDialog) {
+            NewUsernameDialog(
+                oldUsername = username,
+                onDismiss = { viewModel.toggleShowNewUsernameDialog() },
+                onSave = { newUsername ->
+                    viewModel.saveNewUsername(
+                        newUsername = newUsername,
+                        result = { isSuccess, message ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewUsernameDialog()
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            )
+        }
+
+        if (showNewPasswordDialog) {
+            NewPasswordDialog(
+                oldPassword = password,
+                onDismiss = { viewModel.toggleShowNewPasswordDialog() },
+                onSave = { newPassword ->
+                    viewModel.saveNewPassword(
+                        newPassword = newPassword,
+                        result = { isSuccess, message ->
+                            if (isSuccess) {
+                                viewModel.toggleShowNewPasswordDialog()
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            )
         }
     }
 }
