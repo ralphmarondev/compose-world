@@ -1,4 +1,5 @@
-package com.ralphmarondev.settings.presentation.appearance.fonts
+package com.ralphmarondev.settings.presentation.misc.license
+
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppFontStyleScreen(
+fun OpenSourceLicensesScreen(
     navigateBack: () -> Unit
 ) {
     Scaffold(
@@ -37,7 +38,7 @@ fun AppFontStyleScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "App Font Style",
+                        text = "Open Source Licenses",
                         fontFamily = FontFamily.Monospace
                     )
                 },

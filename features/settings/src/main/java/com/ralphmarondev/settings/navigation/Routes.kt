@@ -11,19 +11,26 @@ object Routes {
 
     object General {
         @Serializable
-        data object Version
+        data object VersionAndUpdate
 
         @Serializable
-        data object Backup
-    }
+        data object BackupAndRestore
 
-    object Appearance {
         @Serializable
         data object AppTheme
+
+        @Serializable
+        data object Feedback
     }
 
-    object Misc{
+    object Misc {
         @Serializable
-        data object Developer
+        data object TermsOfService
+
+        @Serializable
+        data object OpenSourceLicenses
+
+        @Serializable
+        data object AboutDeveloper
     }
 }

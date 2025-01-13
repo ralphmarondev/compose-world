@@ -6,11 +6,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.settings.presentation.account.AccountSettingScreen
-import com.ralphmarondev.settings.presentation.appearance.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.general.backup.BackupAndRestoreScreen
+import com.ralphmarondev.settings.presentation.general.feedback.FeedbackScreen
+import com.ralphmarondev.settings.presentation.general.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.general.version.AppVersionScreen
 import com.ralphmarondev.settings.presentation.home.HomeScreen
 import com.ralphmarondev.settings.presentation.misc.developer.AboutDeveloperScreen
+import com.ralphmarondev.settings.presentation.misc.license.OpenSourceLicensesScreen
+import com.ralphmarondev.settings.presentation.misc.terms.TermsOfServiceScreen
 
 @Composable
 fun SettingsNavigation(
@@ -36,23 +39,38 @@ fun SettingsNavigation(
                 },
                 // general
                 navigateToVersion = {
-                    navController.navigate(Routes.General.Version) {
+                    navController.navigate(Routes.General.VersionAndUpdate) {
                         launchSingleTop = true
                     }
                 },
                 navigateToBackup = {
-                    navController.navigate(Routes.General.Backup) {
+                    navController.navigate(Routes.General.BackupAndRestore) {
                         launchSingleTop = true
                     }
                 },
                 navigateToAppTheme = {
-                    navController.navigate(Routes.Appearance.AppTheme) {
+                    navController.navigate(Routes.General.AppTheme) {
+                        launchSingleTop = true
+                    }
+                },
+                navigateToFeedback = {
+                    navController.navigate(Routes.General.Feedback) {
                         launchSingleTop = true
                     }
                 },
                 // misc
+                navigateToTermsOfService = {
+                    navController.navigate(Routes.Misc.TermsOfService) {
+                        launchSingleTop = true
+                    }
+                },
+                navigateToOpenSourceLicenses = {
+                    navController.navigate(Routes.Misc.OpenSourceLicenses) {
+                        launchSingleTop = true
+                    }
+                },
                 navigateToDeveloper = {
-                    navController.navigate(Routes.Misc.Developer) {
+                    navController.navigate(Routes.Misc.AboutDeveloper) {
                         launchSingleTop = true
                     }
                 },
@@ -69,24 +87,45 @@ fun SettingsNavigation(
                 dao = dao
             )
         }
-        composable<Routes.General.Version> {
+        composable<Routes.General.VersionAndUpdate> {
             AppVersionScreen(
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable<Routes.General.Backup> {
+        composable<Routes.General.BackupAndRestore> {
             BackupAndRestoreScreen(
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable<Routes.Appearance.AppTheme> {
+        composable<Routes.General.AppTheme> {
             AppThemeScreen(
                 navigateBack = { navController.navigateUp() },
                 darkTheme = darkTheme,
                 toggleDarkTheme = toggleDarkTheme
             )
         }
-        composable<Routes.Misc.Developer> {
+        composable<Routes.General.Feedback> {
+            FeedbackScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Misc.TermsOfService> {
+            TermsOfServiceScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Misc.OpenSourceLicenses> {
+            OpenSourceLicensesScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable<Routes.Misc.AboutDeveloper> {
             AboutDeveloperScreen(
                 navigateBack = {
                     navController.navigateUp()

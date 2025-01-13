@@ -1,4 +1,5 @@
-package com.ralphmarondev.settings.presentation.general.language
+package com.ralphmarondev.settings.presentation.general.feedback
+
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppLanguageScreen(
+fun FeedbackScreen(
     navigateBack: () -> Unit
 ) {
     Scaffold(
@@ -37,7 +38,7 @@ fun AppLanguageScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Language",
+                        text = "Feedback",
                         fontFamily = FontFamily.Monospace
                     )
                 },

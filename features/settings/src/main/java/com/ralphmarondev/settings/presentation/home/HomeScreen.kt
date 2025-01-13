@@ -36,7 +36,10 @@ fun HomeScreen(
     navigateToVersion: () -> Unit,
     navigateToBackup: () -> Unit,
     navigateToAppTheme: () -> Unit,
+    navigateToFeedback: () -> Unit,
     // misc
+    navigateToTermsOfService: () -> Unit,
+    navigateToOpenSourceLicenses: () -> Unit,
     navigateToDeveloper: () -> Unit
 ) {
     val viewModel: HomeViewModel = viewModel(
@@ -85,7 +88,7 @@ fun HomeScreen(
                     leadingIcon = Icons.Outlined.AccountCircle
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToFeedback,
                     text = "Feedback",
                     leadingIcon = Icons.Outlined.Feedback
                 )
@@ -94,12 +97,12 @@ fun HomeScreen(
             item {
                 SettingsItemCategoryText(text = "Miscellaneous")
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToTermsOfService,
                     text = "Terms of Service",
                     leadingIcon = Icons.Outlined.MiscellaneousServices
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = navigateToOpenSourceLicenses,
                     text = "Open Source Licenses",
                     leadingIcon = Icons.Outlined.Source
                 )
