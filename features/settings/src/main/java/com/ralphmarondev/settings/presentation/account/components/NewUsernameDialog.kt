@@ -70,7 +70,8 @@ fun NewUsernameDialog(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Outlined.Close,
-                        contentDescription = "Close"
+                        contentDescription = "Close",
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -90,7 +91,8 @@ fun NewUsernameDialog(
                 textStyle = TextStyle(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.W500
+                    fontWeight = FontWeight.W500,
+                    color = MaterialTheme.colorScheme.secondary
                 ),
                 singleLine = true,
                 trailingIcon = {
@@ -98,7 +100,8 @@ fun NewUsernameDialog(
                         IconButton(onClick = { newUsername = "" }) {
                             Icon(
                                 imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear"
+                                contentDescription = "Clear",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                     }

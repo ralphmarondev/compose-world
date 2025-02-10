@@ -11,6 +11,7 @@ import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.material.icons.outlined.DeveloperBoard
 import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.MiscellaneousServices
+import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.Scaffold
@@ -85,7 +86,7 @@ fun HomeScreen(
                 SettingsItemCard(
                     onClick = navigateToAppTheme,
                     text = "App Theme",
-                    leadingIcon = Icons.Outlined.AccountCircle
+                    leadingIcon = Icons.Outlined.SettingsApplications
                 )
                 SettingsItemCard(
                     onClick = navigateToFeedback,

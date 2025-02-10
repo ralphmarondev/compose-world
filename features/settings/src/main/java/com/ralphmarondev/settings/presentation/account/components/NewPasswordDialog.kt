@@ -40,6 +40,7 @@ fun NewPasswordDialog(
     onSave: (String) -> Unit
 ) {
     val context = LocalContext.current
+    var userOldPass by rememberSaveable { mutableStateOf("") }
     var newPassword by rememberSaveable { mutableStateOf("") }
     var confirmNewPassword by rememberSaveable { mutableStateOf("") }
 
@@ -71,11 +72,45 @@ fun NewPasswordDialog(
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Outlined.Close,
-                        contentDescription = "Close"
+                        contentDescription = "Close",
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             }
             HorizontalDivider(modifier = Modifier.padding(vertical = 2.dp))
+
+            OutlinedTextField(
+                value = userOldPass,
+                onValueChange = { userOldPass = it },
+                label = {
+                    Text(
+                        text = "Enter old password",
+                        fontFamily = FontFamily.Monospace,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                textStyle = TextStyle(
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W500,
+                    color = MaterialTheme.colorScheme.secondary
+                ),
+                singleLine = true,
+                trailingIcon = {
+                    AnimatedVisibility(userOldPass.isNotEmpty()) {
+                        IconButton(onClick = { userOldPass = "" }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Clear,
+                                contentDescription = "Clear",
+                                tint = MaterialTheme.colorScheme.secondary
+                            )
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            )
 
             OutlinedTextField(
                 value = newPassword,
@@ -91,7 +126,8 @@ fun NewPasswordDialog(
                 textStyle = TextStyle(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.W500
+                    fontWeight = FontWeight.W500,
+                    color = MaterialTheme.colorScheme.secondary
                 ),
                 singleLine = true,
                 trailingIcon = {
@@ -99,7 +135,8 @@ fun NewPasswordDialog(
                         IconButton(onClick = { newPassword = "" }) {
                             Icon(
                                 imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear"
+                                contentDescription = "Clear",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                     }
@@ -122,7 +159,8 @@ fun NewPasswordDialog(
                 textStyle = TextStyle(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.W500
+                    fontWeight = FontWeight.W500,
+                    color = MaterialTheme.colorScheme.secondary
                 ),
                 singleLine = true,
                 trailingIcon = {
@@ -130,7 +168,8 @@ fun NewPasswordDialog(
                         IconButton(onClick = { confirmNewPassword = "" }) {
                             Icon(
                                 imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear"
+                                contentDescription = "Clear",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                     }
