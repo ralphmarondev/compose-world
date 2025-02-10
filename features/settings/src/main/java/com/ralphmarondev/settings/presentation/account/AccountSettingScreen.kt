@@ -1,6 +1,10 @@
 package com.ralphmarondev.settings.presentation.account
 
+import android.content.Context
+import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -28,6 +32,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,6 +50,9 @@ import com.ralphmarondev.settings.R
 import com.ralphmarondev.settings.presentation.account.components.NewNameDialog
 import com.ralphmarondev.settings.presentation.account.components.NewPasswordDialog
 import com.ralphmarondev.settings.presentation.account.components.NewUsernameDialog
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,6 +78,13 @@ fun AccountSettingScreen(
     val showNewNameDialog by viewModel.showNewFullNameDialog.collectAsState()
     val showNewUsernameDialog by viewModel.showNewUsernameDialog.collectAsState()
     val showNewPasswordDialog by viewModel.showNewPasswordDialog.collectAsState()
+
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        imageUri = uri
+    }
 
     Scaffold(
         topBar = {
@@ -122,7 +139,11 @@ fun AccountSettingScreen(
                             contentScale = ContentScale.Crop
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        TextButton(onClick = {}) {
+                        TextButton(
+                            onClick = {
+                                launcher.launch("image/*")
+                            }
+                        ) {
                             Text(
                                 text = "Change photo",
                                 fontFamily = FontFamily.Monospace,
@@ -249,5 +270,21 @@ fun AccountSettingScreen(
                 }
             )
         }
+    }
+}
+
+private fun saveImageToAppFolder(context: Context, imageUri: Uri): String? {
+    return try {
+        val fileName = "IMG_${System.currentTimeMillis()}.png"
+        val file = File(context.filesDir, fileName)
+
+        val inputStream: InputStream? = context.contentResolver.openInputStream(imageUri)
+        FileOutputStream(file).use { outputStream ->
+            inputStream?.copyTo(outputStream)
+        }
+        file.absolutePath
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
     }
 }

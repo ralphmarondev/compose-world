@@ -49,6 +49,8 @@ class AccountSettingsViewModel(
     private val _showNewPasswordDialog = MutableStateFlow(false)
     val showNewPasswordDialog: StateFlow<Boolean> get() = _showNewPasswordDialog
 
+    private val _selectedImage = MutableStateFlow<String?>(null)
+
     init {
         viewModelScope.launch {
             val user = dao.getUserByUsername(currentUser)
