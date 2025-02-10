@@ -33,13 +33,15 @@ fun DeleteNoteDialog(
         title = {
             Text(
                 text = "Deleting Note",
-                fontFamily = FontFamily.Monospace
+                fontFamily = FontFamily.Monospace,
+                color = MaterialTheme.colorScheme.secondary
             )
         },
         text = {
             Text(
                 text = "This action cannot be undone.",
-                fontFamily = FontFamily.Monospace
+                fontFamily = FontFamily.Monospace,
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     )

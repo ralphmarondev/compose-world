@@ -172,33 +172,37 @@ fun UpdateNoteScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 8.dp),
+                            .padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.DateRange,
                             contentDescription = "Date",
                             modifier = Modifier
-                                .size(16.dp)
+                                .size(16.dp),
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
                         Text(
                             text = date,
                             fontSize = 14.sp,
                             modifier = Modifier
-                                .padding(start = 6.dp, end = 8.dp)
+                                .padding(start = 6.dp, end = 8.dp),
+                            color = MaterialTheme.colorScheme.tertiary
                         )
 
                         Icon(
                             imageVector = Icons.Outlined.AccessTime,
                             contentDescription = "Time",
                             modifier = Modifier
-                                .size(16.dp)
+                                .size(16.dp),
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
 
                         Text(
                             text = time,
                             fontSize = 14.sp,
-                            modifier = Modifier.padding(start = 4.dp)
+                            modifier = Modifier.padding(start = 4.dp),
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
                     TitleTextField(

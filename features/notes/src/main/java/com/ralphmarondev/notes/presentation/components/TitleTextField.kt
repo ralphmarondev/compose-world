@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -31,20 +32,23 @@ fun TitleTextField(
                 text = "Title",
                 fontFamily = FontFamily.Monospace,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.secondary
             )
         },
         textStyle = TextStyle(
             fontFamily = FontFamily.Monospace,
             fontSize = 20.sp,
-            fontWeight = FontWeight.W500
+            fontWeight = FontWeight.W500,
+            color = MaterialTheme.colorScheme.secondary
         ),
         trailingIcon = {
             AnimatedVisibility(value.isNotEmpty()) {
                 IconButton(onClick = { onValueChanged("") }) {
                     Icon(
                         imageVector = Icons.Outlined.Clear,
-                        contentDescription = "Clear"
+                        contentDescription = "Clear",
+                        tint = MaterialTheme.colorScheme.secondary
                     )
                 }
             }

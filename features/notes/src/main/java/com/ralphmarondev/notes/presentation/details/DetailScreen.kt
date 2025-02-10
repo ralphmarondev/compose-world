@@ -121,7 +121,8 @@ fun DetailScreen(
                         IconButton(onClick = { showMenu = !showMenu }) {
                             Icon(
                                 imageVector = Icons.Outlined.MoreVert,
-                                contentDescription = "More"
+                                contentDescription = "More",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
 
                             DropdownMenu(
@@ -133,7 +134,8 @@ fun DetailScreen(
                                     text = {
                                         Text(
                                             text = "Edit",
-                                            fontFamily = FontFamily.Monospace
+                                            fontFamily = FontFamily.Monospace,
+                                            color = MaterialTheme.colorScheme.secondary
                                         )
                                     },
                                     onClick = navigateToUpdateNote
@@ -142,7 +144,8 @@ fun DetailScreen(
                                     text = {
                                         Text(
                                             text = "Delete",
-                                            fontFamily = FontFamily.Monospace
+                                            fontFamily = FontFamily.Monospace,
+                                            color = MaterialTheme.colorScheme.secondary
                                         )
                                     },
                                     onClick = {
@@ -185,13 +188,15 @@ fun DetailScreen(
                         IconButton(onClick = navigateToUpdateNote) {
                             Icon(
                                 imageVector = Icons.Outlined.Edit,
-                                contentDescription = "Edit"
+                                contentDescription = "Edit",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                         IconButton(onClick = { showDeleteDialog = !showDeleteDialog }) {
                             Icon(
                                 imageVector = Icons.Outlined.DeleteOutline,
-                                contentDescription = "Delete"
+                                contentDescription = "Delete",
+                                tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                     }

@@ -1,5 +1,6 @@
 package com.ralphmarondev.notes.presentation.components
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -26,13 +27,15 @@ fun DescriptionTextField(
                 text = "How was your day? :)",
                 fontFamily = FontFamily.Monospace,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.secondary
             )
         },
         textStyle = TextStyle(
             fontFamily = FontFamily.Monospace,
             fontSize = 18.sp,
-            fontWeight = FontWeight.W400
+            fontWeight = FontWeight.W400,
+            color = MaterialTheme.colorScheme.secondary
         ),
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
