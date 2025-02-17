@@ -180,13 +180,38 @@ fun NewPasswordDialog(
 
             Button(
                 onClick = {
-                    if (newPassword.trim().isNotEmpty() && confirmNewPassword.trim().isNotEmpty()) {
-                        if (newPassword.trim() != oldPassword) {
-                            onSave(newPassword.trim())
+                    // TODO: PUT THIS ON VIEWMODEL!
+                    if (
+                        newPassword.trim().isNotEmpty() &&
+                        confirmNewPassword.trim().isNotEmpty() &&
+                        userOldPass.trim().isNotEmpty()
+                    ) {
+                        val isOldPasswordCorrect = userOldPass.trim() == oldPassword.trim()
+                        val arePasswordSame = newPassword.trim() == confirmNewPassword.trim()
+                        val isNewAndOldPassSame = newPassword.trim() == oldPassword.trim()
+
+                        if (isOldPasswordCorrect) {
+                            if (arePasswordSame) {
+                                if (!isNewAndOldPassSame) {
+                                    onSave(newPassword.trim())
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "New password must not be the same as the old password!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Password didn't matched!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         } else {
                             Toast.makeText(
                                 context,
-                                "New password must not be the same as the old password",
+                                "Old password didn't matched!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
