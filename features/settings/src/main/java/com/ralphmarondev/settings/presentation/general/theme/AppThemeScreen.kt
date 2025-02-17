@@ -72,7 +72,7 @@ fun AppThemeScreen(
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
                 ElevatedCard(
-                    onClick = toggleDarkTheme,
+                    onClick = { toggleDarkTheme() },
                     modifier = Modifier
                         .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
