@@ -29,6 +29,8 @@ fun AccountCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val imagePath = user.profilePath ?: R.drawable.ralphmaron
+
     ElevatedCard(
         onClick = onClick,
         modifier = modifier
@@ -42,7 +44,7 @@ fun AccountCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(R.drawable.android),
+                painter = rememberAsyncImagePainter(imagePath),
                 contentDescription = "Profile",
                 modifier = Modifier
                     .size(80.dp)

@@ -43,7 +43,11 @@ fun OverviewScreen(
                         username = "ralphmaron",
                         password = "iscute"
                     ),
-                    onClick = {}
+                    onClick = {
+                        navController.navigate(SettingsRoute.Account) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
             item {

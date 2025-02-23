@@ -22,6 +22,7 @@ fun SettingsNavigation(
                 navigateBack = navigateBack
             )
         }
+        composable<SettingsRoute.Account> { }
         composable<SettingsRoute.Theme> { }
         composable<SettingsRoute.Terms> { }
         composable<SettingsRoute.License> { }
