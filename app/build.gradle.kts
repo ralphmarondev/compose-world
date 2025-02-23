@@ -7,15 +7,14 @@ plugins {
 
 android {
     namespace = "com.ralphmarondev.composeworld"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.ralphmarondev.composeworld"
         minSdk = 28
-        //noinspection OldTargetApi
-        targetSdk = 34
-        versionCode = 1
-        versionName = "Adorable Apple"
+        targetSdk = 35
+        versionCode = 2
+        versionName = "Breezy Berry"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -54,17 +53,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core:data"))
-    implementation(project(":features:browser"))
-    implementation(project(":features:home"))
-    implementation(project(":features:calculator"))
-    implementation(project(":features:notes"))
-    implementation(project(":features:settings"))
-    implementation(project(":features:keepr"))
-    implementation(project(":features:onboarding"))
-    implementation(project(":features:clock"))
-    implementation(project(":features:weather"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -74,19 +62,16 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.material.icons.extended.android)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.datastore.preferences)
     implementation(libs.coil.compose)
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.koin)
 
-    // room
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    //noinspection KaptUsageInsteadOfKsp
+    implementation(libs.bundles.room)
     kapt(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)

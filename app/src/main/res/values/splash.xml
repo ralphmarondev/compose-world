@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/icons8_android_os</item>
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="postSplashScreenTheme">@style/Theme.ComposeWorld</item>
-    </style>
-</resources>
