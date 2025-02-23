@@ -27,12 +27,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.composeworld.R
 import com.ralphmarondev.composeworld.features.home.presentation.components.TinyAppCard
+import com.ralphmarondev.composeworld.navigation.Routes
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -118,7 +122,11 @@ fun HomeScreen() {
                     )
                     TinyAppCard(
                         image = R.drawable.setting,
-                        onClick = { }
+                        onClick = {
+                            navController.navigate(Routes.Settings) {
+                                launchSingleTop = true
+                            }
+                        }
                     )
                 }
             }

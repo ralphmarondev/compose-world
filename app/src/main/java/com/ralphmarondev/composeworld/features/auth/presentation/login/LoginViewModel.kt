@@ -3,7 +3,7 @@ package com.ralphmarondev.composeworld.features.auth.presentation.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ralphmarondev.composeworld.core.domain.Result
+import com.ralphmarondev.composeworld.core.domain.model.Result
 import com.ralphmarondev.composeworld.features.auth.preferences.AuthPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

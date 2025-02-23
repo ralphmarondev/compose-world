@@ -1,4 +1,4 @@
-package com.ralphmarondev.composeworld.core.domain
+package com.ralphmarondev.composeworld.core.domain.model
 
 data class Result(
     val success: Boolean,
