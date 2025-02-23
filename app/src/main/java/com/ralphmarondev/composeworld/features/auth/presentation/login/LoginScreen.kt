@@ -32,6 +32,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -69,6 +70,14 @@ fun LoginScreen(
     val focusManager = LocalFocusManager.current
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
+
+    LaunchedEffect(response) {
+        response?.let {
+            if (it.success) {
+                onLoginSuccessful()
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -204,7 +213,6 @@ fun LoginScreen(
                                     snackbar.showSnackbar(
                                         message = response?.message ?: "Login successful!"
                                     )
-                                    onLoginSuccessful()
                                 }
                             } else {
                                 scope.launch {

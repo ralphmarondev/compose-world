@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.composeworld.core.preferences.AppPreferences
 import com.ralphmarondev.composeworld.features.auth.presentation.login.LoginScreen
+import com.ralphmarondev.composeworld.features.home.presentation.HomeScreen
 import com.ralphmarondev.composeworld.features.onboarding.presentation.OnboardingScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 
@@ -39,7 +40,9 @@ fun AppNavigation(
                     onCompleted = {
                         preferences.setFirstLaunchAsDone()
                         navController.navigate(Routes.Auth) {
-                            popUpTo<Routes.Onboarding>()
+                            popUpTo<Routes.Onboarding> {
+                                inclusive = true
+                            }
                         }
                     }
                 )
@@ -53,12 +56,16 @@ fun AppNavigation(
                     },
                     onLoginSuccessful = {
                         navController.navigate(Routes.Home) {
-                            popUpTo<Routes.Auth>()
+                            popUpTo<Routes.Auth> {
+                                inclusive = true
+                            }
                         }
                     }
                 )
             }
-            composable<Routes.Home> { }
+            composable<Routes.Home> {
+                HomeScreen()
+            }
         }
     }
 }

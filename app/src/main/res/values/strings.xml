@@ -18,4 +18,10 @@
 
     <string name="create_account">Create Your Account</string>
     <string name="create_account_description">Sign up to save your preferences, notes, and customizations across devices. It\'s quick and easy!</string>
+
+    <string name="welcome_message">Welcome to ComposeWorld!</string>
+    <string name="description_home_screen">
+        Developed by Ralph Maron Eda, this miniature smartphone OS offers interactive apps and
+        smooth animations. Customize your home screen and enjoy the experience!
+    </string>
 </resources>
