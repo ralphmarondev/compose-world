@@ -4,13 +4,20 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.composeworld.core.domain.model.Result
+import com.ralphmarondev.composeworld.core.domain.model.User
+import com.ralphmarondev.composeworld.core.domain.usecases.CreateUserUseCase
+import com.ralphmarondev.composeworld.core.domain.usecases.IsUserExistsUseCase
+import com.ralphmarondev.composeworld.core.domain.usecases.IsUserTableEmptyUseCase
 import com.ralphmarondev.composeworld.features.auth.preferences.AuthPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val preferences: AuthPreferences
+    private val preferences: AuthPreferences,
+    private val createUserUseCase: CreateUserUseCase,
+    private val isUserTableEmptyUseCase: IsUserTableEmptyUseCase,
+    private val isUserExistsUseCase: IsUserExistsUseCase
 ) : ViewModel() {
 
     private val _username = MutableStateFlow("")
@@ -72,7 +79,17 @@ class LoginViewModel(
                 return@launch
             }
 
-            if (username == "ralphmaron" && password == "iscute") {
+            if (isUserTableEmptyUseCase()) {
+                createUserUseCase(
+                    user = User(
+                        username = "ralphmaron",
+                        password = "iscute"
+                    )
+                )
+            }
+            val onLogin = isUserExistsUseCase(username = username, password = password)
+
+            if (onLogin) {
                 _response.value = Result(
                     success = true,
                     message = "Login successful!"
