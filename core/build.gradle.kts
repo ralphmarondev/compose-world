@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
@@ -7,17 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.ralphmarondev.composeworld"
+    namespace = "com.ralphmarondev.core"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ralphmarondev.composeworld"
         minSdk = 28
-        targetSdk = 35
-        versionCode = 2
-        versionName = "v2025.03"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -36,14 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-
-    implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -55,7 +47,6 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.androidx.material.icons.extended.android)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.coil.compose)
@@ -70,8 +61,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
