@@ -1,5 +1,0 @@
-[2024-11-22]
-
-Modules inside the core module can be called on as many features.
-This will not lead to circular dependency as long as it does
-not depend on those features.
