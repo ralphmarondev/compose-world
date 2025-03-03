@@ -28,6 +28,7 @@ roomRuntime = "2.6.1"
 koin = "3.5.3"
 appcompat = "1.6.1"
 material = "1.10.0"
+workRuntimeVersion = "2.10.0"
 
 
 [libraries]
@@ -68,6 +69,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntimeVersion" }
 
 
 [plugins]
