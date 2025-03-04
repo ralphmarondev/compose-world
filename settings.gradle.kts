@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Compose World"
 include(":app")
-include(":core")
+include(":core:core")
+include(":core:user_settings")
+include(":features:onboarding")
+include(":features:auth")

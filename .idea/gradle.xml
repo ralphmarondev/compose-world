@@ -12,6 +12,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core" />
+            <option value="$PROJECT_DIR$/core/user_settings" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/auth" />
+            <option value="$PROJECT_DIR$/features/onboarding" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
