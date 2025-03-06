@@ -10,7 +10,7 @@ object Routes {
     data object Register
 
     @Serializable
-    data object Auth
+    data object Login
 
     @Serializable
     data object Home

@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ralphmarondev.composeworld.navigation.AppNavigation
-import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.core.notification.requestNotificationPermission
 import org.koin.android.ext.android.inject
@@ -23,9 +22,7 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission(this)
 
         setContent {
-            ComposeWorldTheme (darkTheme = true){
-                AppNavigation(preferences)
-            }
+            AppNavigation(preferences)
         }
     }
 }
