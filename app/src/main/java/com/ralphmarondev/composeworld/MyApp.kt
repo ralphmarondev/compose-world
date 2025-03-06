@@ -2,6 +2,7 @@ package com.ralphmarondev.composeworld
 
 import android.app.Application
 import com.ralphmarondev.auth.di.authModule
+import com.ralphmarondev.composeworld.home.di.homeModule
 import com.ralphmarondev.core.di.coreModule
 import com.ralphmarondev.core.worker.scheduleAppWorker
 import com.ralphmarondev.onboarding.di.onboardingModule
@@ -19,7 +20,8 @@ class MyApp : Application() {
                 coreModule,
                 userSettingsModule,
                 onboardingModule,
-                authModule
+                authModule,
+                homeModule
             )
         }
 

@@ -1,20 +1,16 @@
 package com.ralphmarondev.composeworld.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.login.presentation.LoginScreen
 import com.ralphmarondev.auth.register.presentation.RegistrationScreen
+import com.ralphmarondev.composeworld.home.presentation.HomeScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.onboarding.presentation.OnboardingScreen
@@ -77,15 +73,7 @@ fun AppNavigation(
                 )
             }
             composable<Routes.Home> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Home"
-                    )
-                }
+                HomeScreen()
             }
         }
     }
