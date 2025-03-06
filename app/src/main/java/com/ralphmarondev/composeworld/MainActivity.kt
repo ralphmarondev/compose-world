@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission(this)
 
         setContent {
-            ComposeWorldTheme {
+            ComposeWorldTheme (darkTheme = true){
                 AppNavigation(preferences)
             }
         }
