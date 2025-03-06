@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.auth.login.presentation.LoginScreen
 import com.ralphmarondev.auth.register.presentation.RegistrationScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
@@ -39,11 +40,13 @@ fun AppNavigation(
                 OnboardingScreen(
                     onTryComposeWorld = {
                         navController.navigate(Routes.Home) {
+                            popUpTo<Routes.Onboarding> { inclusive = true }
                             launchSingleTop = true
                         }
                     },
                     onInstallComposeWorld = {
                         navController.navigate(Routes.Register) {
+                            popUpTo<Routes.Onboarding> { inclusive = true }
                             launchSingleTop = true
                         }
                     }
@@ -55,6 +58,7 @@ fun AppNavigation(
                         navController.navigateUp()
                     },
                     onRegistrationSuccessful = {
+                        preferences.setIsFirstLaunchDone()
                         navController.navigate(Routes.Login) {
                             popUpTo<Routes.Register> { inclusive = true }
                             launchSingleTop = true
@@ -63,15 +67,14 @@ fun AppNavigation(
                 )
             }
             composable<Routes.Login> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Auth"
-                    )
-                }
+                LoginScreen(
+                    onLoginSuccessful = {
+                        navController.navigate(Routes.Home) {
+                            popUpTo<Routes.Login> { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
             composable<Routes.Home> {
                 Box(

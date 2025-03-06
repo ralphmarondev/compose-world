@@ -21,7 +21,7 @@ class AppPreferences(
     }
 
     fun setIsFirstLaunchDone() {
-        sharedPreferences.edit().putBoolean(FIRST_LAUNCH, true).apply()
+        sharedPreferences.edit().putBoolean(FIRST_LAUNCH, false).apply()
     }
 
     fun isDarkTheme(): Boolean {

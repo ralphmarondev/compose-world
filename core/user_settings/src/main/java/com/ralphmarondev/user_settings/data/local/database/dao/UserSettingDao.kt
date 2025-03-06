@@ -20,4 +20,7 @@ interface UserSettingDao {
 
     @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
     suspend fun getUserDetail(id: Int): User
+
+    @Query("SELECT COUNT(*) FROM user where username = :username AND password = :password")
+    suspend fun isUserExists(username: String, password: String): Int
 }
