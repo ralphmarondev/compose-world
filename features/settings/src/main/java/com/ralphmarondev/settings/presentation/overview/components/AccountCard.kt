@@ -1,4 +1,4 @@
-package com.ralphmarondev.settings.presentation.home.components
+package com.ralphmarondev.settings.presentation.overview.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -42,7 +42,7 @@ fun AccountCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(R.drawable.android),
+                painter = rememberAsyncImagePainter(R.drawable.app_logo),
                 contentDescription = "Profile",
                 modifier = Modifier
                     .size(80.dp)
@@ -67,13 +67,6 @@ fun AccountCard(
                     fontWeight = FontWeight.W300,
                     color = MaterialTheme.colorScheme.tertiary
                 )
-//                Text(
-//                    text = user.description,
-//                    fontFamily = FontFamily.Monospace,
-//                    fontSize = 16.sp,
-//                    fontWeight = FontWeight.W500,
-//                    color = MaterialTheme.colorScheme.secondary
-//                )
             }
         }
     }

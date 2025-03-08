@@ -14,6 +14,7 @@ import com.ralphmarondev.composeworld.home.presentation.HomeScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.onboarding.presentation.OnboardingScreen
+import com.ralphmarondev.settings.navigation.SettingsNavigation
 
 @Composable
 fun AppNavigation(
@@ -73,7 +74,16 @@ fun AppNavigation(
                 )
             }
             composable<Routes.Home> {
-                HomeScreen()
+                HomeScreen(
+                    navController = navController
+                )
+            }
+            composable<Routes.Settings> {
+                SettingsNavigation(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }

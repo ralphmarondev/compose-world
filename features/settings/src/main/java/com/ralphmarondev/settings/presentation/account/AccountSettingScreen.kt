@@ -43,13 +43,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
-import com.ralphmarondev.data.user.UserDao
 import com.ralphmarondev.settings.R
 import com.ralphmarondev.settings.presentation.account.components.NewNameDialog
 import com.ralphmarondev.settings.presentation.account.components.NewPasswordDialog
 import com.ralphmarondev.settings.presentation.account.components.NewUsernameDialog
+import org.koin.androidx.compose.koinViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -57,21 +56,15 @@ import java.io.InputStream
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountSettingScreen(
-    navigateBack: () -> Unit,
-    dao: UserDao,
-    currentUser: String
+    navigateBack: () -> Unit
 ) {
     /* TODO: get the current user details on launch
     * - allow user to change the current picture [get the picture on their internal storage]
     * - update the user details [fullName, username, password, description]
     * */
     val context = LocalContext.current
-    val viewModel: AccountSettingsViewModel = viewModel(
-        factory = AccountSettingsViewModeFactory(
-            dao = dao,
-            currentUser = currentUser
-        )
-    )
+
+    val viewModel: AccountSettingsViewModel = koinViewModel()
     val fullName by viewModel.fullName.collectAsState()
     val username by viewModel.username.collectAsState()
     val password by viewModel.password.collectAsState()

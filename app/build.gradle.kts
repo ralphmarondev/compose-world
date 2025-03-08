@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":core:user_settings"))
     implementation(project(":features:onboarding"))
     implementation(project(":features:auth"))
+    implementation(project(":features:settings"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

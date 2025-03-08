@@ -6,6 +6,6 @@ interface UserSettingRepository {
     suspend fun createUser(user: User)
     suspend fun updateUser(user: User)
     suspend fun deleteUser(id: Int)
-    suspend fun getUserDetail(id: Int): User
+    suspend fun getUserDetailByUsername(username: String): User
     suspend fun isUserExists(username: String, password: String): Boolean
 }

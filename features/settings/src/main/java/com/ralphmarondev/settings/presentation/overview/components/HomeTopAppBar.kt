@@ -1,4 +1,4 @@
-package com.ralphmarondev.settings.presentation.home.components
+package com.ralphmarondev.settings.presentation.overview.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew

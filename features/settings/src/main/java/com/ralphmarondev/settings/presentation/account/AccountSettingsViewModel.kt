@@ -2,33 +2,18 @@ package com.ralphmarondev.settings.presentation.account
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.ralphmarondev.data.user.UserDao
+import com.ralphmarondev.user_settings.data.local.preferences.UserSettingsPreferences
+import com.ralphmarondev.user_settings.domain.usecases.GetUserDetailByUsername
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-@Suppress("UNCHECKED_CAST")
-class AccountSettingsViewModeFactory(
-    private val dao: UserDao,
-    private val currentUser: String
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AccountSettingsViewModel::class.java)) {
-            return AccountSettingsViewModel(
-                dao = dao,
-                currentUser = currentUser
-            ) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
-
 class AccountSettingsViewModel(
-    private val dao: UserDao,
-    private val currentUser: String
+    private val userSettingsPreferences: UserSettingsPreferences,
+    private val getUserDetailByUsername: GetUserDetailByUsername
 ) : ViewModel() {
+
     private val _fullName = MutableStateFlow("")
     val fullName: StateFlow<String> get() = _fullName
 
@@ -53,11 +38,16 @@ class AccountSettingsViewModel(
 
     init {
         viewModelScope.launch {
-            val user = dao.getUserByUsername(currentUser)
-            _id.value = user.id
-            _fullName.value = user.fullName
-            _username.value = user.username
-            _password.value = user.password
+            val savedUsername = userSettingsPreferences.getSavedUsername()
+            if (savedUsername != null) {
+                val user = getUserDetailByUsername(savedUsername)
+                _id.value = user.id
+                _fullName.value = user.fullName
+                _username.value = user.username
+                _password.value = user.password
+            } else {
+                Log.e("App", "No username found")
+            }
         }
     }
 
@@ -77,10 +67,10 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New full name: $newName")
         viewModelScope.launch {
             try {
-                dao.updateFullNameById(
-                    newFullName = newName,
-                    id = _id.value
-                )
+//                dao.updateFullNameById(
+//                    newFullName = newName,
+//                    id = _id.value
+//                )
                 result(true, "Full name updated successfully!")
                 _fullName.value = newName
             } catch (e: Exception) {
@@ -93,10 +83,10 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New username: $newUsername")
         viewModelScope.launch {
             try {
-                dao.updateUserNameById(
-                    newUsername = newUsername,
-                    id = _id.value
-                )
+//                dao.updateUserNameById(
+//                    newUsername = newUsername,
+//                    id = _id.value
+//                )
                 result(true, "Username updated successfully!")
                 _username.value = newUsername
             } catch (e: Exception) {
@@ -109,10 +99,10 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New password: $newPassword")
         viewModelScope.launch {
             try {
-                dao.updatePasswordById(
-                    newPassword = newPassword,
-                    id = _id.value
-                )
+//                dao.updatePasswordById(
+//                    newPassword = newPassword,
+//                    id = _id.value
+//                )
                 result(true, "Password updated successfully!")
                 _password.value = newPassword
             } catch (e: Exception) {

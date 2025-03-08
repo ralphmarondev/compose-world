@@ -13,14 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.composeworld.R
 import com.ralphmarondev.composeworld.home.presentation.components.DateTimeWidget
 import com.ralphmarondev.composeworld.home.presentation.components.TinyAppCard
+import com.ralphmarondev.composeworld.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
     val viewModel: HomeViewModel = koinViewModel()
 
     Scaffold { innerPadding ->
@@ -69,7 +73,11 @@ fun HomeScreen() {
                 )
                 TinyAppCard(
                     image = R.drawable.setting,
-                    onClick = { }
+                    onClick = {
+                        navController.navigate(Routes.Settings) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
         }

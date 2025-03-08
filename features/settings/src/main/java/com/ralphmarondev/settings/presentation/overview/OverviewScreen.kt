@@ -1,4 +1,4 @@
-package com.ralphmarondev.settings.presentation.home
+package com.ralphmarondev.settings.presentation.overview
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.material.icons.outlined.DeveloperBoard
 import androidx.compose.material.icons.outlined.Feedback
@@ -20,41 +19,25 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.data.user.UserDao
-import com.ralphmarondev.settings.presentation.home.components.AccountCard
-import com.ralphmarondev.settings.presentation.home.components.HomeTopBar
-import com.ralphmarondev.settings.presentation.home.components.SettingsItemCard
-import com.ralphmarondev.settings.presentation.home.components.SettingsItemCategoryText
+import androidx.navigation.NavHostController
+import com.ralphmarondev.settings.navigation.Routes
+import com.ralphmarondev.settings.presentation.overview.components.AccountCard
+import com.ralphmarondev.settings.presentation.overview.components.HomeTopBar
+import com.ralphmarondev.settings.presentation.overview.components.SettingsItemCard
+import com.ralphmarondev.settings.presentation.overview.components.SettingsItemCategoryText
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(
-    dao: UserDao,
-    currentUser: String,
-    navigateBack: () -> Unit,
-    navigateToAccountSettings: () -> Unit,
-    // general
-    navigateToVersion: () -> Unit,
-    navigateToBackup: () -> Unit,
-    navigateToAppTheme: () -> Unit,
-    navigateToFeedback: () -> Unit,
-    // misc
-    navigateToTermsOfService: () -> Unit,
-    navigateToOpenSourceLicenses: () -> Unit,
-    navigateToDeveloper: () -> Unit
+fun OverviewScreen(
+    navController: NavHostController,
+    navigateBack: () -> Unit
 ) {
-    val viewModel: HomeViewModel = viewModel(
-        factory = HomeViewModelFactory(
-            dao = dao,
-            username = currentUser
-        )
-    )
-
+    val viewModel: OverviewViewModel = koinViewModel()
     val user by viewModel.currentUser.collectAsState()
 
     Scaffold(
         topBar = {
-            HomeTopBar(navigateBack)
+            HomeTopBar(navigateBack = navigateBack)
         }
     ) { innerPadding ->
         LazyColumn(
@@ -67,29 +50,49 @@ fun HomeScreen(
             item {
                 AccountCard(
                     user = user,
-                    onClick = navigateToAccountSettings
+                    onClick = {
+                        navController.navigate(Routes.AccountSettings) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
 
             item {
                 SettingsItemCategoryText(text = "General")
                 SettingsItemCard(
-                    onClick = navigateToVersion,
+                    onClick = {
+                        navController.navigate(Routes.General.VersionAndUpdate) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Version and Update",
                     leadingIcon = Icons.Outlined.Update
                 )
                 SettingsItemCard(
-                    onClick = navigateToBackup,
+                    onClick = {
+                        navController.navigate(Routes.General.BackupAndRestore) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Backup and Restore",
                     leadingIcon = Icons.Outlined.Backup
                 )
                 SettingsItemCard(
-                    onClick = navigateToAppTheme,
+                    onClick = {
+                        navController.navigate(Routes.General.AppTheme) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "App Theme",
                     leadingIcon = Icons.Outlined.SettingsApplications
                 )
                 SettingsItemCard(
-                    onClick = navigateToFeedback,
+                    onClick = {
+                        navController.navigate(Routes.General.Feedback) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Feedback",
                     leadingIcon = Icons.Outlined.Feedback
                 )
@@ -98,17 +101,29 @@ fun HomeScreen(
             item {
                 SettingsItemCategoryText(text = "Miscellaneous")
                 SettingsItemCard(
-                    onClick = navigateToTermsOfService,
+                    onClick = {
+                        navController.navigate(Routes.Misc.TermsOfService) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Terms of Service",
                     leadingIcon = Icons.Outlined.MiscellaneousServices
                 )
                 SettingsItemCard(
-                    onClick = navigateToOpenSourceLicenses,
+                    onClick = {
+                        navController.navigate(Routes.Misc.OpenSourceLicenses) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Open Source Licenses",
                     leadingIcon = Icons.Outlined.Source
                 )
                 SettingsItemCard(
-                    onClick = navigateToDeveloper,
+                    onClick = {
+                        navController.navigate(Routes.Misc.AboutDeveloper) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "About Developer",
                     leadingIcon = Icons.Outlined.DeveloperBoard
                 )

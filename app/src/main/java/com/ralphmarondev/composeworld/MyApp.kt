@@ -6,6 +6,7 @@ import com.ralphmarondev.composeworld.home.di.homeModule
 import com.ralphmarondev.core.di.coreModule
 import com.ralphmarondev.core.worker.scheduleAppWorker
 import com.ralphmarondev.onboarding.di.onboardingModule
+import com.ralphmarondev.settings.di.settingsModule
 import com.ralphmarondev.user_settings.di.userSettingsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,6 +22,7 @@ class MyApp : Application() {
                 userSettingsModule,
                 onboardingModule,
                 authModule,
+                settingsModule,
                 homeModule
             )
         }

@@ -19,8 +19,8 @@ class UserSettingRepositoryImpl(
         userSettingDao.deleteUser(id)
     }
 
-    override suspend fun getUserDetail(id: Int): User {
-        return userSettingDao.getUserDetail(id)
+    override suspend fun getUserDetailByUsername(username: String): User {
+        return userSettingDao.getUserDetailByUsername(username)
     }
 
     override suspend fun isUserExists(username: String, password: String): Boolean {
