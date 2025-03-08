@@ -31,14 +31,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ralphmarondev.core.util.LocalThemeState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppThemeScreen(
-    darkTheme: Boolean,
-    toggleDarkTheme: () -> Unit,
     navigateBack: () -> Unit
 ) {
+    val themeState = LocalThemeState.current
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,7 +73,7 @@ fun AppThemeScreen(
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
                 ElevatedCard(
-                    onClick = { toggleDarkTheme() },
+                    onClick = { themeState.toggleTheme() },
                     modifier = Modifier
                         .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
@@ -83,7 +84,7 @@ fun AppThemeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            imageVector = if (darkTheme) Icons.Outlined.DarkMode else Icons.Outlined.LightMode,
+                            imageVector = if (themeState.darkTheme.value) Icons.Outlined.DarkMode else Icons.Outlined.LightMode,
                             contentDescription = "App Theme",
                             tint = MaterialTheme.colorScheme.secondary
                         )
@@ -102,7 +103,7 @@ fun AppThemeScreen(
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
-                                text = if (darkTheme) "Dark Theme" else "Light Theme",
+                                text = if (themeState.darkTheme.value) "Dark Theme" else "Light Theme",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 maxLines = 1,
@@ -113,8 +114,8 @@ fun AppThemeScreen(
                         }
                         Spacer(modifier = Modifier.weight(1f))
                         Switch(
-                            checked = darkTheme,
-                            onCheckedChange = { toggleDarkTheme() }
+                            checked = themeState.darkTheme.value,
+                            onCheckedChange = { themeState.toggleTheme() }
                         )
                     }
                 }

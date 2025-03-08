@@ -8,11 +8,14 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ralphmarondev.composeworld.navigation.AppNavigation
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.core.notification.requestNotificationPermission
+import com.ralphmarondev.core.util.ThemeProvider
+import com.ralphmarondev.core.util.ThemeState
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
     private val preferences: AppPreferences by inject()
+    private val themeState: ThemeState by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +25,9 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission(this)
 
         setContent {
-            AppNavigation(preferences)
+            ThemeProvider(themeState = themeState) {
+                AppNavigation(preferences)
+            }
         }
     }
 }

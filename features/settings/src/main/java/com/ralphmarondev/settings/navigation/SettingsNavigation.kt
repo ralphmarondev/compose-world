@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.settings.presentation.account.AccountSettingScreen
 import com.ralphmarondev.settings.presentation.general.backup.BackupAndRestoreScreen
 import com.ralphmarondev.settings.presentation.general.feedback.FeedbackScreen
+import com.ralphmarondev.settings.presentation.general.theme.AppThemeScreen
 import com.ralphmarondev.settings.presentation.general.version.AppVersionScreen
 import com.ralphmarondev.settings.presentation.misc.developer.AboutDeveloperScreen
 import com.ralphmarondev.settings.presentation.misc.license.OpenSourceLicensesScreen
@@ -47,7 +48,9 @@ fun SettingsNavigation(
             )
         }
         composable<Routes.General.AppTheme> {
-
+            AppThemeScreen(
+                navigateBack = { navController.navigateUp() }
+            )
         }
         composable<Routes.General.Feedback> {
             FeedbackScreen(
