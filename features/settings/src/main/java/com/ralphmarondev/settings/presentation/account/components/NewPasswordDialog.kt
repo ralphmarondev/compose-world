@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -61,7 +60,6 @@ fun NewPasswordDialog(
             ) {
                 Text(
                     text = "New Password",
-                    fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.W500,
                     fontSize = 18.sp,
                     color = MaterialTheme.colorScheme.primary,
@@ -85,13 +83,11 @@ fun NewPasswordDialog(
                 label = {
                     Text(
                         text = "Enter old password",
-                        fontFamily = FontFamily.Monospace,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 textStyle = TextStyle(
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.secondary
@@ -118,13 +114,11 @@ fun NewPasswordDialog(
                 label = {
                     Text(
                         text = "Enter new password",
-                        fontFamily = FontFamily.Monospace,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 textStyle = TextStyle(
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.secondary
@@ -151,13 +145,11 @@ fun NewPasswordDialog(
                 label = {
                     Text(
                         text = "Re-enter new password",
-                        fontFamily = FontFamily.Monospace,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 textStyle = TextStyle(
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.secondary
@@ -227,7 +219,6 @@ fun NewPasswordDialog(
             ) {
                 Text(
                     text = "SAVE",
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500
                 )

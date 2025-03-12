@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,14 +54,12 @@ fun AccountCard(
             ) {
                 Text(
                     text = user.fullName,
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     text = user.username,
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W300,
                     color = MaterialTheme.colorScheme.tertiary

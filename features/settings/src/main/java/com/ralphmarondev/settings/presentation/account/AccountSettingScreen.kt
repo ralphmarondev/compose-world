@@ -40,7 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -84,8 +83,7 @@ fun AccountSettingScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Account Settings",
-                        fontFamily = FontFamily.Monospace
+                        text = "Account Settings"
                     )
                 },
                 navigationIcon = {
@@ -139,7 +137,6 @@ fun AccountSettingScreen(
                         ) {
                             Text(
                                 text = "Change photo",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 color = MaterialTheme.colorScheme.outline
                             )
@@ -154,13 +151,11 @@ fun AccountSettingScreen(
                         ) {
                             Text(
                                 text = "Full Name",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
                                 text = fullName,
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
                             )
@@ -174,13 +169,11 @@ fun AccountSettingScreen(
                         ) {
                             Text(
                                 text = "Username",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
                                 text = username,
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
                             )
@@ -194,13 +187,11 @@ fun AccountSettingScreen(
                         ) {
                             Text(
                                 text = "Password",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 color = MaterialTheme.colorScheme.secondary
                             )
                             Text(
                                 text = password.map { "*" }.joinToString(""),
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.primary
                             )

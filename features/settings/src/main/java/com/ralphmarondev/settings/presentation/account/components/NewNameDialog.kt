@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -59,7 +58,6 @@ fun NewNameDialog(
             ) {
                 Text(
                     text = "New Full Name",
-                    fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.W500,
                     fontSize = 18.sp,
                     color = MaterialTheme.colorScheme.primary,
@@ -83,13 +81,11 @@ fun NewNameDialog(
                 label = {
                     Text(
                         text = "Enter full name",
-                        fontFamily = FontFamily.Monospace,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 textStyle = TextStyle(
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.secondary
@@ -126,7 +122,6 @@ fun NewNameDialog(
             ) {
                 Text(
                     text = "SAVE",
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500
                 )

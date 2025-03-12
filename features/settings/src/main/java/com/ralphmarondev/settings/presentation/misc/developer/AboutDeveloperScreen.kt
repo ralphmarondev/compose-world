@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -49,8 +48,7 @@ fun AboutDeveloperScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "About Developer",
-                        fontFamily = FontFamily.Monospace
+                        text = "About Developer"
                     )
                 },
                 navigationIcon = {
@@ -110,7 +108,6 @@ fun AboutDeveloperScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Ralph Maron A. Eda",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         color = MaterialTheme.colorScheme.primary,
                         fontSize = 22.sp,
@@ -119,7 +116,6 @@ fun AboutDeveloperScreen(
 
                     Text(
                         text = "Computer Engineer",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         color = MaterialTheme.colorScheme.tertiary,
                         fontSize = 14.sp,
@@ -141,7 +137,6 @@ fun AboutDeveloperScreen(
                                 append("software development.")
                             }
                         },
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         color = MaterialTheme.colorScheme.secondary,
                         fontSize = 16.sp,

@@ -53,7 +53,6 @@ fun SettingsItemCard(
             ) {
                 Text(
                     text = text,
-                    fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

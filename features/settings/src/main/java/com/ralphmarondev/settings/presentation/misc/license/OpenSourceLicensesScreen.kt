@@ -23,7 +23,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,8 +38,7 @@ fun OpenSourceLicensesScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Open Source Licenses",
-                        fontFamily = FontFamily.Monospace
+                        text = "Open Source Licenses"
                     )
                 },
                 navigationIcon = {
@@ -73,7 +71,6 @@ fun OpenSourceLicensesScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.license_title),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -81,21 +78,18 @@ fun OpenSourceLicensesScreen(
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     Text(
                         text = stringResource(R.string.mit_license_title),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
                         text = stringResource(R.string.copyright),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary
                     )
                     Text(
                         text = stringResource(R.string.license_paragraph1),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -103,7 +97,6 @@ fun OpenSourceLicensesScreen(
                     Spacer(modifier = Modifier.padding(vertical = 2.dp))
                     Text(
                         text = stringResource(R.string.license_paragraph2),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -111,7 +104,6 @@ fun OpenSourceLicensesScreen(
                     Spacer(modifier = Modifier.padding(vertical = 2.dp))
                     Text(
                         text = stringResource(R.string.license_paragraph3),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary

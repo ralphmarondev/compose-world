@@ -20,7 +20,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,8 +34,7 @@ fun TermsOfServiceScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Terms of Service",
-                        fontFamily = FontFamily.Monospace
+                        text = "Terms of Service"
                     )
                 },
                 navigationIcon = {
@@ -70,14 +68,12 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Terms of Service",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 18.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
                         text = "Last updated January 13, 2025",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.tertiary
@@ -86,7 +82,6 @@ fun TermsOfServiceScreen(
                         text = "Welcome to Compose World! These Terms of Service govern " +
                                 "your use of the Compose World app, operated by Ralph Maron Eda. " +
                                 "By accessing or using the App, you agree to these Terms.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -101,21 +96,18 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Use of the App",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
                         text = "- You must use the App in compliance with all applicable laws and regulations.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
                     )
                     Text(
                         text = "- The App is intended for personal use only and should not be used for unlawful purposes.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -130,7 +122,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Privacy",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -138,7 +129,6 @@ fun TermsOfServiceScreen(
                     Text(
                         text = "- Your use of the App is also governed by our [Privacy Policy], please " +
                                 "review it to understand how we collect, use, and protect your information.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -153,7 +143,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "User Responsibilities",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -161,14 +150,12 @@ fun TermsOfServiceScreen(
                     Text(
                         text = "- You are responsible for maintaining the security of your device and ensuring " +
                                 "the confidentiality of your account.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
                     )
                     Text(
                         text = "- You agree not to reverse-engineer, decompile, or tamper with the App in any way.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -183,7 +170,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Content",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -192,14 +178,12 @@ fun TermsOfServiceScreen(
                         text = "- The App may allow you to store, share or upload content. You retain " +
                                 "ownership of any content you submit, but by doing so, you grant us a license " +
                                 "to use it for app-related purposes.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
                     )
                     Text(
                         text = "- Any inappropriate or illegal content is strictly prohibited.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -214,7 +198,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Disclaimers",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -222,14 +205,12 @@ fun TermsOfServiceScreen(
                     Text(
                         text = "- The App is provided 'as is' without warranties of any kind. We do not " +
                                 "guarantee that the App will be error-free, secure, or continuously available.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
                     )
                     Text(
                         text = "- We are not responsible for any data loss or damages arising from your use of the App.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -244,7 +225,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Limitation of Liability",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -252,7 +232,6 @@ fun TermsOfServiceScreen(
                     Text(
                         text = "- To the fullest extent permitted by law, we shall not be liable for any " +
                                 "indirect, incidental, or consequential damages arising from your use of the App.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -267,7 +246,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Termination",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -275,7 +253,6 @@ fun TermsOfServiceScreen(
                     Text(
                         text = "- We may suspend or terminate your access to the App at any time for any reason, " +
                                 "including violations of these Terms.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -290,7 +267,6 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Changes to the Terms",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
@@ -299,7 +275,6 @@ fun TermsOfServiceScreen(
                         text = "- We reserve the right to update these Terms at any time. Changes will be effective " +
                                 "immediately upon posting in the App. Your continued use of the App signifies " +
                                 "your acceptance of the updated Terms.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -314,14 +289,12 @@ fun TermsOfServiceScreen(
                 ) {
                     Text(
                         text = "Contact Us",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
                         text = "- If you have any questions about these Terms, please contact us at edaralphmaron@gmail.com",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W400,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.secondary

@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,8 +49,7 @@ fun FeedbackScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Feedback",
-                        fontFamily = FontFamily.Monospace
+                        text = "Feedback"
                     )
                 },
                 navigationIcon = {
@@ -84,7 +82,6 @@ fun FeedbackScreen(
                 ) {
                     Text(
                         text = "We'll be happy to hear from you.",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.secondary
@@ -105,13 +102,11 @@ fun FeedbackScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp, vertical = 4.dp),
                         textStyle = TextStyle(
-                            fontFamily = FontFamily.Monospace,
                             color = MaterialTheme.colorScheme.secondary
                         ),
                         label = {
                             Text(
                                 text = "Enter your name",
-                                fontFamily = FontFamily.Monospace,
                                 maxLines = 1
                             )
                         },
@@ -132,13 +127,11 @@ fun FeedbackScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp, vertical = 4.dp),
                         textStyle = TextStyle(
-                            fontFamily = FontFamily.Monospace,
                             color = MaterialTheme.colorScheme.secondary
                         ),
                         label = {
                             Text(
                                 text = "Enter your email",
-                                fontFamily = FontFamily.Monospace,
                                 maxLines = 1
                             )
                         },
@@ -159,13 +152,11 @@ fun FeedbackScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp, vertical = 4.dp),
                         textStyle = TextStyle(
-                            fontFamily = FontFamily.Monospace,
                             color = MaterialTheme.colorScheme.secondary
                         ),
                         label = {
                             Text(
                                 text = "How can we help you?",
-                                fontFamily = FontFamily.Monospace,
                                 maxLines = 1
                             )
                         },
@@ -179,7 +170,6 @@ fun FeedbackScreen(
                     ) {
                         Text(
                             text = "Send Feedback",
-                            fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.W500
                         )
                     }

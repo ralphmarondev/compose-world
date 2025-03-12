@@ -21,7 +21,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,8 +36,7 @@ fun BackupAndRestoreScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Backup and Restore",
-                        fontFamily = FontFamily.Monospace
+                        text = "Backup and Restore"
                     )
                 },
                 navigationIcon = {
@@ -77,7 +75,6 @@ fun BackupAndRestoreScreen(
                     ) {
                         Text(
                             text = "Coming Soon.",
-                            fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.W500,
                             fontSize = 18.sp,
                             color = MaterialTheme.colorScheme.secondary,

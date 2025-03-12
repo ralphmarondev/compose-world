@@ -26,7 +26,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,8 +44,7 @@ fun AppThemeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "App Theme",
-                        fontFamily = FontFamily.Monospace
+                        text = "App Theme"
                     )
                 },
                 navigationIcon = {
@@ -95,7 +93,6 @@ fun AppThemeScreen(
                         ) {
                             Text(
                                 text = "Theme",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 16.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -104,7 +101,6 @@ fun AppThemeScreen(
                             )
                             Text(
                                 text = if (themeState.darkTheme.value) "Dark Theme" else "Light Theme",
-                                fontFamily = FontFamily.Monospace,
                                 fontSize = 14.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,

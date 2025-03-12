@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -46,8 +45,7 @@ fun AppVersionScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Version and Updates",
-                        fontFamily = FontFamily.Monospace
+                        text = "Version and Updates"
                     )
                 },
                 navigationIcon = {
@@ -81,7 +79,6 @@ fun AppVersionScreen(
                 ) {
                     Text(
                         text = "Compose World is up to date!",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 20.sp,
                         color = MaterialTheme.colorScheme.primary,
@@ -118,7 +115,6 @@ fun AppVersionScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Version: 25.01.13",
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.tertiary
