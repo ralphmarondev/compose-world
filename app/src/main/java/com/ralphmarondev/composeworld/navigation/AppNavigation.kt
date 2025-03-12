@@ -10,6 +10,7 @@ import com.ralphmarondev.composeworld.home.presentation.HomeScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.core.util.LocalThemeState
+import com.ralphmarondev.notes.NoteScreen
 import com.ralphmarondev.onboarding.presentation.OnboardingScreen
 import com.ralphmarondev.settings.navigation.SettingsNavigation
 
@@ -77,6 +78,13 @@ fun AppNavigation(
             }
             composable<Routes.Settings> {
                 SettingsNavigation(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable<Routes.Notes> {
+                NoteScreen(
                     navigateBack = {
                         navController.navigateUp()
                     }
