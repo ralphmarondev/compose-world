@@ -43,25 +43,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.notes.data.local.dao.NoteDao
 import com.ralphmarondev.notes.presentation.details.components.DeleteNoteDialog
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     backToAllNotes: () -> Unit,
     navigateToUpdateNote: () -> Unit,
-    noteDao: NoteDao,
     noteId: Int
 ) {
     val context = LocalContext.current
-    val viewModel: DetailsViewModel = viewModel(
-        factory = DetailsViewModelFactory(
-            noteDao = noteDao,
-            noteId = noteId
-        )
-    )
+    val viewModel: DetailsViewModel = koinViewModel(parameters = { parametersOf(noteId) })
     val note by viewModel.note.collectAsState()
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showMenu by remember { mutableStateOf(false) }

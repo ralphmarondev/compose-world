@@ -4,7 +4,7 @@ import android.util.Log
 import com.ralphmarondev.notes.domain.repository.NoteRepository
 
 class DeleteNoteUseCase(private val noteRepository: NoteRepository) {
-    suspend fun deleteNote(id: Int, response: (Boolean, String?) -> Unit) {
+    suspend operator fun invoke(id: Int, response: (Boolean, String?) -> Unit) {
         try {
             noteRepository.deleteNote(id)
             response(true, "Success.")

@@ -33,10 +33,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.notes.R
-import com.ralphmarondev.notes.data.local.dao.NoteDao
 import com.ralphmarondev.notes.presentation.home.components.NoteCard
 import org.koin.androidx.compose.koinViewModel
 

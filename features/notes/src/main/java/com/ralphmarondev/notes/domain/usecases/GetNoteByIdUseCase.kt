@@ -5,7 +5,7 @@ import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.domain.repository.NoteRepository
 
 class GetNoteByIdUseCase(private val noteRepository: NoteRepository) {
-    suspend fun getNoteById(id: Int): Note {
+    suspend operator fun invoke(id: Int): Note {
         return try {
             val note = noteRepository.getNoteById(id)
             note

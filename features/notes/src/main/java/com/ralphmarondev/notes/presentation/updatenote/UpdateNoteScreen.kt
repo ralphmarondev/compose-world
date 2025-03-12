@@ -34,28 +34,22 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ralphmarondev.notes.data.local.dao.NoteDao
 import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.presentation.components.DescriptionTextField
 import com.ralphmarondev.notes.presentation.components.TitleTextField
 import com.ralphmarondev.notes.utils.getCurrentDate
 import com.ralphmarondev.notes.utils.getCurrentTime
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateNoteScreen(
     backToNoteDetails: () -> Unit,
-    noteDao: NoteDao,
     noteId: Int
 ) {
     val context = LocalContext.current
-    val viewModel: UpdateNoteViewModel = viewModel(
-        factory = UpdateNoteViewModelFactory(
-            noteDao = noteDao,
-            noteId = noteId
-        )
-    )
+    val viewModel: UpdateNoteViewModel = koinViewModel(parameters = { parametersOf(noteId) })
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }

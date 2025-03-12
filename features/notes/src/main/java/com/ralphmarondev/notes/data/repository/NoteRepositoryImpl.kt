@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class NoteRepositoryImpl(
     private val noteDao: NoteDao
 ) : NoteRepository {
+
     override suspend fun createNote(note: Note) {
         noteDao.createNote(note)
     }

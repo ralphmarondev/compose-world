@@ -5,7 +5,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.ralphmarondev.notes.data.local.dao.NoteDao
 import com.ralphmarondev.notes.presentation.details.DetailScreen
 import com.ralphmarondev.notes.presentation.home.HomeScreen
 import com.ralphmarondev.notes.presentation.newnote.NewNoteScreen
