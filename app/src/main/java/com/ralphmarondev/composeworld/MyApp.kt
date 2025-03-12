@@ -5,6 +5,7 @@ import com.ralphmarondev.auth.di.authModule
 import com.ralphmarondev.composeworld.home.di.homeModule
 import com.ralphmarondev.core.di.coreModule
 import com.ralphmarondev.core.worker.scheduleAppWorker
+import com.ralphmarondev.notes.di.notesModule
 import com.ralphmarondev.onboarding.di.onboardingModule
 import com.ralphmarondev.settings.di.settingsModule
 import com.ralphmarondev.user_settings.di.userSettingsModule
@@ -23,7 +24,8 @@ class MyApp : Application() {
                 onboardingModule,
                 authModule,
                 settingsModule,
-                homeModule
+                homeModule,
+                notesModule
             )
         }
 
