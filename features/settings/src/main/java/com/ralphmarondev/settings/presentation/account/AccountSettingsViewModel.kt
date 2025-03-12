@@ -4,14 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.user_settings.data.local.preferences.UserSettingsPreferences
+import com.ralphmarondev.user_settings.domain.model.User
 import com.ralphmarondev.user_settings.domain.usecases.GetUserDetailByUsername
+import com.ralphmarondev.user_settings.domain.usecases.UpdateUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AccountSettingsViewModel(
     private val userSettingsPreferences: UserSettingsPreferences,
-    private val getUserDetailByUsername: GetUserDetailByUsername
+    private val getUserDetailByUsername: GetUserDetailByUsername,
+    private val updateUserUseCase: UpdateUserUseCase
 ) : ViewModel() {
 
     private val _fullName = MutableStateFlow("")
@@ -67,10 +70,14 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New full name: $newName")
         viewModelScope.launch {
             try {
-//                dao.updateFullNameById(
-//                    newFullName = newName,
-//                    id = _id.value
-//                )
+                updateUserUseCase(
+                    user = User(
+                        id = _id.value,
+                        username = _username.value,
+                        password = _password.value,
+                        fullName = newName
+                    )
+                )
                 result(true, "Full name updated successfully!")
                 _fullName.value = newName
             } catch (e: Exception) {
@@ -83,10 +90,14 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New username: $newUsername")
         viewModelScope.launch {
             try {
-//                dao.updateUserNameById(
-//                    newUsername = newUsername,
-//                    id = _id.value
-//                )
+                updateUserUseCase(
+                    user = User(
+                        id = _id.value,
+                        username = newUsername,
+                        password = _password.value,
+                        fullName = _fullName.value
+                    )
+                )
                 result(true, "Username updated successfully!")
                 _username.value = newUsername
             } catch (e: Exception) {
@@ -99,10 +110,14 @@ class AccountSettingsViewModel(
         Log.d("Settings", "New password: $newPassword")
         viewModelScope.launch {
             try {
-//                dao.updatePasswordById(
-//                    newPassword = newPassword,
-//                    id = _id.value
-//                )
+                updateUserUseCase(
+                    user = User(
+                        id = _id.value,
+                        username = _username.value,
+                        password = newPassword,
+                        fullName = _fullName.value
+                    )
+                )
                 result(true, "Password updated successfully!")
                 _password.value = newPassword
             } catch (e: Exception) {
