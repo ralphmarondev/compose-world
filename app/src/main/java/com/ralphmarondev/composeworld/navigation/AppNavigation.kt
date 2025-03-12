@@ -28,7 +28,7 @@ fun AppNavigation(
     ComposeWorldTheme(darkTheme = themeState.darkTheme.value) {
         NavHost(
             navController = navController,
-            startDestination = startDestination
+            startDestination = Routes.Onboarding
         ) {
             composable<Routes.Onboarding> {
                 OnboardingScreen(
