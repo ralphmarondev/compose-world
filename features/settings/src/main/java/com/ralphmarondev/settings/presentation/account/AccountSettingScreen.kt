@@ -122,7 +122,7 @@ fun AccountSettingScreen(
                     ) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Image(
-                            painter = rememberAsyncImagePainter(R.drawable.cute_me),
+                            painter = rememberAsyncImagePainter(R.drawable.app_logo),
                             contentDescription = "Profile",
                             modifier = Modifier
                                 .size(100.dp)

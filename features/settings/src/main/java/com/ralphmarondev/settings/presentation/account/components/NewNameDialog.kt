@@ -88,6 +88,7 @@ fun NewNameDialog(
                 textStyle = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
+                    fontFamily = MaterialTheme.typography.titleMedium.fontFamily,
                     color = MaterialTheme.colorScheme.secondary
                 ),
                 singleLine = true,

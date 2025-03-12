@@ -114,7 +114,7 @@ fun AppVersionScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Version: 25.01.13",
+                        text = "Version: 25.03",
                         fontWeight = FontWeight.W500,
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.tertiary

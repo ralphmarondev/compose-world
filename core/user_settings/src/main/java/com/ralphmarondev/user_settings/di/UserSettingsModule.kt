@@ -11,19 +11,21 @@ import com.ralphmarondev.user_settings.domain.usecases.GetUserDetailByUsername
 import com.ralphmarondev.user_settings.domain.usecases.IsUserExistsUseCase
 import com.ralphmarondev.user_settings.domain.usecases.UpdateUserUseCase
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val userSettingsModule = module {
-    single { UserSettingsPreferences(get()) }
+    singleOf(::UserSettingsPreferences)
 
     single { UserSettingsDatabase.createDatabase(androidContext()) }
     single { get<UserSettingsDatabase>().userDao }
     single<UserSettingRepository> { UserSettingRepositoryImpl(get()) }
 
-    factory { CreateDefaultUserUseCase(get()) }
-    factory { CreateUserUseCase(get()) }
-    factory { UpdateUserUseCase(get()) }
-    factory { DeleteUserUseCase(get()) }
-    factory { GetUserDetailByUsername(get()) }
-    factory { IsUserExistsUseCase(get()) }
+    factoryOf(::CreateDefaultUserUseCase)
+    factoryOf(::CreateUserUseCase)
+    factoryOf(::UpdateUserUseCase)
+    factoryOf(::DeleteUserUseCase)
+    factoryOf(::GetUserDetailByUsername)
+    factoryOf(::IsUserExistsUseCase)
 }
