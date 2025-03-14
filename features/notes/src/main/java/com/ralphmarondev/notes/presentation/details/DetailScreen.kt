@@ -37,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
@@ -65,8 +64,7 @@ fun DetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Note Details",
-                        fontFamily = FontFamily.Monospace
+                        text = "Note Details"
                     )
                 },
                 navigationIcon = {
@@ -104,7 +102,6 @@ fun DetailScreen(
                     ) {
                         Text(
                             text = note.date,
-                            fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.W500,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -128,7 +125,6 @@ fun DetailScreen(
                                     text = {
                                         Text(
                                             text = "Edit",
-                                            fontFamily = FontFamily.Monospace,
                                             color = MaterialTheme.colorScheme.secondary
                                         )
                                     },
@@ -138,7 +134,6 @@ fun DetailScreen(
                                     text = {
                                         Text(
                                             text = "Delete",
-                                            fontFamily = FontFamily.Monospace,
                                             color = MaterialTheme.colorScheme.secondary
                                         )
                                     },
@@ -153,7 +148,6 @@ fun DetailScreen(
 
                     Text(
                         text = note.title,
-                        fontFamily = FontFamily.Monospace,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.W500,
                         overflow = TextOverflow.Ellipsis,
@@ -163,7 +157,6 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = note.description,
-                        fontFamily = FontFamily.Monospace,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W400,
                         minLines = 4,
@@ -207,7 +200,6 @@ fun DetailScreen(
                         )
                         Text(
                             text = note.time,
-                            fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.W300,
                             fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.tertiary

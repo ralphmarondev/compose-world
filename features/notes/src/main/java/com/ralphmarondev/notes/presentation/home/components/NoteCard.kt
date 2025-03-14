@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -57,7 +56,6 @@ fun NoteCard(
                 ) {
                     Text(
                         text = getWeekday(note.date),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         fontSize = 14.sp,
                         maxLines = 1,
@@ -68,7 +66,6 @@ fun NoteCard(
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = getDayOfMonth(note.date),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         maxLines = 1,
@@ -80,7 +77,6 @@ fun NoteCard(
                 Column {
                     Text(
                         text = note.title,
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W500,
                         fontSize = 16.sp,
                         maxLines = 1,
@@ -91,7 +87,6 @@ fun NoteCard(
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = getTimeInMilitary(note.time),
-                        fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.W300,
                         fontSize = 14.sp,
                         maxLines = 1,
@@ -108,7 +103,6 @@ fun NoteCard(
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.W400,
-                fontFamily = FontFamily.Monospace,
                 color = MaterialTheme.colorScheme.secondary
             )
         }

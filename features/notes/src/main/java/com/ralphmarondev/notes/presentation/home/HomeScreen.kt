@@ -28,7 +28,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,8 +52,7 @@ fun HomeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Notes",
-                        fontFamily = FontFamily.Monospace
+                        text = "Notes"
                     )
                 },
                 navigationIcon = {
@@ -104,7 +102,6 @@ fun HomeScreen(
                 AnimatedVisibility(notes.isEmpty()) {
                     Text(
                         text = "Notes are empty.",
-                        fontFamily = FontFamily.Monospace,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.W500,
                         modifier = Modifier.padding(16.dp),

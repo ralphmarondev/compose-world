@@ -88,8 +88,7 @@ fun UpdateNoteScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Update Note",
-                        fontFamily = FontFamily.Monospace
+                        text = "Update Note"
                     )
                 },
                 navigationIcon = {

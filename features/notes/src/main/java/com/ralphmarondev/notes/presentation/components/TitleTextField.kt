@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
@@ -30,14 +29,14 @@ fun TitleTextField(
         placeholder = {
             Text(
                 text = "Title",
-                fontFamily = FontFamily.Monospace,
+                fontFamily = MaterialTheme.typography.titleMedium.fontFamily,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.secondary
             )
         },
         textStyle = TextStyle(
-            fontFamily = FontFamily.Monospace,
+            fontFamily = MaterialTheme.typography.titleMedium.fontFamily,
             fontSize = 20.sp,
             fontWeight = FontWeight.W500,
             color = MaterialTheme.colorScheme.secondary

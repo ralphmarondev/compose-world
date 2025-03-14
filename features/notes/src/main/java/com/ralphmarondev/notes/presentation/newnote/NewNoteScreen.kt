@@ -55,8 +55,7 @@ fun NewNoteScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "New Note",
-                        fontFamily = FontFamily.Monospace
+                        text = "New Note"
                     )
                 },
                 navigationIcon = {
@@ -104,8 +103,7 @@ fun NewNoteScreen(
                         }
                     ) {
                         Text(
-                            text = "SAVE",
-                            fontFamily = FontFamily.Monospace
+                            text = "SAVE"
                         )
                     }
                 },
