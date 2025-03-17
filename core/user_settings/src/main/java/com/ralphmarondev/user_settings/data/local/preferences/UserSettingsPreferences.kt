@@ -8,6 +8,7 @@ class UserSettingsPreferences(
     companion object {
         private const val PREFERENCE_NAME = "user_settings_preferences"
         private const val SAVED_USERNAME = "saved_username"
+        private const val ENABLE_AUTH = "enable_auth"
     }
 
     private val sharedPreferences = context.getSharedPreferences(
@@ -21,5 +22,13 @@ class UserSettingsPreferences(
 
     fun getSavedUsername(): String? {
         return sharedPreferences.getString(SAVED_USERNAME, null)
+    }
+
+    fun setEnableAuth(value: Boolean) {
+        sharedPreferences.edit().putBoolean(ENABLE_AUTH, value).apply()
+    }
+
+    fun getEnableAuth(): Boolean {
+        return sharedPreferences.getBoolean(ENABLE_AUTH, true)
     }
 }

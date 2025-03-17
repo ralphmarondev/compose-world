@@ -1,7 +1,9 @@
 package com.ralphmarondev.auth.register.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ralphmarondev.user_settings.data.local.preferences.UserSettingsPreferences
 import com.ralphmarondev.user_settings.domain.model.User
 import com.ralphmarondev.user_settings.domain.usecases.CreateUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,7 +11,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel(
-    private val createUserUseCase: CreateUserUseCase
+    private val createUserUseCase: CreateUserUseCase,
+    private val userSettingsPreferences: UserSettingsPreferences
 ) : ViewModel() {
 
     private val _fullName = MutableStateFlow("")
@@ -23,6 +26,9 @@ class RegistrationViewModel(
 
     private val _passwordHint = MutableStateFlow("")
     val passwordHint = _passwordHint.asStateFlow()
+
+    private val _enableAuth = MutableStateFlow(true)
+    val enableAuth = _enableAuth.asStateFlow()
 
     private val _response = MutableStateFlow(false)
     val response = _response.asStateFlow()
@@ -48,6 +54,10 @@ class RegistrationViewModel(
 
     fun onPasswordHintChange(value: String) {
         _passwordHint.value = value
+    }
+
+    fun onEnableAuthChange() {
+        _enableAuth.value = !_enableAuth.value
     }
 
     fun setSelectedScreen(value: Int) {
@@ -86,6 +96,12 @@ class RegistrationViewModel(
                 hintPassword = _passwordHint.value
             )
             createUserUseCase(user)
+            Log.d(
+                "App",
+                "Saved username: `${_username.value}`, enabled auth: `${_enableAuth.value}`"
+            )
+            userSettingsPreferences.setSavedUsername(_username.value)
+            userSettingsPreferences.setEnableAuth(_enableAuth.value)
         }
     }
 }

@@ -50,7 +50,9 @@ class LoginViewModel(
             val result = isUserExistsUseCase(username = username, password = password)
 
             if (result) {
-                userSettingPreferences.setSavedUsername(username)
+                if (_rememberMe.value) {
+                    userSettingPreferences.setSavedUsername(username)
+                }
                 response(true, "Login successful.")
             } else {
                 response(false, "Login failed.")

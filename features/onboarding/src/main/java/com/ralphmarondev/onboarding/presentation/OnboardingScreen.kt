@@ -1,5 +1,6 @@
 package com.ralphmarondev.onboarding.presentation
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,15 +22,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
 import coil.compose.rememberAsyncImagePainter
+import com.ralphmarondev.core.util.LocalThemeState
 import com.ralphmarondev.onboarding.R
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,6 +43,18 @@ fun OnboardingScreen(
     onTryComposeWorld: () -> Unit,
     onInstallComposeWorld: () -> Unit
 ) {
+    val themeState = LocalThemeState.current
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            val insetsController = window?.let {
+                WindowCompat.getInsetsController(it, view)
+            }
+            insetsController?.isAppearanceLightStatusBars = !themeState.darkTheme.value
+        }
+    }
+
     val viewModel: OnboardingViewModel = koinViewModel()
 
     Scaffold { innerPadding ->

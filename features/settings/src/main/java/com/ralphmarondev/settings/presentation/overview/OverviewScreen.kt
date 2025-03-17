@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.material.icons.outlined.DeveloperBoard
 import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.MiscellaneousServices
+import androidx.compose.material.icons.outlined.Security
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
@@ -86,6 +87,11 @@ fun OverviewScreen(
                     },
                     text = "App Theme",
                     leadingIcon = Icons.Outlined.SettingsApplications
+                )
+                SettingsItemCard(
+                    onClick = {},
+                    text = "Security and Privacy",
+                    leadingIcon = Icons.Outlined.Security
                 )
                 SettingsItemCard(
                     onClick = {

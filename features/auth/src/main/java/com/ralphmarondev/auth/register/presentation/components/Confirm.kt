@@ -2,6 +2,7 @@ package com.ralphmarondev.auth.register.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -44,6 +47,7 @@ fun Confirm(
     val fullName by viewModel.fullName.collectAsState()
     val username by viewModel.username.collectAsState()
     val passwordHint by viewModel.passwordHint.collectAsState()
+    val enableAuth by viewModel.enableAuth.collectAsState()
 
     Column(
         modifier = modifier
@@ -102,6 +106,37 @@ fun Confirm(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp)
         )
+
+        Spacer(
+            modifier = Modifier
+                .height(4.dp)
+        )
+        HorizontalDivider(
+            modifier = Modifier
+                .padding(
+                    vertical = 2.dp,
+                    horizontal = 16.dp
+                )
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = enableAuth,
+                onCheckedChange = {
+                    viewModel.onEnableAuthChange()
+                }
+            )
+            Text(
+                text = "Require password on login?",
+                fontWeight = FontWeight.W500,
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 14.sp
+            )
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
         Button(
