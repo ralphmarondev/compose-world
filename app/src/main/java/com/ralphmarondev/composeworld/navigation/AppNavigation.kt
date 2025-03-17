@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.login.presentation.LoginScreen
 import com.ralphmarondev.auth.register.presentation.RegistrationScreen
+import com.ralphmarondev.calculator.navigation.CalculatorNavigation
 import com.ralphmarondev.composeworld.home.presentation.HomeScreen
 import com.ralphmarondev.composeworld.ui.theme.ComposeWorldTheme
 import com.ralphmarondev.core.data.local.preferences.AppPreferences
@@ -85,6 +86,13 @@ fun AppNavigation(
             }
             composable<Routes.Notes> {
                 NotesNavigation(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable<Routes.Calculator> {
+                CalculatorNavigation(
                     navigateBack = {
                         navController.navigateUp()
                     }

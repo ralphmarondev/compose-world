@@ -18,6 +18,7 @@ converterGson = "2.11.0"
 retrofit = "2.11.0"
 # navigation
 composeNavigation = "2.8.2"
+rhino = "1.7R4"
 serialization = "1.6.3"
 # room
 roomKtx = "2.6.1"
@@ -69,6 +70,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+calculator-rhino = { module = "org.mozilla:rhino", version.ref = "rhino" }
 work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntimeVersion" }
 
 

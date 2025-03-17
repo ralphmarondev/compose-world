@@ -126,7 +126,11 @@ fun HomeScreen(
                     )
                     TinyAppCard(
                         image = R.drawable.calculator,
-                        onClick = {}
+                        onClick = {
+                            navController.navigate(Routes.Calculator) {
+                                launchSingleTop = true
+                            }
+                        }
                     )
 
                     TinyAppCard(
