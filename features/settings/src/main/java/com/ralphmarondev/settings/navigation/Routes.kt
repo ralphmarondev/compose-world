@@ -20,6 +20,9 @@ object Routes {
         data object AppTheme
 
         @Serializable
+        data object SecurityAndPrivacy
+
+        @Serializable
         data object Feedback
     }
 

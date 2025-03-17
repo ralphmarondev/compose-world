@@ -89,7 +89,11 @@ fun OverviewScreen(
                     leadingIcon = Icons.Outlined.SettingsApplications
                 )
                 SettingsItemCard(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(Routes.General.SecurityAndPrivacy) {
+                            launchSingleTop = true
+                        }
+                    },
                     text = "Security and Privacy",
                     leadingIcon = Icons.Outlined.Security
                 )
