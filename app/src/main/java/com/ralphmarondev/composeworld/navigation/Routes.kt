@@ -26,4 +26,7 @@ object Routes {
 
     @Serializable
     data object Weather
+
+    @Serializable
+    data object Quirk
 }

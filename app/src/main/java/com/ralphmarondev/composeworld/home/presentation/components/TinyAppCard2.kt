@@ -2,8 +2,6 @@ package com.ralphmarondev.composeworld.home.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
@@ -48,7 +46,6 @@ fun TinyAppCard2(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = label,
             fontFamily = FontFamily.Monospace,

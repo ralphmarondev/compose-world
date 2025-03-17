@@ -33,6 +33,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.composeworld.R
 import com.ralphmarondev.composeworld.home.presentation.components.DateTimeWidget
 import com.ralphmarondev.composeworld.home.presentation.components.TinyAppCard
+import com.ralphmarondev.composeworld.home.presentation.components.TinyAppCard2
 import com.ralphmarondev.composeworld.navigation.Routes
 import com.ralphmarondev.core.util.LocalThemeState
 import org.koin.androidx.compose.koinViewModel
@@ -179,10 +180,28 @@ private fun FirstPage(
     viewModel: HomeViewModel
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
     ) {
         DateTimeWidget(viewModel = viewModel)
+
+        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TinyAppCard2(
+                image = R.drawable.quirk,
+                label = "Quirk",
+                onClick = {
+                    navController.navigate(Routes.Quirk) {
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+        Spacer(modifier = Modifier.height(80.dp))
     }
 }
 
@@ -192,7 +211,7 @@ private fun SecondPage(
     navController: NavHostController
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
     ) {
         Text(

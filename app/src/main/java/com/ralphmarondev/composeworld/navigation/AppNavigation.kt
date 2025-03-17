@@ -13,6 +13,7 @@ import com.ralphmarondev.core.data.local.preferences.AppPreferences
 import com.ralphmarondev.core.util.LocalThemeState
 import com.ralphmarondev.notes.navigation.NotesNavigation
 import com.ralphmarondev.onboarding.presentation.OnboardingScreen
+import com.ralphmarondev.quirk.navigation.QuirkNavigation
 import com.ralphmarondev.settings.navigation.SettingsNavigation
 import com.ralphmarondev.weather.navigation.WeatherNavigation
 
@@ -31,7 +32,7 @@ fun AppNavigation(
     ComposeWorldTheme(darkTheme = themeState.darkTheme.value) {
         NavHost(
             navController = navController,
-            startDestination = Routes.Onboarding
+            startDestination = startDestination
         ) {
             composable<Routes.Onboarding> {
                 OnboardingScreen(
@@ -101,6 +102,13 @@ fun AppNavigation(
             }
             composable<Routes.Weather> {
                 WeatherNavigation(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable<Routes.Quirk> {
+                QuirkNavigation(
                     navigateBack = {
                         navController.navigateUp()
                     }
