@@ -1,0 +1,4 @@
+[2025-03-17]
+- Make the equationText and resultText dynamically change its font size to make it more cute.
+- Most especially for the equationText for long equations, right now, we are setting it
+  to have maxLine of 3 and setting its textOverflow to ellipsis.

@@ -22,10 +22,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ralphmarondev.calculator.presentation.home.components.CalculatorButton
@@ -82,18 +83,19 @@ fun HomeScreen(
         ) {
             Text(
                 text = equationText,
-                fontFamily = FontFamily.Monospace,
                 fontSize = 30.sp,
                 textAlign = TextAlign.End,
-                maxLines = 5,
+                maxLines = 3,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = resultText,
-                fontFamily = FontFamily.Monospace,
-                fontSize = 60.sp,
-                textAlign = TextAlign.End,
+                style = TextStyle(
+                    fontSize = 48.sp,
+                    textAlign = TextAlign.End,
+                    lineHeight = 1.em
+                ),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
