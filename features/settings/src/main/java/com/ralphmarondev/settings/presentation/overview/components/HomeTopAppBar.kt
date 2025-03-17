@@ -1,8 +1,7 @@
 package com.ralphmarondev.settings.presentation.overview.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,27 +22,18 @@ fun HomeTopBar(
                 text = "Settings"
             )
         },
-        navigationIcon = {
-            IconButton(onClick = navigateBack) {
-                Icon(
-                    imageVector = Icons.Outlined.ArrowBackIosNew,
-                    contentDescription = "Back"
-                )
-            }
-        },
         actions = {
-            IconButton(onClick = {}) {
-                IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = "Search"
-                    )
-                }
+            IconButton(
+                onClick = navigateBack
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Close,
+                    contentDescription = "Close"
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
             actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
             titleContentColor = MaterialTheme.colorScheme.onPrimary
         )
