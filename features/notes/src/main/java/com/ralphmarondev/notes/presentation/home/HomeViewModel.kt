@@ -27,8 +27,8 @@ class HomeViewModel(
             _isLoading.value = true
             getAllNoteUseCase().collect { notes ->
                 _allNotes.value = notes
+                _isLoading.value = false
             }
-            _isLoading.value = false
         }
     }
 }

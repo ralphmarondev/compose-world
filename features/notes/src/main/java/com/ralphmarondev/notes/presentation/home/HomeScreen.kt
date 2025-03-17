@@ -82,14 +82,21 @@ fun HomeScreen(
         ) {
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
-                AnimatedVisibility(notes.isEmpty()) {
-                    val text = if (isLoading) {
-                        "Loading notes..."
-                    } else {
-                        "Notes are empty."
-                    }
+                AnimatedVisibility(notes.isEmpty() && !isLoading) {
                     Text(
-                        text = text,
+                        text = "Notes are empty.",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.W500,
+                        modifier = Modifier.padding(16.dp),
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+            item {
+                AnimatedVisibility(isLoading) {
+                    Text(
+                        text = "Loading Notes...",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.W500,
                         modifier = Modifier.padding(16.dp),
