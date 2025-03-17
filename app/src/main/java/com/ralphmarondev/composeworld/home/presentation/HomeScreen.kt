@@ -152,7 +152,11 @@ fun HomeScreen(
 
                     TinyAppCard(
                         image = R.drawable.weather_news,
-                        onClick = {}
+                        onClick = {
+                            navController.navigate(Routes.Weather) {
+                                launchSingleTop = true
+                            }
+                        }
                     )
                     TinyAppCard(
                         image = R.drawable.setting,

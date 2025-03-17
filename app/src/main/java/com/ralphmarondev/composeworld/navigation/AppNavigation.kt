@@ -14,6 +14,7 @@ import com.ralphmarondev.core.util.LocalThemeState
 import com.ralphmarondev.notes.navigation.NotesNavigation
 import com.ralphmarondev.onboarding.presentation.OnboardingScreen
 import com.ralphmarondev.settings.navigation.SettingsNavigation
+import com.ralphmarondev.weather.navigation.WeatherNavigation
 
 @Composable
 fun AppNavigation(
@@ -93,6 +94,13 @@ fun AppNavigation(
             }
             composable<Routes.Calculator> {
                 CalculatorNavigation(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable<Routes.Weather> {
+                WeatherNavigation(
                     navigateBack = {
                         navController.navigateUp()
                     }

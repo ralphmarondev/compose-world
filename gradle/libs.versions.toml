@@ -93,3 +93,7 @@ room = [
     "androidx-room-ktx",
     "androidx-room-runtime"
 ]
+retrofit = [
+    "retrofit",
+    "converter-gson"
+]

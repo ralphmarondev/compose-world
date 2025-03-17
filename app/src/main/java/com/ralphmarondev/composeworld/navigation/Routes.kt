@@ -23,4 +23,7 @@ object Routes {
 
     @Serializable
     data object Calculator
+
+    @Serializable
+    data object Weather
 }
