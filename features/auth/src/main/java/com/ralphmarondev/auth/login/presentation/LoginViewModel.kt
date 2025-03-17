@@ -19,6 +19,9 @@ class LoginViewModel(
     private val _password = MutableStateFlow("")
     val password = _password.asStateFlow()
 
+    private val _rememberMe = MutableStateFlow(true)
+    val rememberMe = _rememberMe.asStateFlow()
+
 
     fun onUsernameChange(value: String) {
         _username.value = value
@@ -26,6 +29,10 @@ class LoginViewModel(
 
     fun onPasswordChange(value: String) {
         _password.value = value
+    }
+
+    fun onRememberMeChange() {
+        _rememberMe.value = !_rememberMe.value
     }
 
     fun onLogin(

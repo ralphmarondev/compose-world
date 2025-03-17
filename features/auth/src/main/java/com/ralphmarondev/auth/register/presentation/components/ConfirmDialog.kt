@@ -30,7 +30,7 @@ fun ConfirmDialog(
         },
         title = {
             Text(
-                text = "Title",
+                text = "Warning",
                 color = MaterialTheme.colorScheme.primary
             )
         },

@@ -43,7 +43,6 @@ fun Confirm(
 ) {
     val fullName by viewModel.fullName.collectAsState()
     val username by viewModel.username.collectAsState()
-    val password by viewModel.password.collectAsState()
     val passwordHint by viewModel.passwordHint.collectAsState()
 
     Column(
@@ -92,13 +91,6 @@ fun Confirm(
         TextConfirm(
             title = "Username:",
             description = username,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 4.dp)
-        )
-        TextConfirm(
-            title = "Password:",
-            description = password,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp)

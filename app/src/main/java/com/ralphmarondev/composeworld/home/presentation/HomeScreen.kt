@@ -1,5 +1,6 @@
 package com.ralphmarondev.composeworld.home.presentation
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,23 +20,39 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.composeworld.R
 import com.ralphmarondev.composeworld.home.presentation.components.DateTimeWidget
 import com.ralphmarondev.composeworld.home.presentation.components.TinyAppCard
 import com.ralphmarondev.composeworld.navigation.Routes
+import com.ralphmarondev.core.util.LocalThemeState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavHostController
 ) {
+    val themeState = LocalThemeState.current
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            val insetsController = window?.let {
+                WindowCompat.getInsetsController(it, view)
+            }
+            insetsController?.isAppearanceLightStatusBars = themeState.darkTheme.value
+        }
+    }
+
     val viewModel: HomeViewModel = koinViewModel()
 
     Scaffold { innerPadding ->
