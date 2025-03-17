@@ -15,15 +15,20 @@ class HomeViewModel(
     private val _allNotes = MutableStateFlow<List<Note>>(emptyList())
     val allNotes = _allNotes.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading = _isLoading.asStateFlow()
+
     init {
         getAllNotes()
     }
 
     private fun getAllNotes() {
         viewModelScope.launch {
+            _isLoading.value = true
             getAllNoteUseCase().collect { notes ->
                 _allNotes.value = notes
             }
+            _isLoading.value = false
         }
     }
 }
