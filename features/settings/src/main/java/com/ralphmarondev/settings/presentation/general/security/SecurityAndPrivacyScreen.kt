@@ -79,7 +79,10 @@ fun SecurityAndPrivacyScreen(
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item {
                 ElevatedCard(
-                    onClick = { },
+                    onClick = {
+                        isAuthEnabled = !isAuthEnabled
+                        userSettingsPreferences.setEnableAuth(isAuthEnabled)
+                    },
                     modifier = Modifier
                         .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
@@ -124,7 +127,10 @@ fun SecurityAndPrivacyScreen(
                         ) {
                             Switch(
                                 checked = isAuthEnabled,
-                                onCheckedChange = { isAuthEnabled = !isAuthEnabled }
+                                onCheckedChange = {
+                                    isAuthEnabled = !isAuthEnabled
+                                    userSettingsPreferences.setEnableAuth(isAuthEnabled)
+                                }
                             )
                         }
                     }
