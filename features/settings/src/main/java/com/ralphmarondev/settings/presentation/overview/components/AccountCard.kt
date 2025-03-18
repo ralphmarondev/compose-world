@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.settings.R
 import com.ralphmarondev.user_settings.domain.model.User
+import java.io.File
 
 @Composable
 fun AccountCard(
@@ -41,7 +42,12 @@ fun AccountCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(R.drawable.app_logo),
+                painter = rememberAsyncImagePainter(
+                    model = when (user.imagePath) {
+                        null -> R.drawable.app_logo
+                        else -> File(user.imagePath)
+                    }
+                ),
                 contentDescription = "Profile",
                 modifier = Modifier
                     .size(80.dp)

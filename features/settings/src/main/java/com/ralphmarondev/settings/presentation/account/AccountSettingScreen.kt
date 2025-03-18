@@ -32,9 +32,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -57,10 +54,6 @@ import java.io.InputStream
 fun AccountSettingScreen(
     navigateBack: () -> Unit
 ) {
-    /* TODO: get the current user details on launch
-    * - allow user to change the current picture [get the picture on their internal storage]
-    * - update the user details [fullName, username, password, description]
-    * */
     val context = LocalContext.current
 
     val viewModel: AccountSettingsViewModel = koinViewModel()
@@ -70,12 +63,17 @@ fun AccountSettingScreen(
     val showNewNameDialog by viewModel.showNewFullNameDialog.collectAsState()
     val showNewUsernameDialog by viewModel.showNewUsernameDialog.collectAsState()
     val showNewPasswordDialog by viewModel.showNewPasswordDialog.collectAsState()
+    val imagePath by viewModel.selectedImage.collectAsState()
 
-    var imageUri by remember { mutableStateOf<Uri?>(null) }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        imageUri = uri
+        uri?.let {
+            val path = saveImageToAppFolder(context, it)
+            path?.let { image ->
+                viewModel.setSelectedImage(image)
+            }
+        }
     }
 
     Scaffold(
@@ -122,7 +120,12 @@ fun AccountSettingScreen(
                     ) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Image(
-                            painter = rememberAsyncImagePainter(R.drawable.app_logo),
+                            painter = rememberAsyncImagePainter(
+                                model = when (imagePath) {
+                                    null -> R.drawable.app_logo
+                                    else -> File(imagePath)
+                                }
+                            ),
                             contentDescription = "Profile",
                             modifier = Modifier
                                 .size(100.dp)

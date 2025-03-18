@@ -9,6 +9,7 @@ import com.ralphmarondev.user_settings.domain.usecases.GetUserDetailByUsername
 import com.ralphmarondev.user_settings.domain.usecases.UpdateUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AccountSettingsViewModel(
@@ -38,6 +39,7 @@ class AccountSettingsViewModel(
     val showNewPasswordDialog: StateFlow<Boolean> get() = _showNewPasswordDialog
 
     private val _selectedImage = MutableStateFlow<String?>(null)
+    val selectedImage = _selectedImage.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -48,6 +50,7 @@ class AccountSettingsViewModel(
                 _fullName.value = user.fullName
                 _username.value = user.username
                 _password.value = user.password
+                _selectedImage.value = user.imagePath
             } else {
                 Log.e("App", "No username found")
             }
@@ -66,6 +69,27 @@ class AccountSettingsViewModel(
         _showNewPasswordDialog.value = !_showNewPasswordDialog.value
     }
 
+    fun setSelectedImage(imageUrl: String) {
+        _selectedImage.value = imageUrl
+
+        viewModelScope.launch {
+            try {
+                updateUserUseCase(
+                    user = User(
+                        id = _id.value,
+                        username = _username.value,
+                        password = _password.value,
+                        fullName = _fullName.value,
+                        imagePath = _selectedImage.value
+                    )
+                )
+                Log.d("App", "Image updated successfully.")
+            } catch (e: Exception) {
+                Log.e("App", "Updating image failed. Error: ${e.message}")
+            }
+        }
+    }
+
     fun saveNewFullName(newName: String, result: (Boolean, String) -> Unit) {
         Log.d("Settings", "New full name: $newName")
         viewModelScope.launch {
@@ -75,7 +99,8 @@ class AccountSettingsViewModel(
                         id = _id.value,
                         username = _username.value,
                         password = _password.value,
-                        fullName = newName
+                        fullName = newName,
+                        imagePath = _selectedImage.value
                     )
                 )
                 result(true, "Full name updated successfully!")
@@ -95,7 +120,8 @@ class AccountSettingsViewModel(
                         id = _id.value,
                         username = newUsername,
                         password = _password.value,
-                        fullName = _fullName.value
+                        fullName = _fullName.value,
+                        imagePath = _selectedImage.value
                     )
                 )
                 result(true, "Username updated successfully!")
@@ -115,7 +141,8 @@ class AccountSettingsViewModel(
                         id = _id.value,
                         username = _username.value,
                         password = newPassword,
-                        fullName = _fullName.value
+                        fullName = _fullName.value,
+                        imagePath = _selectedImage.value
                     )
                 )
                 result(true, "Password updated successfully!")
