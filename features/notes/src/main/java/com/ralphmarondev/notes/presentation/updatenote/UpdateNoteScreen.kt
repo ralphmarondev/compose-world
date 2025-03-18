@@ -138,8 +138,7 @@ fun UpdateNoteScreen(
                         }
                     ) {
                         Text(
-                            text = "UPDATE",
-                            fontFamily = FontFamily.Monospace
+                            text = "UPDATE"
                         )
                     }
                 },
