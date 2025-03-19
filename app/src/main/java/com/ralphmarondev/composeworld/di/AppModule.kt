@@ -6,11 +6,13 @@ import com.ralphmarondev.core.di.coreModule
 import com.ralphmarondev.notes.di.notesModule
 import com.ralphmarondev.onboarding.di.onboardingModule
 import com.ralphmarondev.settings.di.settingsModule
+import com.ralphmarondev.user_settings.di.firebaseModule
 import com.ralphmarondev.user_settings.di.userSettingsModule
 
 val appModule = listOf(
     coreModule,
     userSettingsModule,
+    firebaseModule,
     onboardingModule,
     authModule,
     settingsModule,

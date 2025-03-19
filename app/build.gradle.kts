@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -74,6 +75,7 @@ dependencies {
 
     implementation(libs.bundles.koin)
     implementation(libs.bundles.room)
+    implementation(libs.firebase.database)
     kapt(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
