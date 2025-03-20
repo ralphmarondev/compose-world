@@ -23,7 +23,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,7 +30,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,10 +38,10 @@ fun FeedbackScreen(
     navigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val viewModel = viewModel<FeedbackViewModel>()
-    val name by viewModel.name.collectAsState()
-    val email by viewModel.email.collectAsState()
-    val feedback by viewModel.feedback.collectAsState()
+    val viewModel: FeedbackViewModel = koinViewModel()
+    val name = viewModel.name.collectAsState().value
+    val email = viewModel.email.collectAsState().value
+    val feedback = viewModel.feedback.collectAsState().value
 
     Scaffold(
         topBar = {

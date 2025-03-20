@@ -17,7 +17,6 @@ import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -34,7 +33,7 @@ fun OverviewScreen(
     navigateBack: () -> Unit
 ) {
     val viewModel: OverviewViewModel = koinViewModel()
-    val user by viewModel.currentUser.collectAsState()
+    val user = viewModel.currentUser.collectAsState().value
 
     Scaffold(
         topBar = {

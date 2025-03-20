@@ -6,17 +6,17 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class FeedbackViewModel : ViewModel() {
     private val _name = MutableStateFlow("")
-    val name: StateFlow<String> get() = _name
+    val name = _name.asStateFlow()
 
     private val _email = MutableStateFlow("")
-    val email: StateFlow<String> get() = _email
+    val email = _email.asStateFlow()
 
     private val _feedback = MutableStateFlow("")
-    val feedback: StateFlow<String> get() = _feedback
+    val feedback = _feedback.asStateFlow()
 
     fun sendFeedback(
         context: Context
