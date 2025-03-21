@@ -9,5 +9,15 @@
 
     <!--backup and restore-->
     <string name="backup_title">Start to Back Up or Restore your data.</string>
-    <string name="backup_desc">On click is enough to backup your data, or restore data from one device to another device.</string>
+    <string name="backup_desc">One click is enough to backup or restore your data from one device to another.</string>
+
+    <string name="backup_name_dne">Username does not exist, do you want to register it and backup your data?</string>
+    <string name="backup_confirm">Are you sure you want to backup your data? This will override your previously backed up data. This action may be irreversible.</string>
+    <string name="backup_success">Your data is backed up successfully.</string>
+    <string name="backup_failed">Failed to backup your data.</string>
+
+    <string name="restore_name_dne">Username does not exist, do you want to register it and backup your data instead?</string>
+    <string name="restore_confirm">Are you sure you want to restore your data? This will override all of your current configuration. This action may be irreversible.</string>
+    <string name="restore_success">Your data is restored successfully.</string>
+    <string name="restore_failed">Failed to restore your data.</string>
 </resources>

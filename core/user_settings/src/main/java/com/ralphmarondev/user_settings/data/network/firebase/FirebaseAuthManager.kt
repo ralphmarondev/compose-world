@@ -38,6 +38,7 @@ class FirebaseAuthManager(
             authResult.user != null
         } catch (e: Exception) {
 //            Result.failure(e)
+            Log.e("App", "Sign up error: ${e.message}")
             false
         }
     }
