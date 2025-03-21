@@ -1,59 +1,30 @@
 package com.ralphmarondev.settings.presentation.general.backup
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.user_settings.data.network.firebase.FirebaseAuthManager
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class BackupAndRestoreViewModel(
     private val firebaseAuthManager: FirebaseAuthManager
 ) : ViewModel() {
-    private val _email = MutableStateFlow("")
-    val email = _email.asStateFlow()
 
-    private val _password = MutableStateFlow("")
-    val password = _password.asStateFlow()
-
-    private val _result = MutableStateFlow(false)
-    val result = _result.asStateFlow()
-
-    private val _showRegisterDialog = MutableStateFlow(false)
-    val showRegisterDialog = _showRegisterDialog.asStateFlow()
-
-
-    fun onEmailChange(value: String) {
-        _email.value = value
+    /*
+     *  - Get username
+     *  - Check if username exists on firebase
+     *  - If not, prompt to register their username and backup data
+     *  - If exists, prompt to confirm backup their data and it will override previous backup.
+     */
+    fun onBackup() {
+        Log.d("App", "Backing up data...")
     }
 
-    fun onPasswordChange(value: String) {
-        _password.value = value
-    }
-
-    fun toggleShowRegisterDialog() {
-        _showRegisterDialog.value = !_showRegisterDialog.value
-    }
-
-    fun onLogin() {
-        viewModelScope.launch {
-            _result.value = firebaseAuthManager.signIn(
-                email = _email.value,
-                password = _password.value
-            )
-            _email.value = ""
-            _password.value = ""
-        }
-    }
-
-    fun onRegister() {
-        viewModelScope.launch {
-            _result.value = firebaseAuthManager.signUp(
-                email = _email.value,
-                password = _password.value
-            )
-            _email.value = ""
-            _password.value = ""
-        }
+    /*
+     *  - Get username
+     *  - Check if username exists on firebase
+     *  - If not, prompt to register their username and restore data
+     *  - If exists, prompt to confirm restore their data and it will override all of their current configuration.
+     */
+    fun onRestore() {
+        Log.d("App", "Restoring data...")
     }
 }

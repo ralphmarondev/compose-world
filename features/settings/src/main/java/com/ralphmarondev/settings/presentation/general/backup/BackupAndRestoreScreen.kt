@@ -1,17 +1,20 @@
 package com.ralphmarondev.settings.presentation.general.backup
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AppRegistration
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Button
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,12 +24,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import com.ralphmarondev.core.presentation.components.NormalTextField
-import com.ralphmarondev.core.presentation.components.PasswordTextField
+import coil.compose.rememberAsyncImagePainter
+import com.ralphmarondev.settings.R
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,10 +41,7 @@ fun BackupAndRestoreScreen(
     navigateBack: () -> Unit
 ) {
     val viewModel: BackupAndRestoreViewModel = koinViewModel()
-    val email = viewModel.email.collectAsState().value
-    val password = viewModel.password.collectAsState().value
-    val result = viewModel.result.collectAsState().value
-    val showRegisterDialog = viewModel.showRegisterDialog.collectAsState().value
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
@@ -56,16 +59,6 @@ fun BackupAndRestoreScreen(
                         )
                     }
                 },
-                actions = {
-                    IconButton(
-                        onClick = viewModel::toggleShowRegisterDialog
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.AppRegistration,
-                            contentDescription = "Register"
-                        )
-                    }
-                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -75,91 +68,74 @@ fun BackupAndRestoreScreen(
             )
         }
     ) { innerPadding ->
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
+                .verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item { Spacer(modifier = Modifier.height(8.dp)) }
-            item {
-                NormalTextField(
-                    value = email,
-                    onValueChange = viewModel::onEmailChange
-                )
-                PasswordTextField(
-                    value = password,
-                    onValueChange = viewModel::onPasswordChange
-                )
-
-                Button(
-                    onClick = viewModel::onLogin
-                ) {
-                    Text(
-                        text = "Login"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = if (result) "Success" else "Failed"
-                )
-            }
-        }
-
-        if (showRegisterDialog) {
-            RegisterDialog(
-                onDismiss = viewModel::toggleShowRegisterDialog,
-                viewModel = viewModel
+            Spacer(modifier = Modifier.height(16.dp))
+            Image(
+                painter = rememberAsyncImagePainter(R.drawable.back_and_restore),
+                contentDescription = "Backup and restore",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(140.dp)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(8.dp))
             )
-        }
-    }
-}
+            Spacer(modifier = Modifier.height(8.dp))
 
-@Composable
-private fun RegisterDialog(
-    onDismiss: () -> Unit,
-    viewModel: BackupAndRestoreViewModel
-) {
-    val email = viewModel.email.collectAsState().value
-    val password = viewModel.password.collectAsState().value
-    val result = viewModel.result.collectAsState().value
+            Text(
+                text = stringResource(R.string.backup_title),
+                fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+            Text(
+                text = stringResource(R.string.backup_desc),
+                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                color = MaterialTheme.colorScheme.secondary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            )
 
-    Dialog(
-        onDismissRequest = onDismiss
-    ) {
-        ElevatedCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Column(
+            Spacer(modifier = Modifier.weight(1f))
+            Button(
+                onClick = viewModel::onBackup,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = "Register")
-                NormalTextField(
-                    value = email,
-                    onValueChange = viewModel::onEmailChange
-                )
-                PasswordTextField(
-                    value = password,
-                    onValueChange = viewModel::onPasswordChange
-                )
-
-                Button(
-                    onClick = viewModel::onRegister
-                ) {
-                    Text(
-                        text = "Register"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = if (result) "Success" else "Failed"
+                    text = "Backup",
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                    modifier = Modifier.padding(4.dp)
                 )
             }
+            ElevatedButton(
+                onClick = viewModel::onRestore,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = "Restore",
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                    modifier = Modifier.padding(4.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
